@@ -1,10 +1,11 @@
 export const SITE = {
   lang: 'ja',
   locale: 'ja_JP',
-  siteName: 'MakeShop LP template',
-  defaultTitle: 'MakeShop LP template',
-  defaultDescription: 'Astro landing page template for MakeShop.',
-  siteUrl: '',
+  siteName: '森半tea&coffee',
+  defaultTitle: '森半 5周年キャンペーンページ',
+  defaultDescription:
+    '森半 Tea&Coffee 5周年、森半は創業190周年。感謝を込めた特別企画をご用意しました。受け継がれた茶づくりの伝統とともに、暮らしに寄り添う商品をお届けします。',
+  siteUrl: 'https://www.tea-and-coffee.shop',
   defaultOgImage: '',
 };
 
