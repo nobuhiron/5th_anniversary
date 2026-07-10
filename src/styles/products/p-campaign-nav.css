@@ -1,0 +1,146 @@
+@import '../global/variables.css';
+
+/* nav.png (1500x3700 @4x) → 375x925 CSS
+   実測: バナー幅 335 / 左右余白 20 / 縦の間隔 12 / 上余白 56 / 下余白 60 */
+.p-campaign-nav {
+  background: var(--bg-nav);
+}
+
+.p-campaign-nav__inner {
+  padding-block: 56px 60px;
+}
+
+.p-campaign-nav__list {
+  display: grid;
+  gap: 12px;
+}
+
+.p-campaign-nav__banner {
+  position: relative;
+  display: grid;
+  align-content: center;
+  width: 100%;
+  aspect-ratio: var(--ratio);
+  padding: 16px 20px;
+  box-sizing: border-box;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  text-decoration: none;
+  transition: opacity var(--duration-hover) var(--easing-standard);
+}
+
+.p-campaign-nav__banner:hover {
+  opacity: 0.86;
+}
+
+.p-campaign-nav__banner[data-theme='light'] {
+  background-color: var(--bg-banner-uchiwa);
+  color: var(--base-heading);
+}
+
+.p-campaign-nav__banner[data-theme='green'] {
+  background-color: var(--palette-green-vivid);
+  color: var(--color-text-on-dark);
+}
+
+.p-campaign-nav__banner[data-theme='cream'] {
+  background-color: var(--bg-campaign02);
+  color: var(--color-sub);
+}
+
+.p-campaign-nav__banner[data-theme='green-gradient'] {
+  background: var(--bg-campaign03);
+  color: var(--color-text-on-dark);
+}
+
+.p-campaign-nav__banner[data-theme='honey'] {
+  background-color: var(--bg-banner-honey);
+  color: var(--color-text-on-dark);
+}
+
+.p-campaign-nav__body {
+  display: grid;
+  justify-items: start;
+  gap: 6px;
+  max-width: 62%;
+}
+
+.p-campaign-nav__badge {
+  display: inline-grid;
+  place-items: center;
+  padding: 5px 18px;
+  border: 1px solid currentColor;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--fw-bold);
+}
+
+.p-campaign-nav__en {
+  display: inline-grid;
+  place-items: center;
+  padding: 5px 22px;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-pill);
+  color: inherit;
+  font-family: var(--font-en--decor);
+  font-size: 17px;
+  font-weight: var(--fw-semibold);
+}
+
+.p-campaign-nav__banner[data-theme='green'] .p-campaign-nav__en {
+  color: var(--palette-green-deep);
+}
+
+.p-campaign-nav__banner[data-theme='green-gradient'] .p-campaign-nav__en {
+  color: var(--palette-green-deep);
+}
+
+.p-campaign-nav__lead {
+  position: relative;
+  padding-inline: 1.1em;
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body-xs);
+  font-weight: var(--fw-medium);
+}
+
+.p-campaign-nav__lead::before,
+.p-campaign-nav__lead::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 1px;
+  height: 1.1em;
+  background-color: currentColor;
+  translate: 0 -50%;
+}
+
+.p-campaign-nav__lead::before {
+  left: 0.1em;
+  rotate: -20deg;
+}
+
+.p-campaign-nav__lead::after {
+  right: 0.1em;
+  rotate: 20deg;
+}
+
+.p-campaign-nav__title {
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-title-sm);
+  font-weight: var(--fw-bold);
+  line-height: 1.4;
+  white-space: pre-line;
+}
+
+.p-campaign-nav__note {
+  font-family: var(--font-jp--sanserif);
+  font-size: 11px;
+}
+
+.p-campaign-nav__chevron {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  translate: -50% 0;
+}

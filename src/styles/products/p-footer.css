@@ -1,0 +1,60 @@
+@import '../global/variables.css';
+
+/* fotter.png (1500x2120 @4x) → 375x530 CSS
+   実測: マーク上105・高さ50 / 森半 ink24 / ナビ ink12・行ピッチ39.8 / 下78 */
+.p-footer {
+  background-color: var(--bg-footer);
+  color: var(--color-text-on-dark);
+}
+
+.p-footer__inner {
+  display: grid;
+  justify-items: center;
+  padding-block: 105px 68px;
+  text-align: center;
+}
+
+.p-footer__logo {
+  font-size: 28px;
+}
+
+.p-footer__logo .c-brand-logo {
+  --brand-mark-hole: var(--bg-footer);
+
+  flex-direction: column;
+  gap: 15px;
+}
+
+.p-footer__logo .c-brand-logo__mark {
+  width: 50px;
+  height: 50px;
+  color: var(--color-text-on-dark);
+}
+
+.p-footer__logo .c-brand-logo__ja {
+  font-size: 1em;
+}
+
+.p-footer__logo .c-brand-logo__en {
+  font-size: 0.44em;
+}
+
+/* カンプ実測: ナビの行ピッチ 39.8px（項目の行ボックス 26.2 + gap 14） */
+.p-footer__list {
+  display: grid;
+  gap: 14px;
+  margin-block-start: 63px;
+}
+
+.p-footer__link {
+  color: var(--color-text-on-dark);
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body-sm);
+  line-height: 1.4;
+  text-decoration: none;
+  transition: color var(--duration-hover) var(--easing-standard);
+}
+
+.p-footer__link:hover {
+  color: var(--palette-gold);
+}

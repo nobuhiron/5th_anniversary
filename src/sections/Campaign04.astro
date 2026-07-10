@@ -1,0 +1,56 @@
+---
+import TreasureTrigger from '../components/TreasureTrigger.astro';
+import { HONEY_SALE_ITEMS, HONEY_SALE_PERIOD } from '../data/campaigns';
+---
+
+<section id='campaign04' class='l-section p-campaign04' aria-labelledby='campaign04-heading'>
+  <div class='l-inner p-campaign04__inner'>
+    <div class='c-heading p-campaign04__heading'>
+      <p class='c-heading__en'>Campaign04</p>
+      <span class='c-heading__rule' aria-hidden='true'></span>
+      <p class='c-heading__lead'>8/3(はちみつ) の日だけの特別</p>
+      <h2 id='campaign04-heading' class='c-heading__ja'>はちみつ紅茶SALE</h2>
+    </div>
+
+    <p class='c-period p-campaign04__period'>{HONEY_SALE_PERIOD}</p>
+
+    <ul class='p-campaign04__items'>
+      {
+        HONEY_SALE_ITEMS.map((item) => (
+          <li class='p-campaign04__item'>
+            <div class='p-campaign04__figure'>
+              <span class='p-campaign04__badge' aria-hidden='true'>
+                SALE
+              </span>
+              <span class='c-placeholder p-campaign04__photo' style='--ratio: 295 / 190'>
+                <span class='c-placeholder__label'>{item.name}</span>
+              </span>
+            </div>
+
+            <div class='p-campaign04__body'>
+              <p class='p-campaign04__lead'>{item.lead}</p>
+              <h3 class='p-campaign04__name'>{item.name}</h3>
+
+              <p class='p-campaign04__price'>
+                <s class='p-campaign04__price-before'>{item.priceBefore}</s>
+                <span class='p-campaign04__price-arrow' aria-hidden='true'>
+                  ▶
+                </span>
+                <span class='p-campaign04__price-after'>
+                  <span class='p-campaign04__price-num'>{item.priceAfter}</span>
+                  <span class='p-campaign04__price-unit'>円(税込)</span>
+                </span>
+              </p>
+
+              <a href={item.code ? `#${item.code}` : '#campaign04'} class='c-btn p-campaign04__cta'>
+                ご購入はこちらから
+              </a>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+
+    <TreasureTrigger item='chawan' label='茶碗' class='p-campaign04__treasure' />
+  </div>
+</section>

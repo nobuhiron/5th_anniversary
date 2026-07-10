@@ -1,0 +1,104 @@
+---
+import TreasureTrigger from '../components/TreasureTrigger.astro';
+import { STAFF_PICKS } from '../data/campaigns';
+import { LINE_URL } from '../data/links';
+---
+
+<section id='campaign01' class='l-section p-campaign01' aria-labelledby='campaign01-heading'>
+  <div class='l-inner p-campaign01__inner'>
+    <div class='c-heading p-campaign01__heading'>
+      <p class='c-heading__en'>Campaign01</p>
+      <span class='c-heading__rule' aria-hidden='true'></span>
+      <h2 id='campaign01-heading' class='c-heading__ja'>
+        おめでとう！大好き！<br />キャンペーン
+      </h2>
+    </div>
+
+    <div class='p-campaign01__line'>
+      <p class='p-campaign01__line-lead'>
+        森半tea&amp;coffeeの<br />
+        <span class='p-campaign01__line-badge'>LINE</span>に
+      </p>
+
+      <p class='p-campaign01__bubble'>
+        5周年おめでとう！<br />(好きな商品名)大好き！
+      </p>
+
+      <p class='p-campaign01__line-note'>とメッセージを送ると</p>
+
+      <p class='p-campaign01__coupon'>
+        <span class='p-campaign01__coupon-badge'>抽選で</span>
+        <span class='p-campaign01__coupon-amount'>
+          <span class='p-campaign01__coupon-num'>1,000</span>
+          <span class='p-campaign01__coupon-unit'>円<span class='p-campaign01__coupon-off'>OFF</span></span>
+        </span>
+        <span class='p-campaign01__coupon-text'>クーポンプレゼント！</span>
+      </p>
+
+      <p class='p-campaign01__phone' aria-hidden='true'>
+        <span class='c-placeholder' style='--ratio: 150 / 300'>
+          <span class='c-placeholder__label'>LINEトーク画面</span>
+        </span>
+      </p>
+
+      <a
+        href={LINE_URL}
+        class='p-campaign01__friend'
+        target='_blank'
+        rel='noopener noreferrer'
+      >
+        <span class='p-campaign01__friend-icon' aria-hidden='true'>LINE</span>
+        <span class='p-campaign01__friend-label'>友だち追加</span>
+        <span class='p-campaign01__friend-arrow' aria-hidden='true'>
+          <svg viewBox='0 0 20 20' fill='none'>
+            <circle cx='10' cy='10' r='9' fill='currentColor'></circle>
+            <path
+              d='M8.5 6l4 4-4 4'
+              stroke='#fff'
+              stroke-width='1.8'
+              stroke-linecap='round'
+              stroke-linejoin='round'></path>
+          </svg>
+        </span>
+      </a>
+    </div>
+
+    <div class='p-campaign01__picks'>
+      <h3 class='p-campaign01__picks-heading'>
+        <span class='p-campaign01__picks-photo' aria-hidden='true'>
+          <span class='c-placeholder c-placeholder--circle' style='--ratio: 1 / 1'>
+            <span class='c-placeholder__label'>菓子</span>
+          </span>
+        </span>
+        <span class='p-campaign01__picks-title'>スタッフの<br />推し商品紹介</span>
+      </h3>
+
+      <div
+        class='c-swiper p-campaign01__carousel'
+        data-carousel='free'
+        data-scrollbar='#pick-scrollbar'
+        data-space='10'
+      >
+        <div class='swiper-wrapper'>
+          {
+            STAFF_PICKS.map((pick) => (
+              <div class='swiper-slide p-campaign01__pick'>
+                <span class='c-placeholder p-campaign01__pick-photo' style='--ratio: 153 / 85'>
+                  <span class='c-placeholder__label'>商品写真</span>
+                </span>
+                <p class='p-campaign01__pick-staff'>
+                  <span class='c-placeholder c-placeholder--circle p-campaign01__pick-avatar' style='--ratio: 1 / 1' />
+                  <span class='p-campaign01__pick-name'>{pick.staff}</span>
+                </p>
+                <p class='p-campaign01__pick-comment'>{pick.comment}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+      <div class='c-swiper__scrollbar p-campaign01__scrollbar' id='pick-scrollbar'></div>
+    </div>
+
+    <TreasureTrigger item='chasen' label='茶筅' class='p-campaign01__treasure' />
+  </div>
+</section>

@@ -1,12 +1,35 @@
 ---
 /**
- * PageChromeRight — PC 右カラム chrome（SP では l-shell 側で非表示）。
- * 季節 LP では「補助ナビ / LINE 登録 / CTA」などを置くことが多い。
- * 案件ごとにこのファイルの中身を実装する。slot を渡せば差し込みも可能。
+ * PC 右カラム。Campaign ナビ + 公式 LINE バナー。
  */
+import CampaignNavLink from './CampaignNavLink.astro';
+import { CAMPAIGN_NAV_ITEMS } from '../data/campaign-nav';
+import { LINE_URL } from '../data/links';
 ---
-<div class="c-page-chrome c-page-chrome--right">
-  <slot>
-    {/* TODO: 右カラムの内容（補助ナビ / LINE 登録 / CTA など）をここに実装 */}
-  </slot>
+
+<div class='p-chrome-right'>
+  <nav class='c-nav-campaign' aria-label='キャンペーンナビゲーション'>
+    <p class='c-nav-campaign__title'>Campaign</p>
+    <ul class='c-nav-campaign__list'>
+      {
+        CAMPAIGN_NAV_ITEMS.map((item) => (
+          <li class='c-nav-campaign__item'>
+            <CampaignNavLink href={item.href} label={item.label} />
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+
+  <a
+    href={LINE_URL}
+    class='p-chrome-right__line'
+    target='_blank'
+    rel='noopener noreferrer'
+    aria-label='森半 tea&coffee 公式 LINE を友だち追加する'
+  >
+    <span class='c-placeholder c-placeholder--line' style='--ratio: 240 / 108'>
+      <span class='c-placeholder__label'>公式LINEバナー</span>
+    </span>
+  </a>
 </div>

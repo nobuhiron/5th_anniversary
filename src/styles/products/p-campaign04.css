@@ -1,0 +1,135 @@
+@import '../global/variables.css';
+
+/* Campagin04.png (1500x6628 @4x) → 375x1657 CSS */
+.p-campaign04 {
+  background-color: var(--bg-campaign04);
+  color: var(--color-sub);
+}
+
+.p-campaign04__inner {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  padding-block: 56px 48px;
+}
+
+.p-campaign04__heading {
+  --heading-fg: var(--color-sub);
+}
+
+.p-campaign04__period {
+  width: 100%;
+  margin-block-start: 20px;
+}
+
+.p-campaign04__items {
+  display: grid;
+  gap: 20px;
+  width: 100%;
+  margin-block-start: 28px;
+}
+
+.p-campaign04__item {
+  border-radius: var(--radius-sm);
+  background-color: var(--color-surface);
+  overflow: hidden;
+}
+
+.p-campaign04__figure {
+  position: relative;
+  background-color: var(--bg-photo-area);
+}
+
+.p-campaign04__badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  background-color: var(--palette-orange);
+  color: var(--color-text-on-dark);
+  font-family: var(--font-en);
+  font-size: var(--font-size-body-xs);
+  font-weight: var(--fw-bold);
+  clip-path: polygon(50% 0, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+}
+
+.p-campaign04__photo {
+  border-radius: 0;
+}
+
+.p-campaign04__body {
+  display: grid;
+  justify-items: center;
+  padding: 16px;
+  text-align: center;
+}
+
+.p-campaign04__lead {
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body-xs);
+}
+
+.p-campaign04__name {
+  margin-block-start: 4px;
+  padding-block-end: 12px;
+  border-block-end: 1px dotted color-mix(in srgb, var(--color-sub) 40%, transparent);
+  width: 100%;
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body);
+  font-weight: var(--fw-bold);
+}
+
+.p-campaign04__price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-block-start: 12px;
+}
+
+.p-campaign04__price-before {
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body-xs);
+  color: var(--color-sub);
+}
+
+.p-campaign04__price-arrow {
+  font-size: 10px;
+}
+
+.p-campaign04__price-after {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  color: var(--palette-price);
+}
+
+.p-campaign04__price-num {
+  font-family: var(--font-en);
+  font-size: 34px;
+  font-weight: var(--fw-bold);
+  line-height: 1;
+}
+
+.p-campaign04__price-unit {
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body-xs);
+  font-weight: var(--fw-bold);
+}
+
+.p-campaign04__cta {
+  margin-block-start: 14px;
+  border-radius: var(--radius-xs);
+}
+
+/* 宝探し（茶碗） */
+.p-campaign04__treasure {
+  position: absolute;
+  right: 4px;
+  bottom: 8px;
+  width: 72px;
+}

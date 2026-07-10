@@ -1,0 +1,89 @@
+---
+import { PLUS1_TERMS } from '../data/campaigns';
+---
+
+<section id='campaign03' class='l-section p-campaign03' aria-labelledby='campaign03-heading'>
+  <div class='l-inner p-campaign03__inner'>
+    <div class='c-heading p-campaign03__heading'>
+      <p class='c-heading__en'>Campaign03</p>
+      <span class='c-heading__rule' aria-hidden='true'></span>
+      <p class='c-heading__lead'>買うほどおトク!!</p>
+      <h2 id='campaign03-heading' class='c-heading__ja'>Plus1キャンペーン</h2>
+      <p class='p-campaign03__sub'>
+        <b class='p-campaign03__em'>対象商品2点以上</b>ご購入で<br />
+        もれなく<b class='p-campaign03__em'>もう1つ</b>もらえる!
+      </p>
+    </div>
+
+    {
+      PLUS1_TERMS.map((term) => (
+        <div class='p-campaign03__term'>
+          <p class='c-period p-campaign03__period'>{term.period}</p>
+          <ul class='p-campaign03__items'>
+            {term.items.map((item) => (
+              <li class='p-campaign03__item'>
+                <a href={item.code ? `#${item.code}` : '#campaign03'} class='p-campaign03__item-link'>
+                  <span class='c-placeholder p-campaign03__item-photo' style='--ratio: 1 / 1'>
+                    <span class='c-placeholder__label'>商品</span>
+                  </span>
+                  <span class='p-campaign03__item-body'>
+                    <span class='p-campaign03__item-lead'>{item.lead}</span>
+                    <span class='p-campaign03__item-name'>
+                      {item.name}
+                      <br />
+                      {item.spec}
+                    </span>
+                  </span>
+                  <span class='p-campaign03__item-arrow' aria-hidden='true'>
+                    <svg viewBox='0 0 24 24' fill='none'>
+                      <circle cx='12' cy='12' r='11' fill='currentColor' />
+                      <path
+                        d='M10 7l5 5-5 5'
+                        stroke='#fff'
+                        stroke-width='2'
+                        stroke-linecap='round'
+                        stroke-linejoin='round'
+                      />
+                    </svg>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+
+    <div class='p-campaign03__condition'>
+      <h3 class='p-campaign03__condition-heading'>条件</h3>
+      <p class='p-campaign03__condition-text'>
+        キャンペーンは、<b class='p-campaign03__em'>同一対象商品を2点同時に</b><br />
+        <b class='p-campaign03__em'>ご購入の場合に適応</b>されます。<br />
+        対象商品でも“異なる2品の組み合わせ”、また<br />
+        は“対象外との組み合わせ”のみご購入の場合は、<br />
+        プレゼント付与対象外となります。<br />
+        2点ご購入毎ではありません。
+      </p>
+    </div>
+
+    <div class='p-campaign03__examples'>
+      <section class='p-campaign03__example' data-kind='ok'>
+        <h3 class='p-campaign03__example-heading'>OK例</h3>
+        <p class='p-campaign03__example-figure' aria-hidden='true'>
+          <span class='c-placeholder' style='--ratio: 300 / 92'>
+            <span class='c-placeholder__label'>商品A × 商品A ＋ 商品A（プレゼント）</span>
+          </span>
+        </p>
+      </section>
+
+      <section class='p-campaign03__example' data-kind='ng'>
+        <h3 class='p-campaign03__example-heading'>NG例</h3>
+        <p class='p-campaign03__example-figure' aria-hidden='true'>
+          <span class='c-placeholder' style='--ratio: 300 / 92'>
+            <span class='c-placeholder__label'>×異なる商品のみ ／ ×対象外商品</span>
+          </span>
+        </p>
+      </section>
+    </div>
+  </div>
+</section>

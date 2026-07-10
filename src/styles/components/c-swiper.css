@@ -1,0 +1,31 @@
+@import '../global/variables.css';
+
+/* -------------------------------------------------------------
+   c-swiper — 横スクロール（コーディングルール「推し商品紹介 / 横スクロール」）。
+   スクロールバー付きの自由ドラッグ。Swiper を使う。
+------------------------------------------------------------- */
+
+.c-swiper {
+  width: 100%;
+  overflow: visible;
+}
+
+/* :where() で詳細度を 0 にし、スライド幅は p-* 側で指定できるようにする */
+.c-swiper :where(.swiper-slide) {
+  width: auto;
+  height: auto;
+}
+
+.c-swiper__scrollbar {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  margin-block-start: var(--spacing-md);
+  border-radius: var(--radius-pill);
+  background-color: var(--scrollbar-track, rgb(255 255 255 / 45%));
+}
+
+.c-swiper__scrollbar .swiper-scrollbar-drag {
+  border-radius: var(--radius-pill);
+  background-color: var(--scrollbar-thumb, rgb(0 0 0 / 25%));
+}

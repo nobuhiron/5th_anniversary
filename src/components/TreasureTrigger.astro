@@ -1,0 +1,25 @@
+---
+/**
+ * 宝探しの隠しアイテム（抹茶 / 茶筅 / 茶碗）。
+ * クリックでポップアップを開き、左カラムのスタンプ帳にスタンプが押される。
+ * 画像素材は支給待ちのためプレースホルダ。
+ */
+interface Props {
+  item: 'matcha' | 'chasen' | 'chawan';
+  label: string;
+  class?: string;
+}
+const { item, label, class: className } = Astro.props;
+---
+
+<button
+  type='button'
+  class:list={['p-treasure-trigger', className]}
+  data-treasure-trigger={item}
+  aria-label={`隠されたお道具「${label}」を見つける`}
+>
+  <span class='c-placeholder' style='--ratio: 1 / 1'>
+    <span class='c-placeholder__label'>{label}</span>
+  </span>
+  <span class='p-treasure-trigger__badge' aria-hidden='true'>CLICK</span>
+</button>

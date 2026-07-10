@@ -1,0 +1,175 @@
+@import '../global/variables.css';
+
+/* Campagin03.png (1500x6700 @4x) → 375x1675 CSS */
+.p-campaign03 {
+  background: var(--bg-campaign03);
+  color: var(--color-text-on-dark);
+}
+
+/* カンプ実測: 上78 / OK例 1258..1412(154) / NG例 1442..1596(154) / 下79 */
+.p-campaign03__inner {
+  display: grid;
+  justify-items: center;
+  padding-block: 78px 79px;
+}
+
+.p-campaign03__heading {
+  --heading-fg: var(--color-text-on-dark);
+}
+
+.p-campaign03__sub {
+  margin-block-start: 12px;
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body);
+  font-weight: var(--fw-medium);
+  line-height: 1.7;
+  text-align: center;
+}
+
+.p-campaign03__em {
+  color: var(--palette-gold);
+  font-weight: var(--fw-bold);
+}
+
+.p-campaign03__term {
+  width: 100%;
+  margin-block-start: 36px;
+}
+
+/* カンプ実測: 商品カード 高さ110 / カード間 10 / 期間帯からの間隔 34 */
+.p-campaign03__items {
+  display: grid;
+  gap: 10px;
+  margin-block-start: 34px;
+}
+
+.p-campaign03__item-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 110px;
+  padding: 12px;
+  box-sizing: border-box;
+  background: var(--bg-product-card);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  text-decoration: none;
+  transition: opacity var(--duration-hover) var(--easing-standard);
+}
+
+.p-campaign03__item-link:hover {
+  opacity: 0.86;
+}
+
+.p-campaign03__item-photo {
+  width: 86px;
+  flex-shrink: 0;
+  background-color: var(--color-surface);
+}
+
+.p-campaign03__item-body {
+  flex: 1;
+  display: grid;
+  gap: 2px;
+  padding: 8px 10px;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-xs);
+}
+
+.p-campaign03__item-lead {
+  font-family: var(--font-jp--sanserif);
+  font-size: 10px;
+}
+
+.p-campaign03__item-name {
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body-xs);
+  font-weight: var(--fw-bold);
+  line-height: 1.5;
+}
+
+.p-campaign03__item-arrow {
+  flex-shrink: 0;
+  display: inline-flex;
+  width: 24px;
+  color: var(--palette-green-deep);
+}
+
+.p-campaign03__item-arrow svg {
+  display: block;
+  width: 100%;
+}
+
+/* 条件 */
+.p-campaign03__condition {
+  width: 100%;
+  margin-block-start: 44px;
+  text-align: center;
+}
+
+.p-campaign03__condition-heading {
+  position: relative;
+  display: inline-block;
+  padding-inline: 1.6em;
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body);
+  font-weight: var(--fw-bold);
+}
+
+.p-campaign03__condition-heading::before,
+.p-campaign03__condition-heading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 1em;
+  border-block-start: 2px dotted currentColor;
+  translate: 0 -50%;
+}
+
+.p-campaign03__condition-heading::before {
+  left: 0;
+}
+
+.p-campaign03__condition-heading::after {
+  right: 0;
+}
+
+/* カンプ実測: 本文の行ピッチ 24px */
+.p-campaign03__condition-text {
+  margin-block-start: 12px;
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body-xs);
+  line-height: 24px;
+}
+
+/* OK例 / NG例 */
+.p-campaign03__examples {
+  display: grid;
+  gap: 30px;
+  width: 100%;
+  margin-block-start: 24px;
+}
+
+.p-campaign03__example {
+  display: grid;
+  align-content: center;
+  min-height: 154px;
+  padding: 16px;
+  box-sizing: border-box;
+  border: 1px solid var(--palette-border-on-dark);
+  border-radius: var(--radius-sm);
+}
+
+.p-campaign03__example-heading {
+  position: relative;
+  display: block;
+  margin-block-end: 12px;
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--fw-bold);
+  text-align: center;
+}
+
+.p-campaign03__example-figure {
+  display: block;
+}

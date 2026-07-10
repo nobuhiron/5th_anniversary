@@ -1,9 +1,16 @@
 ---
+import { getImage } from 'astro:assets';
 import '../styles/style.css';
 import { FONT_LINKS, SITE } from '../config/site';
 import PageChromeLeft from '../components/PageChromeLeft.astro';
 import PageChromeRight from '../components/PageChromeRight.astro';
+import PageTop from '../components/PageTop.astro';
+import TreasurePopups from '../components/TreasurePopups.astro';
 import { publicAssetPath } from '../utils/assets';
+import pageBgSrc from '../assets/images/page-bg.png';
+
+// コーディングルール「背景画像固定」: PC フレームの背景。sharp 最適化(webp)を通す。
+const pageBg = await getImage({ src: pageBgSrc, widths: [1440, 2880], format: 'webp' });
 
 interface Props {
   title?: string;
@@ -47,9 +54,11 @@ const twitterCard = ogImageUrl ? 'summary_large_image' : 'summary';
     <link rel='icon' type='image/svg+xml' href={publicAssetPath('/favicon.svg')} />
     <meta name='viewport' content='width=device-width, initial-scale=1' />
     <meta name='generator' content={Astro.generator} />
-    {FONT_LINKS.preconnect.map((href) => (
-      <link rel='preconnect' href={href} crossorigin='anonymous' />
-    ))}
+    {
+      FONT_LINKS.preconnect.map((href) => (
+        <link rel='preconnect' href={href} crossorigin='anonymous' />
+      ))
+    }
     {FONT_LINKS.stylesheet && <link rel='stylesheet' href={FONT_LINKS.stylesheet} />}
     <meta name='description' content={description} />
     <meta name='robots' content={robots} />
@@ -68,19 +77,32 @@ const twitterCard = ogImageUrl ? 'summary_large_image' : 'summary';
     <title>{title}</title>
   </head>
   <body class='l-page'>
-    <div class='l-page__bg' aria-hidden='true'></div>
+    <div class='l-page__bg' aria-hidden='true'>
+      <img class='l-page__bg-image' src={pageBg.src} srcset={pageBg.srcSet.attribute} alt='' />
+    </div>
+
     <div class='l-shell'>
-      <aside class='l-shell__aside l-shell__aside--left'>
+      <aside class='l-shell__aside l-shell__aside--left' aria-label='ページタイトルと宝探し'>
         <PageChromeLeft />
       </aside>
+
       <div class='l-shell__main'>
         <main id='main-content' class='l-main-column'>
           <slot />
         </main>
       </div>
-      <aside class='l-shell__aside l-shell__aside--right'>
+
+      <aside class='l-shell__aside l-shell__aside--right' aria-label='キャンペーンナビとLINE登録'>
         <PageChromeRight />
       </aside>
     </div>
+
+    <TreasurePopups />
+    <PageTop />
+
+    <script>
+      import '../scripts/main.js';
+      import '../scripts/carousels.js';
+    </script>
   </body>
 </html>

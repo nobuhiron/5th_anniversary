@@ -1,0 +1,41 @@
+@import '../global/variables.css';
+
+/* -------------------------------------------------------------
+   c-placeholder — 本画像に差し替えるまでの箱。
+   最終画像の比率(--ratio)で場所を確保し、CLS を出さない。
+------------------------------------------------------------- */
+
+.c-placeholder {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: var(--ratio, 1 / 1);
+  background-color: var(--palette-image-placeholder);
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgb(0 0 0 / 4%) 0,
+    rgb(0 0 0 / 4%) 1px,
+    transparent 1px,
+    transparent 8px
+  );
+  border-radius: var(--radius-sm);
+  color: var(--palette-muted);
+  overflow: hidden;
+}
+
+.c-placeholder__label {
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.04em;
+  text-align: center;
+  padding-inline: var(--spacing-sm);
+}
+
+.c-placeholder--circle {
+  border-radius: var(--radius-xl);
+}
+
+.c-placeholder--line {
+  border-radius: var(--radius-md);
+}

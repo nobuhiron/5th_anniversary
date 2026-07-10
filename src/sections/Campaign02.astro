@@ -1,0 +1,46 @@
+---
+import { GOODS_ITEMS, GOODS_NOTES } from '../data/campaigns';
+---
+
+<section id='campaign02' class='l-section p-campaign02' aria-labelledby='campaign02-heading'>
+  <div class='l-inner p-campaign02__inner'>
+    <div class='c-heading p-campaign02__heading'>
+      <p class='c-heading__en'>Campaign02</p>
+      <span class='c-heading__rule' aria-hidden='true'></span>
+      <p class='c-heading__lead'>商品合計金額に応じて</p>
+      <h2 id='campaign02-heading' class='c-heading__ja'>
+        オリジナルグッズ<br />プレゼント
+      </h2>
+      <p class='p-campaign02__badge' aria-hidden='true'>
+        <span class='p-campaign02__badge-sm'>なくなり次第</span>
+        <span class='p-campaign02__badge-lg'>終了</span>
+      </p>
+    </div>
+
+    <ul class='p-campaign02__goods'>
+      {
+        GOODS_ITEMS.map((item) => (
+          <li class='p-campaign02__item'>
+            <span class='c-placeholder c-placeholder--circle p-campaign02__photo' style='--ratio: 1 / 1'>
+              <span class='c-placeholder__label'>{item.name}</span>
+            </span>
+            <p class='p-campaign02__ribbon' data-tone={item.tone}>
+              商品合計金額
+            </p>
+            <p class='p-campaign02__range' data-tone={item.tone}>
+              {item.range}
+            </p>
+            <p class='p-campaign02__name'>{item.name}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class='p-campaign02__notes'>
+      <h3 class='p-campaign02__notes-heading'>注意事項</h3>
+      <ul class='p-campaign02__notes-list'>
+        {GOODS_NOTES.map((note) => <li class='p-campaign02__note'>{note}</li>)}
+      </ul>
+    </div>
+  </div>
+</section>
