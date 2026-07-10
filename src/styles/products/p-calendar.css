@@ -1,0 +1,177 @@
+@import '../global/variables.css';
+
+/* -------------------------------------------------------------
+   p-calendar — 2026年8月のキャンペーンカレンダー。
+   カンプ実測(SCALE=4): 行高 69px / 帯高 15px / 段の間隔 18px。
+------------------------------------------------------------- */
+
+/* カンプ実測(card top 基準, CSS): caption 18.3–31.3 / 曜日 47–60.3 /
+   グリッド 63–477 (6行×69) / カード高 510 */
+.p-calendar {
+  width: 100%;
+  margin-block-start: 44px;
+  padding: 10px 14px 33px;
+  box-sizing: border-box;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  text-align: left;
+}
+
+.p-calendar__caption {
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body);
+  font-weight: var(--fw-bold);
+  line-height: 1.62;
+}
+
+.p-calendar__table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.p-calendar__weekday {
+  height: 27px;
+  padding: 0;
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--fw-bold);
+  line-height: 1.4;
+  text-align: center;
+  vertical-align: bottom;
+}
+
+.p-calendar__weekday[data-day='sun'] {
+  color: var(--palette-calendar-sun);
+}
+
+.p-calendar__weekday[data-day='sat'] {
+  color: var(--palette-calendar-sat);
+}
+
+.p-calendar__cell {
+  position: relative;
+  height: 69px;
+  padding: 4px;
+  border: 1px solid color-mix(in srgb, var(--base-text) 10%, transparent);
+  vertical-align: top;
+}
+
+.p-calendar__cell[data-empty] {
+  background-color: color-mix(in srgb, var(--base-bg) 60%, var(--color-surface));
+}
+
+.p-calendar__cell[data-highlight='green'] {
+  background-color: color-mix(in srgb, var(--palette-green-light) 18%, var(--color-surface));
+}
+
+.p-calendar__cell[data-highlight='blue'] {
+  background-color: color-mix(in srgb, var(--palette-blue-sky) 18%, var(--color-surface));
+}
+
+.p-calendar__day {
+  display: block;
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--fw-bold);
+  text-align: center;
+}
+
+/* 帯: セルの左右いっぱい（罫線をまたいで連続させる）。--lane で段を積む */
+.p-calendar__bar {
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  bottom: calc(var(--lane) * 18px);
+  height: 15px;
+  pointer-events: none;
+}
+
+.p-calendar__bar[data-tone='green-light'] {
+  background-color: var(--palette-green-light);
+}
+
+.p-calendar__bar[data-tone='green-deep'] {
+  background-color: var(--palette-green-deep);
+}
+
+.p-calendar__bar[data-tone='blue-sky'] {
+  background-color: var(--palette-blue-sky);
+}
+
+/* 区間の終端は右向きの矢羽根にする */
+.p-calendar__bar[data-end] {
+  right: -9px;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 50%, calc(100% - 8px) 100%, 0 100%);
+}
+
+/* マーカー（吹き出し / バッジ）。セルからはみ出して置く。
+   カンプ実測(CSS): 吹き出し w125 / 六角形 w49 h55 / 円 w46 h50 / 印 w55 */
+.p-calendar__mark {
+  position: absolute;
+  bottom: 18px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  padding: 4px 6px;
+  font-family: var(--font-jp--sanserif);
+  font-size: 9px;
+  font-weight: var(--fw-bold);
+  line-height: 1.25;
+  text-align: center;
+  white-space: pre-line;
+  color: var(--color-text-on-dark);
+}
+
+.p-calendar__mark[data-anchor='center'] {
+  left: 50%;
+  translate: -50% 0;
+}
+
+.p-calendar__mark[data-anchor='right'] {
+  right: 6px;
+}
+
+.p-calendar__mark[data-anchor='left'] {
+  left: 6px;
+}
+
+.p-calendar__mark[data-tone='green-light'] {
+  background-color: var(--palette-green-light);
+}
+
+.p-calendar__mark[data-tone='orange'] {
+  background-color: var(--palette-orange);
+}
+
+.p-calendar__mark[data-tone='green-vivid'] {
+  background-color: var(--palette-green-vivid);
+}
+
+.p-calendar__mark[data-tone='teal-dark'] {
+  background-color: var(--palette-teal-dark);
+}
+
+.p-calendar__mark[data-shape='bubble'] {
+  width: 125px;
+  min-height: 46px;
+  border-radius: var(--radius-sm);
+}
+
+.p-calendar__mark[data-shape='circle'] {
+  width: 46px;
+  height: 50px;
+  border-radius: var(--radius-xl);
+}
+
+.p-calendar__mark[data-shape='seal'] {
+  width: 55px;
+  height: 55px;
+  border-radius: var(--radius-xl);
+}
+
+.p-calendar__mark[data-shape='hexagon'] {
+  width: 49px;
+  height: 55px;
+  clip-path: polygon(50% 0, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+}

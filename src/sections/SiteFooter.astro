@@ -1,0 +1,26 @@
+---
+import BrandLogo from '../components/BrandLogo.astro';
+import { FOOTER_NAV_ITEMS } from '../data/campaign-nav';
+---
+
+<footer class='p-footer'>
+  <div class='l-inner p-footer__inner'>
+    <p class='p-footer__logo'>
+      <BrandLogo />
+    </p>
+
+    <nav class='p-footer__nav' aria-label='フッターナビゲーション'>
+      <ul class='p-footer__list'>
+        {
+          FOOTER_NAV_ITEMS.map((item) => (
+            <li class='p-footer__item'>
+              <a href={item.href} class='p-footer__link'>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</footer>

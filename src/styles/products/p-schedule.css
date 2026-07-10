@@ -1,0 +1,162 @@
+@import '../global/variables.css';
+
+/* キャンペーンスケジュール.png (1500x5488 @4x) → 375x1372 CSS */
+.p-schedule {
+  background-color: var(--base-heading);
+  color: var(--color-text-on-dark);
+}
+
+.p-schedule__inner {
+  display: grid;
+  justify-items: center;
+  padding-block: 40px 48px;
+  text-align: center;
+}
+
+.p-schedule__mascot {
+  width: 62px;
+}
+
+.p-schedule__lead {
+  margin-block-start: 20px;
+  font-size: var(--font-size-body-sm);
+}
+
+/* カンプ実測: 28px / line-height 1.35 / 字送り 28.06px。
+   12字の「キャンペーンスケジュール」が 335px の内寸に収まるよう字送りを僅かに詰める。 */
+.p-schedule__title {
+  margin-block-start: 12px;
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-title-lg);
+  font-weight: var(--fw-bold);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.p-schedule__month {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 1px;
+  min-width: 160px;
+  margin-block-start: 16px;
+  padding: 8px 24px;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-pill);
+  color: var(--color-sub);
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--fw-bold);
+  white-space: nowrap;
+}
+
+.p-schedule__month-num {
+  font-size: var(--font-size-title);
+  line-height: 1;
+}
+
+/* 2×2 のキャンペーンカード */
+.p-schedule__cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 100%;
+  margin-block-start: 28px;
+}
+
+.p-schedule__card {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  aspect-ratio: 163 / 148;
+}
+
+.p-schedule__card[data-theme='green'] {
+  background-color: var(--palette-green-line);
+}
+
+.p-schedule__card[data-theme='cream'] {
+  background-color: var(--bg-campaign02);
+}
+
+.p-schedule__card[data-theme='green-gradient'] {
+  background: var(--bg-campaign03);
+}
+
+.p-schedule__card[data-theme='honey'] {
+  background-color: var(--bg-campaign04);
+}
+
+.p-schedule__card-link {
+  display: grid;
+  align-content: start;
+  justify-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  padding: 14px 10px;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: var(--color-text-on-dark);
+}
+
+.p-schedule__card[data-theme='cream'] .p-schedule__card-link,
+.p-schedule__card[data-theme='honey'] .p-schedule__card-link {
+  color: var(--color-sub);
+}
+
+.p-schedule__card-en {
+  display: grid;
+  place-items: center;
+  min-width: 118px;
+  padding: 4px 12px;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-pill);
+  color: var(--palette-green-deep);
+  font-family: var(--font-en--decor);
+  font-size: 15px;
+  font-weight: var(--fw-semibold);
+}
+
+.p-schedule__card[data-theme='cream'] .p-schedule__card-en,
+.p-schedule__card[data-theme='honey'] .p-schedule__card-en {
+  color: var(--color-sub);
+}
+
+.p-schedule__card-title {
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body);
+  font-weight: var(--fw-bold);
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.p-schedule__notes {
+  width: 100%;
+  margin-block-start: 20px;
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body-xs);
+  line-height: 1.7;
+  text-align: left;
+}
+
+.p-schedule__detail {
+  width: 100%;
+  position: relative;
+}
+
+.p-schedule__detail[hidden] {
+  display: none;
+}
+
+/* 宝探し（抹茶）はカレンダー右上に重ねる */
+.p-schedule__treasure {
+  position: absolute;
+  top: -34px;
+  right: 0;
+  width: 76px;
+  z-index: 2;
+}
+
+.p-schedule__toggle {
+  margin-block-start: 24px;
+}

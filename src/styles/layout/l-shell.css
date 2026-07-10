@@ -1,7 +1,11 @@
+@import '../global/variables.css';
+
 /* -------------------------------------------------------------
    l-shell — SP は中央固定列(--layout-main-width) 1 本、
    PC(--lg) では 1fr / main / 1fr のグリッドにして左右に chrome を出す。
-   季節 LP 共通の骨格。左右 chrome の中身は案件ごとに PageChrome* で実装する。
+
+   コーディングルール「背景画像固定」:
+   画面背景は position:fixed で固定し、中央のパーツだけがスクロールする。
 ------------------------------------------------------------- */
 
 .l-page {
@@ -11,14 +15,22 @@
   isolation: isolate;
 }
 
-/* ページ全体の背景レイヤー（案件ごとに差し替える想定の薄いプレースホルダ）。
-   既定では何も描かない。必要なら background を上書きする。 */
 .l-page__bg {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
+  background-color: var(--bg-page-frame);
+}
+
+.l-page__bg-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .l-shell {
@@ -41,6 +53,7 @@
   width: 100%;
   max-width: var(--layout-main-width);
   margin-inline: auto;
+  background-color: var(--color-surface);
 }
 
 @media (--lg) {
@@ -65,9 +78,10 @@
     min-width: 0;
   }
 
-  /* グリッド内では中央カラムなので margin auto は不要 */
   .l-main-column {
     margin-inline: 0;
+    /* カンプ実測: 本体カラムの外側に淡いドロップシャドウ */
+    box-shadow: 0 0 24px rgb(0 0 0 / 18%);
   }
 }
 

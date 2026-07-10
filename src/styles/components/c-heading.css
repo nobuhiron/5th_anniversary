@@ -1,0 +1,79 @@
+@import '../global/variables.css';
+
+/* -------------------------------------------------------------
+   c-heading — 各キャンペーンセクションの見出し。
+   Dancing Script の英字 → 短い罫線 → ＼リード／ → 和文タイトル の順。
+------------------------------------------------------------- */
+
+.c-heading {
+  display: grid;
+  justify-items: center;
+  gap: var(--spacing-sm);
+  text-align: center;
+  color: var(--heading-fg, var(--color-text-on-dark));
+}
+
+.c-heading__en {
+  font-family: var(--font-en--decor);
+  font-size: 32px;
+  font-weight: var(--fw-semibold);
+  line-height: 1.1;
+}
+
+.c-heading__rule {
+  width: 24px;
+  height: 1px;
+  background-color: currentColor;
+  opacity: 0.7;
+}
+
+/* ＼リード／ の山括弧あしらい */
+.c-heading__lead {
+  position: relative;
+  display: inline-block;
+  padding-inline: 1.4em;
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--fw-medium);
+}
+
+.c-heading__lead::before,
+.c-heading__lead::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 1px;
+  height: 1.15em;
+  background-color: currentColor;
+  translate: 0 -50%;
+}
+
+/* ＼ は上が左に倒れる = 反時計回り。／ は時計回り。 */
+.c-heading__lead::before {
+  left: 0.2em;
+  rotate: -20deg;
+}
+
+.c-heading__lead::after {
+  right: 0.2em;
+  rotate: 20deg;
+}
+
+.c-heading__ja {
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-title-lg);
+  font-weight: var(--fw-bold);
+  line-height: 1.35;
+}
+
+/* 日付帯（上下に細い罫線） */
+.c-period {
+  display: block;
+  padding-block: var(--spacing-sm);
+  border-block: 1px solid currentColor;
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--fw-bold);
+  text-align: center;
+  letter-spacing: 0.01em;
+}

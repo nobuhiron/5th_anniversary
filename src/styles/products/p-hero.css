@@ -1,0 +1,13 @@
+@import '../global/variables.css';
+
+/* カンプ実測: MV.jpg = 750x1468 (@2x) → 375x734 CSS */
+.p-hero {
+  background-color: var(--bg-page-frame);
+}
+
+.p-hero__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 750 / 1468;
+}

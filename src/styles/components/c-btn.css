@@ -1,0 +1,173 @@
+@import '../global/variables.css';
+
+/* -------------------------------------------------------------
+   c-btn — CTA ボタン。
+   コーディングルール「ホバー: 色変更」→ 塗り(茶)から白抜き(枠線+茶文字)へ反転。
+------------------------------------------------------------- */
+
+.c-btn {
+  --btn-bg: var(--color-cta);
+  --btn-fg: var(--color-text-on-dark);
+  --btn-border: var(--color-cta);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 44px;
+  padding: 12px var(--spacing-lg);
+  box-sizing: border-box;
+  background-color: var(--btn-bg);
+  color: var(--btn-fg);
+  border: 1px solid var(--btn-border);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--fw-bold);
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition:
+    background-color var(--duration-hover) var(--easing-standard),
+    color var(--duration-hover) var(--easing-standard);
+}
+
+.c-btn:hover {
+  --btn-bg: var(--color-surface);
+  --btn-fg: var(--color-cta);
+}
+
+/* 右端に丸アイコンを持つバー型（詳しく見る） */
+.c-btn-bar {
+  --bar-bg: var(--palette-green-deep);
+  --bar-fg: var(--color-text-on-dark);
+  --bar-circle: var(--color-text-on-dark);
+  --bar-arrow: var(--palette-green-deep);
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 44px;
+  padding: 12px 44px;
+  box-sizing: border-box;
+  background-color: var(--bar-bg);
+  color: var(--bar-fg);
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--fw-bold);
+  text-decoration: none;
+  transition:
+    background-color var(--duration-hover) var(--easing-standard),
+    color var(--duration-hover) var(--easing-standard);
+}
+
+.c-btn-bar--dark {
+  --bar-bg: var(--base-text);
+  --bar-arrow: var(--base-text);
+}
+
+.c-btn-bar:hover {
+  --bar-bg: var(--color-surface);
+  --bar-fg: var(--palette-green-deep);
+  --bar-circle: var(--palette-green-deep);
+  --bar-arrow: var(--color-surface);
+}
+
+.c-btn-bar--dark:hover {
+  --bar-fg: var(--base-text);
+  --bar-circle: var(--base-text);
+  --bar-arrow: var(--color-surface);
+}
+
+.c-btn-bar__icon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  translate: 0 -50%;
+  display: inline-flex;
+  color: var(--bar-circle);
+}
+
+.c-btn-bar__icon svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+/* 白いピル型（開く / 閉じる） */
+.c-btn-toggle {
+  --toggle-bg: var(--color-surface);
+  --toggle-fg: var(--color-sub);
+  --toggle-circle: var(--color-sub);
+  --toggle-arrow: var(--color-surface);
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 56px;
+  padding: 14px 56px;
+  box-sizing: border-box;
+  background-color: var(--toggle-bg);
+  color: var(--toggle-fg);
+  border: none;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body);
+  font-weight: var(--fw-bold);
+  transition:
+    background-color var(--duration-hover) var(--easing-standard),
+    color var(--duration-hover) var(--easing-standard);
+}
+
+.c-btn-toggle:hover {
+  --toggle-bg: var(--color-sub);
+  --toggle-fg: var(--color-surface);
+  --toggle-circle: var(--color-surface);
+  --toggle-arrow: var(--color-sub);
+}
+
+.c-btn-toggle__icon {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  translate: 0 -50%;
+  display: inline-flex;
+  color: var(--toggle-circle);
+}
+
+.c-btn-toggle__icon svg {
+  display: block;
+  width: 40px;
+  height: 40px;
+  transition: rotate var(--duration-hover) var(--easing-standard);
+}
+
+/* 開いている間は chevron を上向きにする */
+[aria-expanded='true'] .c-btn-toggle__icon svg {
+  rotate: 180deg;
+}
+
+/* 円形の chevron ボタン（バナー下部） */
+.c-btn-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-xl);
+  background-color: var(--color-surface);
+  color: var(--color-sub);
+  transition:
+    background-color var(--duration-hover) var(--easing-standard),
+    color var(--duration-hover) var(--easing-standard);
+}
+
+.c-btn-circle svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}

@@ -1,0 +1,270 @@
+@import '../global/variables.css';
+
+/* Campagin01.png (1500x4896 @4x) → 375x1224 CSS */
+.p-campaign01 {
+  background-color: var(--bg-campaign01);
+  color: var(--color-text-on-dark);
+}
+
+/* カンプ実測: 推し商品カード 978..1148(h170) / セクション下余白 76 */
+.p-campaign01__inner {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  padding-block: 48px 76px;
+}
+
+.p-campaign01__heading {
+  --heading-fg: var(--color-text-on-dark);
+}
+
+.p-campaign01__line {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  width: 100%;
+  margin-block-start: 32px;
+  text-align: center;
+}
+
+.p-campaign01__line-lead {
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body);
+  font-weight: var(--fw-bold);
+  line-height: 1.8;
+}
+
+.p-campaign01__line-badge {
+  display: inline-grid;
+  place-items: center;
+  padding: 2px 10px;
+  border-radius: var(--radius-xs);
+  background-color: var(--color-surface);
+  color: var(--palette-green-line);
+  font-family: var(--font-en);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--fw-bold);
+}
+
+.p-campaign01__bubble {
+  position: relative;
+  margin-block-start: 16px;
+  padding: 12px 18px;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-sm);
+  color: var(--palette-green-deep);
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--fw-bold);
+  line-height: 1.6;
+}
+
+.p-campaign01__bubble::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 32px;
+  border: 8px solid transparent;
+  border-top-color: var(--color-surface);
+}
+
+.p-campaign01__line-note {
+  margin-block-start: 20px;
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body-sm);
+}
+
+.p-campaign01__coupon {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  margin-block-start: 12px;
+  color: var(--palette-yellow-vivid);
+}
+
+.p-campaign01__coupon-badge {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border: 1.5px solid currentColor;
+  border-radius: var(--radius-xl);
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--fw-bold);
+}
+
+.p-campaign01__coupon-amount {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.p-campaign01__coupon-num {
+  font-family: var(--font-en);
+  font-size: 56px;
+  font-weight: var(--fw-bold);
+  line-height: 1;
+}
+
+.p-campaign01__coupon-unit {
+  display: grid;
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-title-sm);
+  font-weight: var(--fw-bold);
+  line-height: 1.1;
+}
+
+.p-campaign01__coupon-off {
+  font-family: var(--font-en);
+  font-size: var(--font-size-body-sm);
+}
+
+.p-campaign01__coupon-text {
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-title-sm);
+  font-weight: var(--fw-bold);
+}
+
+/* カンプ: スマホモックはテキストの右に重ねる（フローに高さを足さない） */
+.p-campaign01__phone {
+  position: absolute;
+  right: -10px;
+  top: 96px;
+  width: 140px;
+  margin: 0;
+}
+
+.p-campaign01__friend {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  width: 100%;
+  margin-block-start: 24px;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-pill);
+  color: var(--palette-green-line);
+  text-decoration: none;
+  transition: opacity var(--duration-hover) var(--easing-standard);
+}
+
+.p-campaign01__friend:hover {
+  opacity: 0.85;
+}
+
+.p-campaign01__friend-icon {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  background-color: var(--palette-green-line);
+  color: var(--color-surface);
+  font-family: var(--font-en);
+  font-size: 9px;
+  font-weight: var(--fw-bold);
+}
+
+.p-campaign01__friend-label {
+  flex: 1;
+  text-align: center;
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body);
+  font-weight: var(--fw-bold);
+}
+
+.p-campaign01__friend-arrow {
+  display: inline-flex;
+  width: 22px;
+  color: var(--palette-green-line);
+}
+
+.p-campaign01__friend-arrow svg {
+  display: block;
+  width: 100%;
+}
+
+/* スタッフの推し商品紹介 */
+/* カンプ実測: 友だち追加ボタン下端 675 → 推し商品見出し 825（間隔 150） */
+.p-campaign01__picks {
+  --scrollbar-track: rgb(255 255 255 / 45%);
+  --scrollbar-thumb: rgb(0 0 0 / 25%);
+
+  width: 100%;
+  margin-block-start: 150px;
+}
+
+.p-campaign01__picks-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.p-campaign01__picks-photo {
+  display: block;
+  width: 56px;
+  flex-shrink: 0;
+}
+
+.p-campaign01__picks-title {
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-title-sm);
+  font-weight: var(--fw-bold);
+  line-height: 1.45;
+}
+
+/* カンプ実測(ladder): 推し商品見出し 825 → カード上端 978。間隔 153px */
+.p-campaign01__carousel {
+  margin-block-start: 95px;
+}
+
+/* swiper/css の .swiper-slide{width:100%} はランタイム注入で後勝ちになるため、
+   セレクタを 2 段にして詳細度で上回る（!important を使わない） */
+.p-campaign01__carousel .p-campaign01__pick {
+  width: 153px;
+  padding-block-end: 12px;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-xs);
+  overflow: hidden;
+  color: var(--color-text);
+}
+
+.p-campaign01__pick-photo {
+  border-radius: 0;
+}
+
+.p-campaign01__pick-staff {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 10px 6px;
+}
+
+.p-campaign01__pick-avatar {
+  width: 26px;
+  flex-shrink: 0;
+}
+
+.p-campaign01__pick-name {
+  font-family: var(--font-en);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--fw-bold);
+}
+
+/* カンプ実測: カード高 170。コメントは 3 行に収める（153px 幅で 13字/行） */
+.p-campaign01__pick-comment {
+  padding-inline: 10px;
+  font-family: var(--font-jp--sanserif);
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+/* 宝探し（茶筅）。推し商品カルーセルの上に載せる */
+.p-campaign01__treasure {
+  position: absolute;
+  right: 4px;
+  bottom: 130px;
+  width: 72px;
+}

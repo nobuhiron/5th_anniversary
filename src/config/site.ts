@@ -9,8 +9,9 @@ export const SITE = {
   defaultOgImage: '',
 };
 
+// コーディングルール: 見出し・本文 = Noto Serif JP / Noto Sans JP、英字あしらい = Dancing Script / Roboto
 export const FONT_LINKS = {
   preconnect: ['https://fonts.googleapis.com', 'https://fonts.gstatic.com'],
   stylesheet:
-    'https://fonts.googleapis.com/css2?family=Alex+Brush&family=Metal&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;500;700&display=swap',
+    'https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap',
 };

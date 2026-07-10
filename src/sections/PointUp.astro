@@ -1,0 +1,85 @@
+---
+import { LIMITED_SALE, POINT_UP } from '../data/campaigns';
+---
+
+<section id='point-up' class='l-section p-point-up' aria-labelledby='point-up-heading'>
+  <div class='l-inner p-point-up__inner'>
+    <p class='p-point-up__watermark' aria-hidden='true'>Point-up sale</p>
+
+    <p class='p-point-up__lead'>{POINT_UP.lead}</p>
+    <span class='p-point-up__rule' aria-hidden='true'></span>
+
+    <h2 id='point-up-heading' class='p-point-up__title'>
+      <span class='p-point-up__title-en'>{POINT_UP.titleEn}</span>
+      <span class='p-point-up__title-ja'>{POINT_UP.titleJa}</span>
+    </h2>
+
+    <p class='c-period p-point-up__period'>{POINT_UP.period}</p>
+
+    <div class='p-point-up__card'>
+      <div class='p-point-up__rate'>
+        <p class='p-point-up__rate-label'>対象5ブランド</p>
+        <p class='p-point-up__rate-value'>
+          <span class='p-point-up__rate-plus' aria-hidden='true'>＋</span>
+          <span class='p-point-up__rate-num'>6</span>
+          <span class='p-point-up__rate-unit'>
+            <span class='p-point-up__rate-all'>全品</span>
+            <span class='p-point-up__rate-pct'>％還元</span>
+          </span>
+        </p>
+        <span class='p-point-up__coins' aria-hidden='true'></span>
+      </div>
+
+      <p class='p-point-up__brands'>
+        {POINT_UP.brands}
+        <b class='p-point-up__brands-em'>{POINT_UP.brandsEm}</b>
+      </p>
+
+      <a href='#point-up' class='c-btn-bar p-point-up__more'>
+        詳しく見る
+        <span class='c-btn-bar__icon' aria-hidden='true'>
+          <svg viewBox='0 0 20 20' fill='none'>
+            <circle cx='10' cy='10' r='9' fill='currentColor'></circle>
+            <path
+              d='M8.5 6l4 4-4 4'
+              stroke='var(--bar-arrow)'
+              stroke-width='1.8'
+              stroke-linecap='round'
+              stroke-linejoin='round'></path>
+          </svg>
+        </span>
+      </a>
+    </div>
+
+    <p class='p-point-up__sale-lead'>{LIMITED_SALE.lead}</p>
+    <p class='p-point-up__sale-title'>{LIMITED_SALE.title}</p>
+    <p class='c-period p-point-up__period'>{LIMITED_SALE.period}</p>
+
+    <div class='p-point-up__banner'>
+      <p class='p-point-up__banner-seal' aria-hidden='true'>毎月<br />恒例</p>
+      <p class='p-point-up__banner-title'>
+        <span class='p-point-up__banner-ja'>スペシャル</span>
+        <span class='p-point-up__banner-en'>SALE</span>
+      </p>
+      <p class='p-point-up__banner-note'>人気商品が驚きの価格に!</p>
+      <a href='#point-up' class='c-btn-bar c-btn-bar--dark p-point-up__banner-more'>
+        詳しく見る
+        <span class='c-btn-bar__icon' aria-hidden='true'>
+          <svg viewBox='0 0 20 20' fill='none'>
+            <circle cx='10' cy='10' r='9' fill='currentColor'></circle>
+            <path
+              d='M8.5 6l4 4-4 4'
+              stroke='var(--bar-arrow)'
+              stroke-width='1.8'
+              stroke-linecap='round'
+              stroke-linejoin='round'></path>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <p class='p-point-up__outro'>
+    周年期間の<br />お得なキャンペーンは<br />こちら
+  </p>
+</section>

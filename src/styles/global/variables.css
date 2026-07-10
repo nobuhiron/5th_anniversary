@@ -1,26 +1,75 @@
 /* -------------------
-   Project Editable Tokens
-   Edit this section for each project
+   Project Editable Tokens（コーディングルール準拠：森半 5周年 Anniversary）
+   ベース文字色 4色（#1A1A1A / #FFFFFF / #2D2D32 / #354E0F）＋ キーカラー 15色。
+   実装側は下部の semantic token / palette token だけを参照する（色の直書き禁止）。
 ------------------- */
 :root {
-  /* Base Colors */
-  --base-main: #6a3c0a;
-  --base-accent: #c2584a;
-  --base-sub: #bf9c35;
-  --base-text: #333;
-  --base-bg: #efe5d1;
-  --base-surface: #f6f5f2;
+  /* Base（コーディングルール # テキスト > フォントカラー（ベース）） */
+  --base-text: #1a1a1a;
+  --base-text-strong: #2d2d32;
+  --base-text-on-dark: #ffffff;
+  --base-heading: #354e0f; /* 深いオリーブ。フッター / About 背景にも使う */
 
-  /* Project Font Sources */
+  --base-bg: #f8f5e8; /* クリーム。Campaign02 / ポイントアップ の地色 */
+  --base-surface: #ffffff;
+  --base-main: #005e26; /* 濃緑（キーカラー筆頭） */
+  --base-accent: #ffc722; /* ゴールド */
+  --base-sub: #805a24; /* ブラウン（CTA・英字見出し） */
+
+  /* キーカラー（コーディングルール # キーカラー 15色） */
+  --palette-green-deep: #005e26;
+  --palette-yellow: #ffc722;
+  --palette-green-light: #a3c523;
+  --palette-blue-sky: #36b2df;
+  --palette-orange: #fdae2d;
+  --palette-teal-dark: #306c78;
+  --palette-brown: #805a24;
+  --palette-teal: #1e94ae;
+  --palette-green-vivid: #1eae47;
+  --palette-yellow-vivid: #ffed22;
+  --palette-green-line: #02872a; /* Campaign01 の地色 / LINE 緑 */
+  --palette-green-olive: #879c51;
+  --palette-orange-deep: #fd8b2d;
+  --palette-gold: #daac2b;
+  --palette-mint-pale: #f0f9f6;
+
+  /* 補助・派生 */
+  --palette-price: #cc0000; /* セール価格の赤（Campaign04） */
+  --palette-alert: #e8332a; /* 注意事項の赤（Campaign02） */
+  --palette-muted: #6b6b6b;
+  --palette-border: color-mix(in srgb, var(--base-text) 12%, transparent);
+  --palette-border-on-dark: color-mix(in srgb, #ffffff 40%, transparent);
+  --palette-image-placeholder: #e5e5df;
+  --palette-calendar-sun: #e02020;
+  --palette-calendar-sat: #36b2df;
+
+  /* 背景（measure / sample-colors による実測値） */
+  --bg-page-frame: #305f2b; /* PC 固定背景（mv.png のベース緑） */
+  --bg-about-mid: #2c4b14; /* About 中央の緑（ロゴマークの抜き色に使う） */
+  --bg-about: linear-gradient(180deg, #2a400f 0%, #2c4b14 50%, #2d5216 100%);
+  --bg-campaign01: #02872a;
+  --bg-campaign02: #f8f5e8;
+  --bg-campaign03: linear-gradient(180deg, #328457 0%, #208453 45%, #00573c 100%);
+  --bg-campaign04: #fecc82;
+  --bg-nav: linear-gradient(180deg, #fde5cb 0%, #fdfcfa 50%, #e8dad1 100%);
+  --bg-point: #f8f5e8;
+  --bg-footer: #354e0f;
+
+  /* パーツ地色（本画像が入るまでのプレースホルダ地。実測値） */
+  --bg-banner-uchiwa: #f2efe9;
+  --bg-banner-honey: #b39a83;
+  --bg-product-card: linear-gradient(135deg, #f4f8ef 0%, #e9f1e2 100%);
+  --bg-photo-area: #f2f1ef;
+
+  /* Project Font Sources（コーディングルール # テキスト > フォントファミリー） */
   --font-source-jp-serif: 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
   --font-source-jp-sans: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
-  --font-source-en: 'Metal', 'Georgia', serif;
-  --font-source-en-decor: 'Alex Brush', 'Times New Roman', cursive;
+  --font-source-en: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  --font-source-en-decor: 'Dancing Script', 'Segoe Script', cursive;
 
-  /* Layout */
+  /* Layout（カンプ幅 375px） */
   --layout-max-width: 1440px;
   --layout-max-width-inner: 1100px;
-  /* SP 本体（中央固定列）の幅。カンプ幅に合わせる。既定 375px */
   --layout-main-width: 375px;
   --layout-padding-sp: 20px;
   --layout-padding-pc: 50px;
@@ -29,27 +78,39 @@
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
-  --spacing-2xl: 40px;
-  --spacing-3xl: 48px;
-  --spacing-4xl: 64px;
-  --spacing-5xl: 96px;
+  --spacing-lg: 20px;
+  --spacing-xl: 24px;
+  --spacing-2xl: 32px;
+  --spacing-3xl: 40px;
+  --spacing-4xl: 48px;
+  --spacing-5xl: 64px;
 
   /* Radius */
   --radius-xs: 4px;
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
+  --radius-pill: 999px;
   --radius-xl: 50%;
 
-  /* Typography */
+  /* Typography（コーディングルール: 本文 13/14/15/16、和タイトル 20/24/28） */
   --fw-regular: 400;
   --fw-medium: 500;
   --fw-semibold: 600;
   --fw-bold: 700;
-  --font-size-base: clamp(16px, 1.6vw, 18px);
+  --font-size-body-xs: 13px;
+  --font-size-body-sm: 14px;
+  --font-size-body-md: 15px;
+  --font-size-body: 16px;
+  --font-size-base: 16px; /* base.css 互換エイリアス */
+  --font-size-title-sm: 20px;
+  --font-size-title: 24px;
+  --font-size-title-lg: 28px;
   --line-height-base: 1.62;
+
+  /* Motion */
+  --duration-hover: 240ms;
+  --easing-standard: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 /* -------------------
@@ -58,11 +119,15 @@
 ------------------- */
 :root {
   --color-text: var(--base-text);
+  --color-text-strong: var(--base-text-strong);
+  --color-text-on-dark: var(--base-text-on-dark);
+  --color-heading: var(--base-heading);
   --color-bg: var(--base-bg);
   --color-surface: var(--base-surface);
   --color-main: var(--base-main);
   --color-accent: var(--base-accent);
   --color-sub: var(--base-sub);
+  --color-cta: var(--base-sub);
 
   /* Font Aliases */
   --font-jp--serif: var(--font-source-jp-serif);

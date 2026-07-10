@@ -1,0 +1,78 @@
+@import '../global/variables.css';
+
+/* -------------------------------------------------------------
+   c-nav-campaign — PC 右カラムの Campaign ナビ。
+   コーディングルール「ホバー: 色変更」に従い、文字色とアイコン色を反転させる。
+------------------------------------------------------------- */
+
+.c-nav-campaign {
+  width: 100%;
+  max-width: 260px;
+}
+
+.c-nav-campaign__title {
+  font-family: var(--font-en--decor);
+  font-size: 24px;
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-on-dark);
+  line-height: 1.1;
+  padding-block-end: var(--spacing-sm);
+  border-block-end: 1px solid var(--palette-border-on-dark);
+}
+
+.c-nav-campaign__list {
+  display: grid;
+  gap: 2px;
+  margin-block-start: var(--spacing-md);
+}
+
+.c-nav-campaign__link {
+  --nav-fg: var(--color-text-on-dark);
+  --nav-icon-bg: var(--color-text-on-dark);
+  --nav-chevron-stroke: var(--palette-green-deep);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+  min-height: 40px;
+  padding-block: 6px;
+  color: var(--nav-fg);
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--fw-medium);
+  line-height: 1.45;
+  text-decoration: none;
+  transition:
+    color var(--duration-hover) var(--easing-standard),
+    opacity var(--duration-hover) var(--easing-standard);
+}
+
+.c-nav-campaign__link:hover {
+  --nav-fg: var(--palette-gold);
+  --nav-icon-bg: var(--palette-gold);
+  --nav-chevron-stroke: var(--palette-green-deep);
+}
+
+.c-nav-campaign__label {
+  flex: 1;
+  min-width: 0;
+}
+
+.c-nav-campaign__icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  color: var(--nav-icon-bg);
+  transition: color var(--duration-hover) var(--easing-standard);
+}
+
+.c-nav-campaign__chevron {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.c-nav-campaign__link:focus-visible {
+  outline: 2px solid var(--palette-gold);
+  outline-offset: 2px;
+}

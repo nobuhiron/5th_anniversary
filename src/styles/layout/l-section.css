@@ -1,0 +1,14 @@
+@import '../global/variables.css';
+
+/* セクション共通。背景はセクションごとに p-* 側で指定する */
+.l-section {
+  position: relative;
+  overflow: clip;
+}
+
+/* 本体カラム内の左右余白（カンプ実測: 20px） */
+.l-inner {
+  width: 100%;
+  padding-inline: var(--layout-padding-sp);
+  box-sizing: border-box;
+}

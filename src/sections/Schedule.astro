@@ -1,0 +1,71 @@
+---
+import Calendar from '../components/Calendar.astro';
+import TreasureTrigger from '../components/TreasureTrigger.astro';
+import { SCHEDULE_CARDS } from '../data/schedule';
+---
+
+<section id='schedule' class='l-section p-schedule' aria-labelledby='schedule-heading'>
+  <div class='l-inner p-schedule__inner'>
+    <p class='p-schedule__mascot' aria-hidden='true'>
+      <span class='c-placeholder c-placeholder--circle' style='--ratio: 1 / 1'>
+        <span class='c-placeholder__label'>くま半</span>
+      </span>
+    </p>
+
+    <p class='p-schedule__lead'>
+      <span class='c-heading__lead'>お得が盛りだくさん</span>
+    </p>
+
+    <h2 id='schedule-heading' class='p-schedule__title'>
+      5周年<br />キャンペーンスケジュール
+    </h2>
+
+    <p class='p-schedule__month'>
+      <span class='p-schedule__month-num'>2026</span>年<span class='p-schedule__month-num'>8</span>月
+    </p>
+
+    <ul class='p-schedule__cards'>
+      {
+        SCHEDULE_CARDS.map((card) => (
+          <li class='p-schedule__card' data-theme={card.theme}>
+            <a href={card.href} class='p-schedule__card-link'>
+              <span class='p-schedule__card-en'>{card.en}</span>
+              <span class='p-schedule__card-title'>{card.title}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class='p-schedule__notes'>
+      ※期間:2026/8/1~31<br />
+      ※詳細は、本頁の中部をご確認ください。
+    </p>
+
+    <div class='p-schedule__detail' id='schedule-detail' hidden>
+      <TreasureTrigger item='matcha' label='抹茶' class='p-schedule__treasure' />
+      <Calendar />
+    </div>
+
+    <button
+      type='button'
+      class='c-btn-toggle p-schedule__toggle'
+      data-schedule-toggle
+      aria-expanded='false'
+      aria-controls='schedule-detail'
+    >
+      <span data-schedule-toggle-label>開く</span>
+      <span class='c-btn-toggle__icon' aria-hidden='true'>
+        <svg viewBox='0 0 40 40' fill='none'>
+          <circle cx='20' cy='20' r='20' fill='currentColor'></circle>
+          <path
+            d='M14 17.5l6 6 6-6'
+            stroke='var(--toggle-arrow)'
+            stroke-width='2.2'
+            stroke-linecap='round'
+            stroke-linejoin='round'></path>
+        </svg>
+      </span>
+    </button>
+  </div>
+</section>

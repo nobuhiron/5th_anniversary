@@ -1,6 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { SITE } from '../config/site';
+import Hero from '../sections/Hero.astro';
+import About from '../sections/About.astro';
+import Schedule from '../sections/Schedule.astro';
+import CampaignNav from '../sections/CampaignNav.astro';
+import PointUp from '../sections/PointUp.astro';
+import Campaign01 from '../sections/Campaign01.astro';
+import Campaign02 from '../sections/Campaign02.astro';
+import Campaign03 from '../sections/Campaign03.astro';
+import Campaign04 from '../sections/Campaign04.astro';
+import SiteFooter from '../sections/SiteFooter.astro';
 ---
 
 <Layout
@@ -8,5 +18,32 @@ import { SITE } from '../config/site';
   description={SITE.defaultDescription}
   canonical='/view/page/lp_5th'
 >
-  <h1>MakeShop LP Template</h1>
+  {/* FV / メインビジュアル */}
+  <Hero />
+
+  {/* 5周年のごあいさつ */}
+  <About />
+
+  {/* キャンペーンスケジュール（開閉 + カレンダー） */}
+  <Schedule />
+
+  {/* 各キャンペーンへのバナーナビ */}
+  <CampaignNav />
+
+  {/* ポイントアップセール / 24時間限定SALE */}
+  <PointUp />
+
+  {/* おめでとう！大好き！キャンペーン */}
+  <Campaign01 />
+
+  {/* オリジナルグッズプレゼント */}
+  <Campaign02 />
+
+  {/* Plus1キャンペーン */}
+  <Campaign03 />
+
+  {/* はちみつ紅茶SALE */}
+  <Campaign04 />
+
+  <SiteFooter />
 </Layout>

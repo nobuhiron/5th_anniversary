@@ -1,12 +1,41 @@
 ---
 /**
- * PageChromeLeft — PC 左カラム chrome（SP では l-shell 側で非表示）。
- * 季節 LP では「ロゴ / ページタイトル」などを置くことが多い。
- * 案件ごとにこのファイルの中身を実装する。slot を渡せば差し込みも可能。
+ * PC 左カラム。森半ロゴ + 5th Anniversary + うちわバナー + 宝探しカード。
+ * 画像素材は支給待ちのためプレースホルダ。
  */
+import BrandLogo from './BrandLogo.astro';
 ---
-<div class="c-page-chrome c-page-chrome--left">
-  <slot>
-    {/* TODO: 左カラムの内容（ロゴ / ページタイトル など）をここに実装 */}
-  </slot>
+
+<div class='p-chrome-left'>
+  <BrandLogo class='p-chrome-left__logo' />
+
+  <p class='p-chrome-left__title'>
+    <span class='p-chrome-left__title-num'>5</span><span class='p-chrome-left__title-th'>th</span>
+    <span class='p-chrome-left__title-en'>Anniversary</span>
+  </p>
+
+  <a
+    href='#campaign-uchiwa'
+    class='p-chrome-left__banner'
+    aria-label='購入者全員に クーポン付きミニうちわプレゼント'
+  >
+    <span class='c-placeholder' style='--ratio: 300 / 118'>
+      <span class='c-placeholder__label'>うちわバナー</span>
+    </span>
+  </a>
+
+  <section class='p-treasure' aria-labelledby='treasure-heading'>
+    <span class='p-treasure__ribbon' aria-hidden='true'>5th Anniversary</span>
+    <h2 id='treasure-heading' class='p-treasure__text'>
+      茶の湯にまつわる道具が、<br />
+      このページのどこかに隠れています。<br />
+      <b class='p-treasure__count'>3つすべて</b>を見つけた方へ、<br />
+      <b class='p-treasure__strong'>特別なお品をご用意</b>しております。
+    </h2>
+    <ul class='p-treasure__stamps' data-treasure-stamps>
+      <li class='p-treasure__stamp' data-treasure-slot='matcha'></li>
+      <li class='p-treasure__stamp' data-treasure-slot='chasen'></li>
+      <li class='p-treasure__stamp' data-treasure-slot='chawan'></li>
+    </ul>
+  </section>
 </div>

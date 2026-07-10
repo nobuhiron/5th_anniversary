@@ -1,5 +1,7 @@
+/* FLOCSS のカスケード順: foundation → layout → object(component → project)。
+   component(c-*) より project(p-*) を後に読み、p-* 側の上書きを効かせる。 */
 @import './global/index.css';
 @import './foundation/index.css';
 @import './layout/index.css';
-@import './products/index.css';
 @import './components/index.css';
+@import './products/index.css';

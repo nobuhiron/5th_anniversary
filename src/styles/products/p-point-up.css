@@ -1,0 +1,248 @@
+@import '../global/variables.css';
+
+/* ポイントアップセール.png (1500x5220 @4x) → 375x1305 CSS */
+.p-point-up {
+  background-color: var(--bg-point);
+  color: var(--color-text);
+}
+
+/* カンプ実測: 上72 / リード 3行の行ピッチ38 / POINT UP ink25 / 下(outro込み)149 */
+.p-point-up__inner {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  padding-block: 72px 24px;
+  text-align: center;
+}
+
+.p-point-up__watermark {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  translate: -50% 0;
+  font-family: var(--font-en--decor);
+  font-size: 62px;
+  color: color-mix(in srgb, var(--color-sub) 10%, transparent);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.p-point-up__lead {
+  position: relative;
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-title-sm);
+  font-weight: var(--fw-bold);
+  line-height: 38px;
+  white-space: pre-line;
+}
+
+.p-point-up__rule {
+  width: 28px;
+  height: 1px;
+  margin-block: 24px;
+  background-color: var(--color-text);
+}
+
+.p-point-up__title {
+  display: grid;
+  gap: 4px;
+}
+
+.p-point-up__title-en {
+  font-family: var(--font-en);
+  font-size: 34px;
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+}
+
+.p-point-up__title-ja {
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-title-sm);
+  font-weight: var(--fw-bold);
+}
+
+.p-point-up__period {
+  width: 100%;
+  margin-block-start: 20px;
+}
+
+/* +6%還元 カード */
+.p-point-up__card {
+  width: 100%;
+  margin-block-start: 28px;
+  border-radius: var(--radius-sm);
+  background-color: var(--palette-green-vivid);
+  overflow: hidden;
+}
+
+/* カンプ実測: カード全体 399..650 = 251px に収める */
+.p-point-up__rate {
+  position: relative;
+  margin: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-surface);
+}
+
+.p-point-up__rate-label {
+  display: inline-block;
+  padding-block-end: 2px;
+  border-block-end: 1px solid currentColor;
+  color: var(--palette-green-deep);
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--fw-bold);
+}
+
+.p-point-up__rate-value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-block-start: 8px;
+  color: var(--palette-green-deep);
+}
+
+.p-point-up__rate-plus {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 1.5px solid currentColor;
+  border-radius: var(--radius-xl);
+  font-size: 14px;
+  font-weight: var(--fw-bold);
+}
+
+.p-point-up__rate-num {
+  font-family: var(--font-en);
+  font-size: 64px;
+  font-weight: var(--fw-bold);
+  line-height: 1;
+}
+
+.p-point-up__rate-unit {
+  display: grid;
+  justify-items: start;
+  font-family: var(--font-jp--sanserif);
+  font-weight: var(--fw-bold);
+}
+
+.p-point-up__rate-all {
+  font-size: 12px;
+}
+
+.p-point-up__rate-pct {
+  font-size: var(--font-size-title-sm);
+}
+
+.p-point-up__brands {
+  padding: 0 16px 12px;
+  color: var(--color-text-on-dark);
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body-xs);
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.p-point-up__brands-em {
+  display: block;
+  color: var(--palette-yellow);
+  font-weight: var(--fw-bold);
+}
+
+.p-point-up__more {
+  --bar-bg: var(--palette-green-deep);
+}
+
+/* 24時間限定 SALE */
+.p-point-up__sale-lead {
+  margin-block-start: 22px;
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.2em;
+}
+
+.p-point-up__sale-title {
+  font-family: var(--font-en);
+  font-size: 40px;
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+/* スペシャルSALE バナー */
+.p-point-up__banner {
+  position: relative;
+  width: 100%;
+  margin-block-start: 24px;
+  padding-block-start: 24px;
+  border-radius: var(--radius-sm);
+  background-color: var(--palette-teal);
+  color: var(--color-text-on-dark);
+  overflow: hidden;
+}
+
+.p-point-up__banner-seal {
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: var(--radius-xl);
+  background-color: var(--color-surface);
+  color: var(--palette-teal);
+  font-family: var(--font-jp--sanserif);
+  font-size: 12px;
+  font-weight: var(--fw-bold);
+  line-height: 1.3;
+}
+
+.p-point-up__banner-title {
+  display: grid;
+  gap: 2px;
+}
+
+.p-point-up__banner-ja {
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-title);
+  font-weight: var(--fw-bold);
+}
+
+.p-point-up__banner-en {
+  font-family: var(--font-en);
+  font-size: 52px;
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  color: var(--palette-yellow);
+}
+
+.p-point-up__banner-note {
+  display: inline-grid;
+  place-items: center;
+  margin-block: 12px 20px;
+  padding: 6px 18px;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-pill);
+  color: var(--palette-teal);
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--fw-bold);
+}
+
+/* 「周年期間のお得なキャンペーンはこちら」＋下向きの切り欠き */
+.p-point-up__outro {
+  padding-block: 32px 48px;
+  font-family: var(--font-jp--sanserif);
+  font-size: var(--font-size-body);
+  font-weight: var(--fw-bold);
+  line-height: 1.9;
+  letter-spacing: 0.14em;
+  text-align: center;
+  background-color: var(--bg-point);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 28px), 50% 100%, 0 calc(100% - 28px));
+}

@@ -1,0 +1,109 @@
+---
+/**
+ * 2026年8月のキャンペーンカレンダー。
+ *
+ * 帯（CALENDAR_BARS）は各セルの中に区間を描く。
+ * <tr> 直下に <span> を置くと HTML の解析でテーブル外へ押し出されるため、
+ * 帯は必ずセル（<td>）の内側に置くこと。
+ */
+import {
+  CALENDAR_BARS,
+  CALENDAR_HIGHLIGHTS,
+  CALENDAR_MARKS,
+  CALENDAR_MONTH,
+  CALENDAR_YEAR,
+  WEEKDAY_LABELS,
+} from '../data/schedule';
+
+const firstWeekday = new Date(CALENDAR_YEAR, CALENDAR_MONTH - 1, 1).getDay();
+const daysInMonth = new Date(CALENDAR_YEAR, CALENDAR_MONTH, 0).getDate();
+
+type Cell = { day: number | null };
+const cells: Cell[] = [
+  ...Array.from({ length: firstWeekday }, () => ({ day: null })),
+  ...Array.from({ length: daysInMonth }, (_, i) => ({ day: i + 1 })),
+];
+while (cells.length % 7 !== 0) cells.push({ day: null });
+
+const weeks: Cell[][] = [];
+for (let i = 0; i < cells.length; i += 7) weeks.push(cells.slice(i, i + 7));
+
+type Mark = (typeof CALENDAR_MARKS)[number];
+const markByDay = new Map<number, Mark>(CALENDAR_MARKS.map((m) => [m.day, m]));
+
+type Highlight = (typeof CALENDAR_HIGHLIGHTS)[number];
+const highlightByDay = new Map<number, Highlight>(CALENDAR_HIGHLIGHTS.map((h) => [h.day, h]));
+
+/** その日に重なる帯を返す。区間の左端・右端かどうかも添える。 */
+function barsForDay(day: number) {
+  return CALENDAR_BARS.filter((bar) => day >= bar.from && day <= bar.to).map((bar) => ({
+    tone: bar.tone,
+    lane: bar.lane,
+    isEnd: day === bar.to,
+  }));
+}
+---
+
+<div class='p-calendar'>
+  <p class='p-calendar__caption'>{CALENDAR_YEAR}年{CALENDAR_MONTH}月</p>
+
+  <table class='p-calendar__table'>
+    <caption class='visually-hidden'>
+      {CALENDAR_YEAR}年{CALENDAR_MONTH}月のキャンペーン開催日
+    </caption>
+    <thead>
+      <tr>
+        {
+          WEEKDAY_LABELS.map((w, i) => (
+            <th
+              scope='col'
+              class='p-calendar__weekday'
+              data-day={i === 0 ? 'sun' : i === 6 ? 'sat' : undefined}
+            >
+              {w}
+            </th>
+          ))
+        }
+      </tr>
+    </thead>
+    <tbody>
+      {
+        weeks.map((week) => (
+          <tr class='p-calendar__week'>
+            {week.map((cell) => (
+              <td
+                class='p-calendar__cell'
+                data-empty={cell.day === null ? '' : undefined}
+                data-highlight={cell.day !== null ? highlightByDay.get(cell.day)?.tone : undefined}
+              >
+                {cell.day !== null && <span class='p-calendar__day'>{cell.day}</span>}
+
+                {cell.day !== null &&
+                  barsForDay(cell.day).map((bar) => (
+                    <span
+                      class='p-calendar__bar'
+                      data-tone={bar.tone}
+                      data-end={bar.isEnd ? '' : undefined}
+                      style={`--lane: ${bar.lane}`}
+                      aria-hidden='true'
+                    />
+                  ))}
+
+                {cell.day !== null && markByDay.has(cell.day) && (
+                  <span
+                    class='p-calendar__mark'
+                    data-shape={markByDay.get(cell.day)!.shape}
+                    data-tone={markByDay.get(cell.day)!.tone}
+                    data-anchor={markByDay.get(cell.day)!.anchor}
+                  >
+                    {markByDay.get(cell.day)!.label}
+                  </span>
+                )}
+              </td>
+            ))}
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,50 @@
+---
+import { CAMPAIGN_BANNERS } from '../data/campaign-banners';
+---
+
+<section id='campaign-nav' class='l-section p-campaign-nav' aria-labelledby='campaign-nav-heading'>
+  <h2 id='campaign-nav-heading' class='visually-hidden'>キャンペーン一覧</h2>
+
+  <div class='l-inner p-campaign-nav__inner'>
+    <ul class='p-campaign-nav__list'>
+      {
+        CAMPAIGN_BANNERS.map((banner) => (
+          <li class='p-campaign-nav__item'>
+            <a
+              href={banner.href}
+              class='p-campaign-nav__banner'
+              data-theme={banner.theme}
+              style={`--ratio: ${banner.ratio}`}
+            >
+              <span class='p-campaign-nav__body'>
+                {'badge' in banner && banner.badge && (
+                  <span class='p-campaign-nav__badge'>{banner.badge}</span>
+                )}
+                {'en' in banner && banner.en && <span class='p-campaign-nav__en'>{banner.en}</span>}
+                <span class='p-campaign-nav__lead'>{banner.lead}</span>
+                <span class='p-campaign-nav__title'>{banner.title}</span>
+                {'note' in banner && banner.note && (
+                  <span class='p-campaign-nav__note'>{banner.note}</span>
+                )}
+              </span>
+
+              {banner.hasChevron && (
+                <span class='c-btn-circle p-campaign-nav__chevron' aria-hidden='true'>
+                  <svg viewBox='0 0 16 16' fill='none'>
+                    <path
+                      d='M4 6l4 4 4-4'
+                      stroke='currentColor'
+                      stroke-width='1.8'
+                      stroke-linecap='round'
+                      stroke-linejoin='round'
+                    />
+                  </svg>
+                </span>
+              )}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

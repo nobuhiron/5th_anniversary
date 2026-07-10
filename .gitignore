@@ -25,3 +25,16 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# 支給デザイン画像（カンプ）。リポジトリには入れない
+/5周年LP.png
+/MV.jpg
+/mv.png
+/nav.png
+/about.png
+/fotter.png
+/main.png
+/Campagin0*.png
+/コーディングルール.png
+/キャンペーンスケジュール.png
+/ポイントアップセール.png

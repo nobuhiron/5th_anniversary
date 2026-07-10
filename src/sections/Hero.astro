@@ -1,0 +1,19 @@
+---
+import { Image } from 'astro:assets';
+import heroImage from '../assets/images/hero.jpg';
+---
+
+<section id='hero' class='l-section p-hero' aria-label='森半 tea&coffee 5th anniversary'>
+  <h1 class='visually-hidden'>
+    森半 tea&amp;coffee 5th anniversary 8/1(土)10:00 - 8/31(日)9:59
+  </h1>
+  <Image
+    class='p-hero__image'
+    src={heroImage}
+    alt=''
+    widths={[375, 750]}
+    sizes='375px'
+    loading='eager'
+    fetchpriority='high'
+  />
+</section>

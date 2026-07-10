@@ -1,0 +1,77 @@
+---
+/**
+ * 宝探しのポップアップ。3種のお道具ごとに 1 枚。
+ * 3つ揃うと「茶碗」のポップアップが完了版（特別セットを見る）になる。
+ */
+const POPUPS = [
+  {
+    item: 'matcha',
+    title: '抹茶を見つけた！',
+    body: '大切な主役、抹茶を見つけた\nようです。さあ、おいしい抹茶\nを立てる準備を始めましょう。',
+    count: 1,
+  },
+  {
+    item: 'chasen',
+    title: '茶筅を見つけた！',
+    body: 'お茶を点てる準備が整ってき\nました。秘密のお茶会まであ\nと一息です！',
+    count: 2,
+  },
+  {
+    item: 'chawan',
+    title: '茶碗が揃った！\nお茶会へようこそ',
+    body: 'おめでとうございます！\nすべての道具を見つけた方だけに、\n数量限定の特別セットをご用意しました。\n通常ページにはない限定商品を\nぜひご覧ください。',
+    count: 3,
+  },
+] as const;
+---
+
+{
+  POPUPS.map((popup) => (
+    <div
+      class='p-treasure-popup'
+      data-treasure-popup={popup.item}
+      role='dialog'
+      aria-modal='true'
+      aria-labelledby={`treasure-popup-${popup.item}`}
+      hidden
+    >
+      <div class='p-treasure-popup__panel'>
+        <button
+          type='button'
+          class='p-treasure-popup__close'
+          data-treasure-close
+          aria-label='閉じる'
+        >
+          ×
+        </button>
+
+        <h2 id={`treasure-popup-${popup.item}`} class='p-treasure-popup__title'>
+          {popup.title}
+        </h2>
+
+        <p class='p-treasure-popup__figure' aria-hidden='true'>
+          <span class='c-placeholder' style='--ratio: 200 / 130'>
+            <span class='c-placeholder__label'>お道具イラスト</span>
+          </span>
+        </p>
+
+        <p class='p-treasure-popup__body'>{popup.body}</p>
+
+        {popup.count < 3 ? (
+          <p class='p-treasure-popup__count'>
+            <b>{popup.count}/3</b>個獲得
+          </p>
+        ) : (
+          <>
+            <p class='p-treasure-popup__count p-treasure-popup__count--done'>
+              <b>3/3</b>個獲得
+            </p>
+            <a href='#campaign-special' class='c-btn p-treasure-popup__cta'>
+              特別セットを見る
+            </a>
+          </>
+        )}
+      </div>
+    </div>
+  ))
+}
