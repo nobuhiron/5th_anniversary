@@ -7,7 +7,7 @@ import PageChromeRight from '../components/PageChromeRight.astro';
 import PageTop from '../components/PageTop.astro';
 import TreasurePopups from '../components/TreasurePopups.astro';
 import { publicAssetPath } from '../utils/assets';
-import pageBgSrc from '../assets/images/page-bg.png';
+import pageBgSrc from '../assets/images/page_bg.jpg';
 
 // コーディングルール「背景画像固定」: PC フレームの背景。sharp 最適化(webp)を通す。
 const pageBg = await getImage({ src: pageBgSrc, widths: [1440, 2880], format: 'webp' });

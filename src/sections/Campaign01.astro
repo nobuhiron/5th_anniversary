@@ -1,10 +1,22 @@
 ---
+import { Image } from 'astro:assets';
 import TreasureTrigger from '../components/TreasureTrigger.astro';
 import { STAFF_PICKS } from '../data/campaigns';
 import { LINE_URL } from '../data/links';
+import bgImage from '../assets/images/campaign01-bg.jpg';
+import lineCard from '../assets/images/campaign01-line.jpg';
+import sweets from '../assets/images/sweets.png';
+import clickChasen from '../assets/images/click-chasen.png';
+
+// LINE カードは吹き出し・クーポン・スマホ・友だち追加ボタンまで焼き込まれた完成版（335x408）。
+// 文言は alt で読み上げ、カード全体を LINE への導線にする。
 ---
 
 <section id='campaign01' class='l-section p-campaign01' aria-labelledby='campaign01-heading'>
+  <Image class='p-campaign01__bg' src={bgImage} alt='' format='webp' />
+
+  <TreasureTrigger item='chasen' label='茶筅' image={clickChasen} class='p-campaign01__treasure' />
+
   <div class='l-inner p-campaign01__inner'>
     <div class='c-heading p-campaign01__heading'>
       <p class='c-heading__en'>Campaign01</p>
@@ -14,80 +26,38 @@ import { LINE_URL } from '../data/links';
       </h2>
     </div>
 
-    <div class='p-campaign01__line'>
-      <p class='p-campaign01__line-lead'>
-        森半tea&amp;coffeeの<br />
-        <span class='p-campaign01__line-badge'>LINE</span>に
-      </p>
-
-      <p class='p-campaign01__bubble'>
-        5周年おめでとう！<br />(好きな商品名)大好き！
-      </p>
-
-      <p class='p-campaign01__line-note'>とメッセージを送ると</p>
-
-      <p class='p-campaign01__coupon'>
-        <span class='p-campaign01__coupon-badge'>抽選で</span>
-        <span class='p-campaign01__coupon-amount'>
-          <span class='p-campaign01__coupon-num'>1,000</span>
-          <span class='p-campaign01__coupon-unit'>円<span class='p-campaign01__coupon-off'>OFF</span></span>
-        </span>
-        <span class='p-campaign01__coupon-text'>クーポンプレゼント！</span>
-      </p>
-
-      <p class='p-campaign01__phone' aria-hidden='true'>
-        <span class='c-placeholder' style='--ratio: 150 / 300'>
-          <span class='c-placeholder__label'>LINEトーク画面</span>
-        </span>
-      </p>
-
-      <a
-        href={LINE_URL}
-        class='p-campaign01__friend'
-        target='_blank'
-        rel='noopener noreferrer'
-      >
-        <span class='p-campaign01__friend-icon' aria-hidden='true'>LINE</span>
-        <span class='p-campaign01__friend-label'>友だち追加</span>
-        <span class='p-campaign01__friend-arrow' aria-hidden='true'>
-          <svg viewBox='0 0 20 20' fill='none'>
-            <circle cx='10' cy='10' r='9' fill='currentColor'></circle>
-            <path
-              d='M8.5 6l4 4-4 4'
-              stroke='#fff'
-              stroke-width='1.8'
-              stroke-linecap='round'
-              stroke-linejoin='round'></path>
-          </svg>
-        </span>
-      </a>
-    </div>
+    <a href={LINE_URL} class='p-campaign01__line' target='_blank' rel='noopener noreferrer'>
+      <Image
+        class='p-campaign01__line-image'
+        src={lineCard}
+        alt='森半tea&coffeeのLINEに「5周年おめでとう！(好きな商品名)大好き！」とメッセージを送ると、抽選で1,000円OFFクーポンプレゼント！ 友だち追加'
+        format='webp'
+      />
+    </a>
 
     <div class='p-campaign01__picks'>
-      <h3 class='p-campaign01__picks-heading'>
-        <span class='p-campaign01__picks-photo' aria-hidden='true'>
-          <span class='c-placeholder c-placeholder--circle' style='--ratio: 1 / 1'>
-            <span class='c-placeholder__label'>菓子</span>
-          </span>
-        </span>
-        <span class='p-campaign01__picks-title'>スタッフの<br />推し商品紹介</span>
-      </h3>
+      <Image class='p-campaign01__picks-photo' src={sweets} alt='' format='webp' />
+
+      <h3 class='p-campaign01__picks-title'>スタッフの<br />推し商品紹介</h3>
 
       <div
         class='c-swiper p-campaign01__carousel'
         data-carousel='free'
         data-scrollbar='#pick-scrollbar'
-        data-space='10'
+        data-space='8'
       >
         <div class='swiper-wrapper'>
           {
             STAFF_PICKS.map((pick) => (
               <div class='swiper-slide p-campaign01__pick'>
-                <span class='c-placeholder p-campaign01__pick-photo' style='--ratio: 153 / 85'>
+                <span class='c-placeholder p-campaign01__pick-photo' style='--ratio: 154 / 100'>
                   <span class='c-placeholder__label'>商品写真</span>
                 </span>
                 <p class='p-campaign01__pick-staff'>
-                  <span class='c-placeholder c-placeholder--circle p-campaign01__pick-avatar' style='--ratio: 1 / 1' />
+                  <span
+                    class='c-placeholder c-placeholder--circle p-campaign01__pick-avatar'
+                    style='--ratio: 1 / 1'
+                  />
                   <span class='p-campaign01__pick-name'>{pick.staff}</span>
                 </p>
                 <p class='p-campaign01__pick-comment'>{pick.comment}</p>
@@ -96,9 +66,8 @@ import { LINE_URL } from '../data/links';
           }
         </div>
       </div>
+
       <div class='c-swiper__scrollbar p-campaign01__scrollbar' id='pick-scrollbar'></div>
     </div>
-
-    <TreasureTrigger item='chasen' label='茶筅' class='p-campaign01__treasure' />
   </div>
 </section>

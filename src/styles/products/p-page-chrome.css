@@ -16,14 +16,9 @@
   text-align: center;
 }
 
+/* カンプ実測: ロゴ 125x67.5（全体カンプ @2x の 250x135） */
 .p-chrome-left__logo {
-  font-size: 22px;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.p-chrome-left__logo .c-brand-logo__mark {
-  color: var(--palette-green-vivid);
+  width: 125px;
 }
 
 .p-chrome-left__title {
@@ -120,19 +115,25 @@
 }
 
 /* 右カラム */
+/* カンプ実測: ナビも LINE バナーも幅 286・左端が揃う（全体カンプ @2x の 572px） */
 .p-chrome-right {
   display: grid;
   justify-items: center;
   gap: 28px;
-  width: 100%;
-  max-width: 280px;
-  padding-inline: var(--spacing-lg);
+  width: 286px;
 }
 
 .p-chrome-right__line {
   display: block;
   width: 100%;
   transition: opacity var(--duration-hover) var(--easing-standard);
+}
+
+.p-chrome-right__line-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
 }
 
 .p-chrome-right__line:hover {

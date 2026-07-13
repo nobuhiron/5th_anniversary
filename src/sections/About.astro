@@ -1,8 +1,12 @@
 ---
+import { Image } from 'astro:assets';
 import BrandLogo from '../components/BrandLogo.astro';
+import aboutBg from '../assets/images/about_bg.png';
 ---
 
 <section id='about' class='l-section p-about' aria-labelledby='about-heading'>
+  <Image class='p-about__bg' src={aboutBg} alt='' format='webp' />
+
   <div class='l-inner p-about__inner'>
     <p class='p-about__mark' aria-hidden='true'>
       <BrandLogo markOnly />

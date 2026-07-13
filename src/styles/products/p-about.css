@@ -1,11 +1,25 @@
 @import '../global/variables.css';
 
-/* about.png (1500x2260 @4x) → 375x565 CSS
-   実測: 上76 / マーク40 / マーク下20 / 本文 15px・行送り30px / 段落間18 / 下33
-   （76 + 40 + 20 + 150 + 18 + 90 + 18 + 120 + 33 = 565） */
+/* about.svg (viewBox 375x565) の実測値で構成する。
+   上76 / マーク 41x43 / マーク下17 / 本文 15px・行送り30px / 段落間18 / 下33
+   （76 + 43 + 17 + 150 + 18 + 90 + 18 + 120 + 33 = 565）
+   背景は支給 about_bg.png（750x1130 = @2x）。CSS の url() は CDN 配信で URL が
+   書き換わらない事故があるため、l-page__bg と同じく <img> で敷く。 */
 .p-about {
-  background: var(--bg-about);
+  position: relative;
+  isolation: isolate;
+  background-color: var(--bg-about-mid);
   color: var(--color-text-on-dark);
+}
+
+.p-about__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
 }
 
 .p-about__inner {
@@ -15,17 +29,14 @@
   text-align: center;
 }
 
+/* about.svg 実測: rect x=166.5 y=76 w=41 h=43（logo-icon.png 82x86 = @2x） */
 .p-about__mark {
-  width: 40px;
-  height: 40px;
-  margin-block-end: 20px;
-  color: var(--color-text-on-dark);
+  width: 41px;
+  height: 43px;
+  margin-block-end: 17px;
 }
 
-/* 抜き色は背景と同じ濃緑にする */
 .p-about__mark .c-brand-logo {
-  --brand-mark-hole: var(--bg-about-mid);
-
   width: 100%;
   height: 100%;
 }

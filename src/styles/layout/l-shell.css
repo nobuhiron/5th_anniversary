@@ -48,10 +48,10 @@
   width: 100%;
 }
 
-/* 本体の中央固定列 */
+/* 本体の中央固定列。狭い画面では縮み、広い画面でも --layout-main-max-sp を超えない */
 .l-main-column {
   width: 100%;
-  max-width: var(--layout-main-width);
+  max-width: var(--layout-main-max-sp);
   margin-inline: auto;
   background-color: var(--color-surface);
 }
@@ -79,15 +79,10 @@
   }
 
   .l-main-column {
+    /* PC はカンプ実測の 375px 固定に戻す（グリッド列も同値） */
+    max-width: var(--layout-main-width);
     margin-inline: 0;
     /* カンプ実測: 本体カラムの外側に淡いドロップシャドウ */
     box-shadow: 0 0 24px rgb(0 0 0 / 18%);
-  }
-}
-
-/* 縦向きスマホでは固定幅を解除して画面幅に追従させる */
-@media (max-width: 767px) and (orientation: portrait) {
-  .l-main-column {
-    max-width: none;
   }
 }

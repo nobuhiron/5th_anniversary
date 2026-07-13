@@ -35,7 +35,8 @@
 
   /* 補助・派生 */
   --palette-price: #cc0000; /* セール価格の赤（Campaign04） */
-  --palette-alert: #e8332a; /* 注意事項の赤（Campaign02） */
+  --palette-alert: #ff383c; /* 注意事項の赤（Campaign02。SVG 実測） */
+  --palette-brown-dark: #45330f; /* 濃い茶。見出し・景品名・点線（SVG 実測） */
   --palette-muted: #6b6b6b;
   --palette-border: color-mix(in srgb, var(--base-text) 12%, transparent);
   --palette-border-on-dark: color-mix(in srgb, #ffffff 40%, transparent);
@@ -45,14 +46,15 @@
 
   /* 背景（measure / sample-colors による実測値） */
   --bg-page-frame: #305f2b; /* PC 固定背景（mv.png のベース緑） */
-  --bg-about-mid: #2c4b14; /* About 中央の緑（ロゴマークの抜き色に使う） */
-  --bg-about: linear-gradient(180deg, #2a400f 0%, #2c4b14 50%, #2d5216 100%);
+  --bg-about-mid: #2c4b14; /* About の緑。背景画像 about_bg.png の読込前フォールバック */
+  --bg-schedule-base: #2b5014; /* スケジュールの緑。schedule-bg.jpg の読込前フォールバック */
   --bg-campaign01: #02872a;
   --bg-campaign02: #f8f5e8;
-  --bg-campaign03: linear-gradient(180deg, #328457 0%, #208453 45%, #00573c 100%);
+  --bg-campaign03-base: #1d6b45; /* Plus1 の緑。背景画像 campaign03-bg.jpg の読込前フォールバック */
   --bg-campaign04: #fecc82;
-  --bg-nav: linear-gradient(180deg, #fde5cb 0%, #fdfcfa 50%, #e8dad1 100%);
-  --bg-point: #f8f5e8;
+  --bg-nav-base: #f8f5e8; /* nav のクリーム地。背景画像 nav-bg.jpg の読込前フォールバック */
+  --bg-point: #f8f5e8; /* ポイントアップの地色（ベタ塗り） */
+  --bg-point-watermark: #f1edd9; /* 地色に沈む Point-up sale の飾り文字 */
   --bg-footer: #354e0f;
 
   /* パーツ地色（本画像が入るまでのプレースホルダ地。実測値） */
@@ -71,6 +73,9 @@
   --layout-max-width: 1440px;
   --layout-max-width-inner: 1100px;
   --layout-main-width: 375px;
+  /* スマホ実機(iPhone 14/15 = 393px 等)では 390px まで本体を広げる。
+     PC の中央カラムはカンプ実測どおり --layout-main-width 固定。 */
+  --layout-main-max-sp: 390px;
   --layout-padding-sp: 20px;
   --layout-padding-pc: 50px;
 

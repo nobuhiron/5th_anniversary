@@ -1,57 +1,141 @@
 @import '../global/variables.css';
 
-/* Campagin03.png (1500x6700 @4x) → 375x1675 CSS */
+/* -------------------------------------------------------------
+   Campagin03.svg (viewBox 375x1675) 実測。背景は支給画像。
+
+   英字 墨面 78-125.2 / 罫線 144.5 / リード 墨面 189.1-202.3
+   見出し 墨面 223.2-248.9（1行） / サブ 墨面 276.2-323.5（2行）
+   期間の罫線 367.5-414.5 / カード (20,435)(20,555) 335x110・間隔 10
+   期間の罫線 704.5-751.5 / カード (20,772)(20,892)
+   条件の見出し 墨面 1040-1058.8（両脇に罫線 y=1048.25）
+   本文 墨面 1089.1-1222.2
+   OK例 (20,1247) / NG例 (20,1431) いずれも 336.5x164.5（枠・ラベル込みの支給画像）
+
+   カード内: 写真 x=26 高さ110 / 本文 x=145（3行・行送り 23.5）/ 矢印 (316,+42) 28x28
+------------------------------------------------------------- */
+
 .p-campaign03 {
-  background: var(--bg-campaign03);
+  position: relative;
+  isolation: isolate;
+  background-color: var(--bg-campaign03-base);
   color: var(--color-text-on-dark);
 }
 
-/* カンプ実測: 上78 / OK例 1258..1412(154) / NG例 1442..1596(154) / 下79 */
+.p-campaign03__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  pointer-events: none;
+}
+
 .p-campaign03__inner {
   display: grid;
   justify-items: center;
-  padding-block: 78px 79px;
-}
-
-.p-campaign03__heading {
-  --heading-fg: var(--color-text-on-dark);
-}
-
-.p-campaign03__sub {
-  margin-block-start: 12px;
-  font-family: var(--font-jp--sanserif);
-  font-size: var(--font-size-body);
-  font-weight: var(--fw-medium);
-  line-height: 1.7;
+  padding-block: 66.6px 80px;
   text-align: center;
 }
 
-.p-campaign03__em {
-  color: var(--palette-gold);
+.p-campaign03__heading {
+  gap: 0;
+  width: 100%;
+}
+
+.p-campaign03__heading .c-heading__rule {
+  margin-block-start: 20.7px;
+}
+
+.p-campaign03__heading .c-heading__lead {
+  margin-block-start: 30.2px;
+}
+
+/* 実測: 墨面 223.2-248.9（1行） */
+.p-campaign03__heading .c-heading__ja {
+  margin-block-start: 19.3px;
+  line-height: 37px;
+  letter-spacing: 0.116em;
+}
+
+/* 実測: 墨面 276.2-323.5（2行）。強調は黄色。 */
+.p-campaign03__sub {
+  margin-block-start: 14px;
+  font-family: var(--font-jp--sanserif);
+  font-size: 18px;
   font-weight: var(--fw-bold);
+  line-height: 27px;
+}
+
+/* 強調は黄色。文字を大きくするのはサブ見出しだけ（条件の本文でも同じクラスを使うので、
+   ここで font-size を効かせると本文まで大きくなり折り返す）。 */
+.p-campaign03__em {
+  color: var(--palette-yellow);
+}
+
+.p-campaign03__sub .p-campaign03__em {
+  font-size: 22px;
+}
+
+/* 上下に罫線（c-period）。実測: 367.5-414.5 / 704.5-751.5 = 高さ 47 */
+.p-campaign03__period {
+  width: 100%;
+  padding-block: 9.15px;
+  font-size: 16.5px;
+  letter-spacing: 0.09em;
 }
 
 .p-campaign03__term {
   width: 100%;
-  margin-block-start: 36px;
 }
 
-/* カンプ実測: 商品カード 高さ110 / カード間 10 / 期間帯からの間隔 34 */
+/* 実測: サブの下 → 1本目の期間の上罫線 367.5。
+   :first-of-type は「div の最初」= 見出しに当たってしまうので隣接セレクタで指す。 */
+.c-heading + .p-campaign03__term {
+  margin-block-start: 46.4px;
+}
+
+.p-campaign03__term + .p-campaign03__term {
+  margin-block-start: 39.5px;
+}
+
+/* 実測: 期間の下端 414.5 → カード 435 */
 .p-campaign03__items {
   display: grid;
-  gap: 10px;
-  margin-block-start: 34px;
+  row-gap: 10px;
+  width: 100%;
+  margin-block-start: 20.5px;
+}
+
+/* 実測: カード 335x110 / 斜め 110.3deg のグラデーション（各色 → 白） */
+.p-campaign03__item {
+  height: 110px;
+  border-radius: var(--radius-xs);
+  overflow: hidden;
+}
+
+.p-campaign03__item[data-tone='green'] {
+  background: linear-gradient(110.3deg, #dbf0ce, #fff);
+}
+
+.p-campaign03__item[data-tone='grey'] {
+  background: linear-gradient(110.3deg, #d5d4d3, #fff);
+}
+
+.p-campaign03__item[data-tone='blue'] {
+  background: linear-gradient(110.3deg, #e1f4ff, #fff);
+}
+
+.p-campaign03__item[data-tone='orange'] {
+  background: linear-gradient(110.3deg, #ffecdc, #fff);
 }
 
 .p-campaign03__item-link {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  min-height: 110px;
-  padding: 12px;
-  box-sizing: border-box;
-  background: var(--bg-product-card);
-  border-radius: var(--radius-sm);
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
   color: var(--color-text);
   text-decoration: none;
   transition: opacity var(--duration-hover) var(--easing-standard);
@@ -61,115 +145,102 @@
   opacity: 0.86;
 }
 
+/* 実測: 写真枠は x=26（カード左から 6）115x110。支給画像は 122x110 なので cover で収める。 */
 .p-campaign03__item-photo {
-  width: 86px;
-  flex-shrink: 0;
-  background-color: var(--color-surface);
+  position: absolute;
+  top: 0;
+  left: 6px;
+  display: block;
+  width: 115px;
+  height: 110px;
+  max-width: none;
+  object-fit: cover;
 }
 
+/* 実測: 本文 x=145（カード左から 125）。3 行・行送り 23.5 / 墨面 461.2-522.4 */
 .p-campaign03__item-body {
-  flex: 1;
+  position: absolute;
+  top: 22px;
+  left: 125px;
   display: grid;
-  gap: 2px;
-  padding: 8px 10px;
-  background-color: var(--color-surface);
-  border-radius: var(--radius-xs);
+  justify-items: start;
+  font-family: var(--font-jp--sanserif);
+  line-height: 23.5px;
+  text-align: left;
 }
 
 .p-campaign03__item-lead {
-  font-family: var(--font-jp--sanserif);
-  font-size: 10px;
+  font-size: 14px;
 }
 
+/* 実測: 墨面高 13・幅 154.5（11字）。17px だとカード4の 12 字が矢印にかかる。 */
 .p-campaign03__item-name {
-  font-family: var(--font-jp--sanserif);
-  font-size: var(--font-size-body-xs);
+  font-size: 14px;
   font-weight: var(--fw-bold);
-  line-height: 1.5;
 }
 
+/* 実測: 円 28x28 @(316, カード上から 42) */
 .p-campaign03__item-arrow {
-  flex-shrink: 0;
-  display: inline-flex;
-  width: 24px;
+  position: absolute;
+  top: 42px;
+  left: 296px;
+  display: block;
+  width: 28px;
+  height: 28px;
   color: var(--palette-green-deep);
 }
 
 .p-campaign03__item-arrow svg {
   display: block;
   width: 100%;
+  height: 100%;
 }
 
-/* 条件 */
+/* 実測: 見出し 墨面 1040-1058.8 / 両脇の罫線 y=1048.25（左 20.25-149.75 / 右 226.25-355.75） */
 .p-campaign03__condition {
   width: 100%;
-  margin-block-start: 44px;
-  text-align: center;
+  margin-block-start: 38px;
 }
 
 .p-campaign03__condition-heading {
-  position: relative;
-  display: inline-block;
-  padding-inline: 1.6em;
+  display: flex;
+  align-items: center;
+  gap: 16.5px;
   font-family: var(--font-jp--sanserif);
-  font-size: var(--font-size-body);
+  font-size: 22px;
   font-weight: var(--fw-bold);
+  line-height: 18.8px;
+  letter-spacing: 0.1em;
 }
 
 .p-campaign03__condition-heading::before,
 .p-campaign03__condition-heading::after {
   content: '';
-  position: absolute;
-  top: 50%;
-  width: 1em;
-  border-block-start: 2px dotted currentColor;
-  translate: 0 -50%;
+  flex: 1;
+  height: 1px;
+  background-color: currentColor;
 }
 
-.p-campaign03__condition-heading::before {
-  left: 0;
-}
-
-.p-campaign03__condition-heading::after {
-  right: 0;
-}
-
-/* カンプ実測: 本文の行ピッチ 24px */
+/* 実測: 本文 墨面 1089.1-1222.2（6行・行送り 23.9・最大幅 310.1）。
+   15px だと 22 字の行が 336.6 になり内寸 335 を超えて折り返す（8 行になっていた）。 */
 .p-campaign03__condition-text {
-  margin-block-start: 12px;
+  margin-block-start: 24.8px;
   font-family: var(--font-jp--sanserif);
-  font-size: var(--font-size-body-xs);
-  line-height: 24px;
+  font-size: 14px;
+  line-height: 23.9px;
 }
 
-/* OK例 / NG例 */
-.p-campaign03__examples {
-  display: grid;
-  gap: 30px;
-  width: 100%;
-  margin-block-start: 24px;
-}
-
+/* 枠・ラベル・図が焼き込まれた支給画像。実測: (20,1247) 336.5x164.5 */
+/* 支給画像は 336.5 幅（内寸 335 より僅かに広い）。中央揃えだと 0.75px 左へずれるので左寄せにする。 */
 .p-campaign03__example {
-  display: grid;
-  align-content: center;
-  min-height: 154px;
-  padding: 16px;
-  box-sizing: border-box;
-  border: 1px solid var(--palette-border-on-dark);
-  border-radius: var(--radius-sm);
+  display: block;
+  justify-self: start;
+  width: 336.5px;
+  max-width: none;
+  height: auto;
+  margin-block-start: 20px;
 }
 
-.p-campaign03__example-heading {
-  position: relative;
-  display: block;
-  margin-block-end: 12px;
-  font-family: var(--font-jp--sanserif);
-  font-size: var(--font-size-body-sm);
-  font-weight: var(--fw-bold);
-  text-align: center;
-}
-
-.p-campaign03__example-figure {
-  display: block;
+.p-campaign03__example + .p-campaign03__example {
+  margin-block-start: 19.5px;
 }

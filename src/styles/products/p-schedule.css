@@ -1,31 +1,58 @@
 @import '../global/variables.css';
 
-/* キャンペーンスケジュール.png (1500x5488 @4x) → 375x1372 CSS */
+/* -------------------------------------------------------------
+   キャンペーンスケジュール.svg (viewBox 375x1372 = 開いた状態) の実測値。
+
+   縦の積み上げ:
+     23 上余白 / マスコット 66 / リード / 見出し 2行 / 月ピル 28 /
+     カード 157x2 + 行間 12 / 注記 / カレンダー 510 / ボタン 54 / 60 下余白
+   カレンダーは支給の calendar.png（日付・帯・バッジ込みの一枚画）。
+   白カードは 335 幅だが「Plus1第2弾」バッジが右に 12px はみ出すため画像は 347 幅。
+------------------------------------------------------------- */
+
 .p-schedule {
-  background-color: var(--base-heading);
+  position: relative;
+  isolation: isolate;
+  background-color: var(--bg-schedule-base);
   color: var(--color-text-on-dark);
 }
 
+/* 背景は 375x1372 ちょうど。閉じた状態では上端から必要分だけ見せる。 */
+.p-schedule__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  pointer-events: none;
+}
+
+/* 列幅の固定は l-inner 側で行う（はみ出す 347 幅のカレンダーに引きずられないように） */
 .p-schedule__inner {
   display: grid;
   justify-items: center;
-  padding-block: 40px 48px;
+  padding-block: 23px 60px;
   text-align: center;
 }
 
+/* 実測: 66x66 @(154,23) */
 .p-schedule__mascot {
-  width: 62px;
+  width: 66px;
+  height: auto;
 }
 
+/* 実測: 墨面 y110-123.2 */
 .p-schedule__lead {
-  margin-block-start: 20px;
-  font-size: var(--font-size-body-sm);
+  margin-block-start: 17.5px;
+  font-size: var(--font-size-body-md);
+  line-height: 1.35;
 }
 
-/* カンプ実測: 28px / line-height 1.35 / 字送り 28.06px。
-   12字の「キャンペーンスケジュール」が 335px の内寸に収まるよう字送りを僅かに詰める。 */
+/* 実測: 墨面 y142.8-204.7（2行）。字送りはカンプ実測どおり僅かに詰める。 */
 .p-schedule__title {
-  margin-block-start: 12px;
+  margin-block-start: 9.5px;
   font-family: var(--font-jp--sanserif);
   font-size: var(--font-size-title-lg);
   font-weight: var(--fw-bold);
@@ -33,14 +60,15 @@
   letter-spacing: -0.01em;
 }
 
+/* 実測: 160x28 @(107,216) */
 .p-schedule__month {
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: center;
   gap: 1px;
-  min-width: 160px;
-  margin-block-start: 16px;
-  padding: 8px 24px;
+  width: 160px;
+  height: 28px;
+  margin-block-start: 4px;
   background-color: var(--color-surface);
   border-radius: var(--radius-pill);
   color: var(--color-sub);
@@ -55,108 +83,72 @@
   line-height: 1;
 }
 
-/* 2×2 のキャンペーンカード */
+/* 実測: カード 160x157 / 行間 12。
+   1fr で割ると 160.5 になり、2段ぶんで 1px ずれてカレンダー以降が全部下がる。
+   カードは 160 固定にして、余りを列間に回す（内寸 335 - 160x2 = 15）。 */
 .p-schedule__cards {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(2, 160px);
+  justify-content: space-between;
+  row-gap: 12px;
   width: 100%;
-  margin-block-start: 28px;
+  margin-block-start: 40px;
 }
 
-.p-schedule__card {
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  aspect-ratio: 163 / 148;
-}
-
-.p-schedule__card[data-theme='green'] {
-  background-color: var(--palette-green-line);
-}
-
-.p-schedule__card[data-theme='cream'] {
-  background-color: var(--bg-campaign02);
-}
-
-.p-schedule__card[data-theme='green-gradient'] {
-  background: var(--bg-campaign03);
-}
-
-.p-schedule__card[data-theme='honey'] {
-  background-color: var(--bg-campaign04);
-}
-
-.p-schedule__card-link {
-  display: grid;
-  align-content: start;
-  justify-items: center;
-  gap: 10px;
+/* カードはリンクにしない（遷移は nav セクションのバナーが担う） */
+.p-schedule__card-image {
+  display: block;
   width: 100%;
-  height: 100%;
-  padding: 14px 10px;
-  box-sizing: border-box;
-  text-decoration: none;
-  color: var(--color-text-on-dark);
+  height: auto;
 }
 
-.p-schedule__card[data-theme='cream'] .p-schedule__card-link,
-.p-schedule__card[data-theme='honey'] .p-schedule__card-link {
-  color: var(--color-sub);
-}
-
-.p-schedule__card-en {
-  display: grid;
-  place-items: center;
-  min-width: 118px;
-  padding: 4px 12px;
-  background-color: var(--color-surface);
-  border-radius: var(--radius-pill);
-  color: var(--palette-green-deep);
-  font-family: var(--font-en--decor);
-  font-size: 15px;
-  font-weight: var(--fw-semibold);
-}
-
-.p-schedule__card[data-theme='cream'] .p-schedule__card-en,
-.p-schedule__card[data-theme='honey'] .p-schedule__card-en {
-  color: var(--color-sub);
-}
-
-.p-schedule__card-title {
-  font-family: var(--font-jp--sanserif);
-  font-size: var(--font-size-body);
-  font-weight: var(--fw-bold);
-  line-height: 1.5;
-  white-space: pre-line;
-}
-
+/* 実測: 墨面 y625-654（2行・行送り 17.8） */
 .p-schedule__notes {
   width: 100%;
-  margin-block-start: 20px;
+  margin-block-start: 11.5px;
   font-family: var(--font-jp--sanserif);
   font-size: var(--font-size-body-xs);
-  line-height: 1.7;
+  line-height: 17.8px;
   text-align: left;
 }
 
 .p-schedule__detail {
-  width: 100%;
   position: relative;
+  width: 100%;
+  margin-block-start: 52px;
 }
 
 .p-schedule__detail[hidden] {
   display: none;
 }
 
-/* 宝探し（抹茶）はカレンダー右上に重ねる */
+/* 実測: 白カード 335 幅 + バッジのはみ出し 12 = 347x510 @(20,709)。
+   reset の img{max-width:100%} だと内寸 335 に潰れてバッジが切れるので解除する。 */
+.p-schedule__calendar {
+  display: block;
+  width: 347px;
+  max-width: none;
+  height: auto;
+}
+
+/* 実測: 抹茶（CLICK バッジ・きらめき込み）96.5x85 @(263.8,619.3) */
 .p-schedule__treasure {
   position: absolute;
-  top: -34px;
-  right: 0;
-  width: 76px;
+  top: -89.7px;
+  left: 243.8px;
+  width: 96.5px;
   z-index: 2;
 }
 
+.p-schedule__treasure .p-treasure-trigger__image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 実測: 280x54 @(47,1258) */
 .p-schedule__toggle {
-  margin-block-start: 24px;
+  width: 280px;
+  min-height: 54px;
+  margin-block-start: 39px;
 }

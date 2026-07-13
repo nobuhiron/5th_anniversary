@@ -1,16 +1,30 @@
 ---
-import Calendar from '../components/Calendar.astro';
+import { Image } from 'astro:assets';
 import TreasureTrigger from '../components/TreasureTrigger.astro';
 import { SCHEDULE_CARDS } from '../data/schedule';
+import scheduleBg from '../assets/images/schedule-bg.jpg';
+import kumahan from '../assets/images/kumahan.png';
+import calendarImage from '../assets/images/calendar.png';
+import clickMatcha from '../assets/images/click-matcha.png';
+import campaign01 from '../assets/images/campaign01.png';
+import campaign02 from '../assets/images/campaign02.png';
+import campaign03 from '../assets/images/campaign03.png';
+import campaign04 from '../assets/images/campaign04.png';
+
+// カード画像は見出しとピルまで焼き込まれた完成版。文字は alt で読み上げる。
+const CARD_IMAGES: Record<string, ImageMetadata> = {
+  campaign01,
+  campaign02,
+  campaign03,
+  campaign04,
+};
 ---
 
 <section id='schedule' class='l-section p-schedule' aria-labelledby='schedule-heading'>
+  <Image class='p-schedule__bg' src={scheduleBg} alt='' format='webp' />
+
   <div class='l-inner p-schedule__inner'>
-    <p class='p-schedule__mascot' aria-hidden='true'>
-      <span class='c-placeholder c-placeholder--circle' style='--ratio: 1 / 1'>
-        <span class='c-placeholder__label'>くま半</span>
-      </span>
-    </p>
+    <Image class='p-schedule__mascot' src={kumahan} alt='' format='webp' />
 
     <p class='p-schedule__lead'>
       <span class='c-heading__lead'>お得が盛りだくさん</span>
@@ -27,11 +41,13 @@ import { SCHEDULE_CARDS } from '../data/schedule';
     <ul class='p-schedule__cards'>
       {
         SCHEDULE_CARDS.map((card) => (
-          <li class='p-schedule__card' data-theme={card.theme}>
-            <a href={card.href} class='p-schedule__card-link'>
-              <span class='p-schedule__card-en'>{card.en}</span>
-              <span class='p-schedule__card-title'>{card.title}</span>
-            </a>
+          <li class='p-schedule__card'>
+            <Image
+              class='p-schedule__card-image'
+              src={CARD_IMAGES[card.id]}
+              alt={`${card.en} ${card.title.replace(/\n/g, '')}`}
+              format='webp'
+            />
           </li>
         ))
       }
@@ -43,8 +59,18 @@ import { SCHEDULE_CARDS } from '../data/schedule';
     </p>
 
     <div class='p-schedule__detail' id='schedule-detail' hidden>
-      <TreasureTrigger item='matcha' label='抹茶' class='p-schedule__treasure' />
-      <Calendar />
+      <TreasureTrigger
+        item='matcha'
+        label='抹茶'
+        image={clickMatcha}
+        class='p-schedule__treasure'
+      />
+      <Image
+        class='p-schedule__calendar'
+        src={calendarImage}
+        alt='2026年8月のキャンペーンスケジュール。8/1〜8/17 Plus1キャンペーン第1弾、8/3 はちみつ紅茶セール、8/7〜8/8 ポイントUP DAY、8/20 毎月恒例SALE、8/21〜8/31 Plus1キャンペーン第2弾。'
+        format='webp'
+      />
     </div>
 
     <button
@@ -56,12 +82,12 @@ import { SCHEDULE_CARDS } from '../data/schedule';
     >
       <span data-schedule-toggle-label>開く</span>
       <span class='c-btn-toggle__icon' aria-hidden='true'>
-        <svg viewBox='0 0 40 40' fill='none'>
-          <circle cx='20' cy='20' r='20' fill='currentColor'></circle>
+        <svg viewBox='0 0 30 30' fill='none'>
+          <circle cx='15' cy='15' r='15' fill='currentColor'></circle>
           <path
-            d='M14 17.5l6 6 6-6'
+            d='M10 13l5 5 5-5'
             stroke='var(--toggle-arrow)'
-            stroke-width='2.2'
+            stroke-width='2'
             stroke-linecap='round'
             stroke-linejoin='round'></path>
         </svg>

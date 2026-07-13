@@ -27,6 +27,9 @@ pnpm-debug.log*
 .idea/
 
 # 支給デザイン画像（カンプ）。リポジトリには入れない
+# ※ src/assets/images/ 配下の支給素材は実装で使うので追跡する
+/about.svg
+/キャンペーンスケジュール.svg
 /5周年LP.png
 /MV.jpg
 /mv.png

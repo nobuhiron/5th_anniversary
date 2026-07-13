@@ -13,15 +13,19 @@
   color: var(--heading-fg, var(--color-text-on-dark));
 }
 
+/* 実測（Campagin01/02 のラスタ）: 墨面の高さ 47・幅 200.5(01) / 210.5(02)。
+   Dancing Script は 47px + 字送り -0.028em で一致する。 */
 .c-heading__en {
   font-family: var(--font-en--decor);
-  font-size: 32px;
+  font-size: 47px;
   font-weight: var(--fw-semibold);
   line-height: 1.1;
+  letter-spacing: -0.028em;
 }
 
+/* 実測: 26px */
 .c-heading__rule {
-  width: 24px;
+  width: 26px;
   height: 1px;
   background-color: currentColor;
   opacity: 0.7;
@@ -59,11 +63,14 @@
   rotate: 20deg;
 }
 
+/* 実測: 墨面の高さ 26 / カタカナ 1 字あたり 29.3。
+   行送りはセクションで異なる（Campaign01=40 / Campaign02=37）ので p-* 側で上書きする。 */
 .c-heading__ja {
   font-family: var(--font-jp--sanserif);
   font-size: var(--font-size-title-lg);
   font-weight: var(--fw-bold);
-  line-height: 1.35;
+  line-height: 40px;
+  letter-spacing: 0.054em;
 }
 
 /* 日付帯（上下に細い罫線） */

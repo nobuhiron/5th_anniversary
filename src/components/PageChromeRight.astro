@@ -2,9 +2,11 @@
 /**
  * PC 右カラム。Campaign ナビ + 公式 LINE バナー。
  */
+import { Image } from 'astro:assets';
 import CampaignNavLink from './CampaignNavLink.astro';
 import { CAMPAIGN_NAV_ITEMS } from '../data/campaign-nav';
 import { LINE_URL } from '../data/links';
+import lineBanner from '../assets/images/line.jpg';
 ---
 
 <div class='p-chrome-right'>
@@ -28,8 +30,6 @@ import { LINE_URL } from '../data/links';
     rel='noopener noreferrer'
     aria-label='森半 tea&coffee 公式 LINE を友だち追加する'
   >
-    <span class='c-placeholder c-placeholder--line' style='--ratio: 240 / 108'>
-      <span class='c-placeholder__label'>公式LINEバナー</span>
-    </span>
+    <Image class='p-chrome-right__line-image' src={lineBanner} alt='' format='webp' />
   </a>
 </div>

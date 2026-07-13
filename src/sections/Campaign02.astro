@@ -1,8 +1,29 @@
 ---
+import { Image } from 'astro:assets';
 import { GOODS_ITEMS, GOODS_NOTES } from '../data/campaigns';
+import confetti from '../assets/images/confetti.png';
+import goods01 from '../assets/images/goods01.png';
+import goods02 from '../assets/images/goods02.png';
+import goods03 from '../assets/images/goods03.png';
+import goods04 from '../assets/images/goods04.png';
+
+// 支給の景品写真（320x320 = 円 160x160 の @2x）。データの並び順に対応する。
+const GOODS_IMAGES: Record<string, ImageMetadata> = {
+  soebumisen: goods01,
+  pukupuku: goods02,
+  tenugui: goods03,
+  kumahan: goods04,
+};
 ---
 
 <section id='campaign02' class='l-section p-campaign02' aria-labelledby='campaign02-heading'>
+  <Image class='p-campaign02__confetti' src={confetti} alt='' format='webp' />
+
+  <p class='p-campaign02__badge' aria-hidden='true'>
+    <span class='p-campaign02__badge-sm'>なくなり次第</span>
+    <span class='p-campaign02__badge-lg'>終了</span>
+  </p>
+
   <div class='l-inner p-campaign02__inner'>
     <div class='c-heading p-campaign02__heading'>
       <p class='c-heading__en'>Campaign02</p>
@@ -11,21 +32,22 @@ import { GOODS_ITEMS, GOODS_NOTES } from '../data/campaigns';
       <h2 id='campaign02-heading' class='c-heading__ja'>
         オリジナルグッズ<br />プレゼント
       </h2>
-      <p class='p-campaign02__badge' aria-hidden='true'>
-        <span class='p-campaign02__badge-sm'>なくなり次第</span>
-        <span class='p-campaign02__badge-lg'>終了</span>
-      </p>
     </div>
 
     <ul class='p-campaign02__goods'>
       {
         GOODS_ITEMS.map((item) => (
           <li class='p-campaign02__item'>
-            <span class='c-placeholder c-placeholder--circle p-campaign02__photo' style='--ratio: 1 / 1'>
-              <span class='c-placeholder__label'>{item.name}</span>
-            </span>
-            <p class='p-campaign02__ribbon' data-tone={item.tone}>
-              商品合計金額
+            <Image
+              class='p-campaign02__photo'
+              src={GOODS_IMAGES[item.id]}
+              alt={item.name}
+              format='webp'
+            />
+            <p class='p-campaign02__ribbon'>
+              <span class='p-campaign02__ribbon-label' data-tone={item.tone}>
+                商品合計金額
+              </span>
             </p>
             <p class='p-campaign02__range' data-tone={item.tone}>
               {item.range}

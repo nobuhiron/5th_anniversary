@@ -88,10 +88,12 @@ export const POINT_UP = {
   period: '2026年8/7(金)10:00 - 8/8(土)9:59',
   brands: '森半・CAFE KFK(カフェ カフカ)・\nMJB(エムジェービー)・MINTON(ミントン)・\nKAUAI coffee(カウアイコーヒー)の',
   brandsEm: '5ブランドの全商品のポイントを+6％還元！',
+  href: 'https://www.tea-and-coffee.shop/view/category/ct102',
 } as const;
 
 export const LIMITED_SALE = {
   lead: '24時間限定',
   title: 'SALE',
   period: '2026年8/20(木)0:00 - 8/20(木)23:59',
+  href: 'https://www.tea-and-coffee.shop/view/category/sale',
 } as const;

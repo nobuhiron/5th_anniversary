@@ -1,15 +1,19 @@
 ---
+import { Image } from 'astro:assets';
+
 /**
  * 宝探しの隠しアイテム（抹茶 / 茶筅 / 茶碗）。
  * クリックでポップアップを開き、左カラムのスタンプ帳にスタンプが押される。
- * 画像素材は支給待ちのためプレースホルダ。
+ * image を渡すと支給画像を描画する（CLICK バッジは画像に含まれる）。
+ * 未支給のものはプレースホルダ + CLICK バッジで代用する。
  */
 interface Props {
   item: 'matcha' | 'chasen' | 'chawan';
   label: string;
   class?: string;
+  image?: ImageMetadata;
 }
-const { item, label, class: className } = Astro.props;
+const { item, label, class: className, image } = Astro.props;
 ---
 
 <button
@@ -18,8 +22,18 @@ const { item, label, class: className } = Astro.props;
   data-treasure-trigger={item}
   aria-label={`隠されたお道具「${label}」を見つける`}
 >
-  <span class='c-placeholder' style='--ratio: 1 / 1'>
-    <span class='c-placeholder__label'>{label}</span>
-  </span>
-  <span class='p-treasure-trigger__badge' aria-hidden='true'>CLICK</span>
+  {
+    image ? (
+      <Image class='p-treasure-trigger__image' src={image} alt='' format='webp' />
+    ) : (
+      <>
+        <span class='c-placeholder' style='--ratio: 1 / 1'>
+          <span class='c-placeholder__label'>{label}</span>
+        </span>
+        <span class='p-treasure-trigger__badge' aria-hidden='true'>
+          CLICK
+        </span>
+      </>
+    )
+  }
 </button>

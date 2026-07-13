@@ -1,6 +1,6 @@
 @import '../global/variables.css';
 
-/* カンプ実測: MV.jpg = 750x1468 (@2x) → 375x734 CSS */
+/* 支給画像実測: MV.jpg = 750x1314 (@2x) → 375x657 CSS */
 .p-hero {
   background-color: var(--bg-page-frame);
 }
@@ -9,5 +9,5 @@
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 750 / 1468;
+  aspect-ratio: 750 / 1314;
 }

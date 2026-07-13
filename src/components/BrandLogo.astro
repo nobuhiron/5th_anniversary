@@ -1,32 +1,23 @@
 ---
+import { Image } from 'astro:assets';
+import logo from '../assets/images/logo.png';
+import logoIcon from '../assets/images/logo-icon.png';
+
 /**
- * 森半 tea&coffee のロゴ。
- * 正式なロゴ SVG は支給待ち。現状はシンボルマーク（三日月＋3点）＋文字組みで代用する。
- * markOnly を渡すとシンボルマークだけを描画する（About セクションで使用）。
+ * 森半 tea&coffee のロゴ（支給 logo.png = マーク + 森半 + tea&coffee のロックアップ）。
+ * 白抜き素材なので濃色背景の上でのみ使う（左 chrome / フッター / About はいずれも濃緑）。
+ * markOnly は支給の logo-icon.png（マーク単体）を描画する（About）。
+ * 表示幅は置き先（p-chrome-left__logo / p-footer__logo / p-about__mark）で指定する。
  */
 interface Props {
   class?: string;
   markOnly?: boolean;
+  alt?: string;
 }
-const { class: className, markOnly = false } = Astro.props;
+const { class: className, markOnly = false, alt = '' } = Astro.props;
+const source = markOnly ? logoIcon : logo;
 ---
 
 <span class:list={['c-brand-logo', markOnly && 'c-brand-logo--mark-only', className]}>
-  <svg class='c-brand-logo__mark' viewBox='0 0 48 48' aria-hidden='true'>
-    <path
-      d='M40 30a17 17 0 1 1-9-22 13.6 13.6 0 0 0 9 22Z'
-      fill='currentColor'
-      transform='rotate(-20 24 24)'></path>
-    <circle cx='19' cy='15' r='4' fill='var(--brand-mark-hole)'></circle>
-    <circle cx='29' cy='19' r='2.6' fill='var(--brand-mark-hole)'></circle>
-    <circle cx='19' cy='26' r='2.2' fill='var(--brand-mark-hole)'></circle>
-  </svg>
-  {
-    !markOnly && (
-      <span class='c-brand-logo__text'>
-        <span class='c-brand-logo__ja'>森半</span>
-        <span class='c-brand-logo__en'>tea&amp;coffee</span>
-      </span>
-    )
-  }
+  <Image class='c-brand-logo__image' src={source} alt={alt} format='webp' />
 </span>

@@ -130,9 +130,10 @@
   --toggle-arrow: var(--color-sub);
 }
 
+/* カンプ実測: 円 r=15（30px）・ボタン右端から 14px 内側 */
 .c-btn-toggle__icon {
   position: absolute;
-  right: 8px;
+  right: 14px;
   top: 50%;
   translate: 0 -50%;
   display: inline-flex;
@@ -141,33 +142,12 @@
 
 .c-btn-toggle__icon svg {
   display: block;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   transition: rotate var(--duration-hover) var(--easing-standard);
 }
 
 /* 開いている間は chevron を上向きにする */
 [aria-expanded='true'] .c-btn-toggle__icon svg {
   rotate: 180deg;
-}
-
-/* 円形の chevron ボタン（バナー下部） */
-.c-btn-circle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-xl);
-  background-color: var(--color-surface);
-  color: var(--color-sub);
-  transition:
-    background-color var(--duration-hover) var(--easing-standard),
-    color var(--duration-hover) var(--easing-standard);
-}
-
-.c-btn-circle svg {
-  display: block;
-  width: 16px;
-  height: 16px;
 }

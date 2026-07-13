@@ -35,7 +35,3 @@
 .c-placeholder--circle {
   border-radius: var(--radius-xl);
 }
-
-.c-placeholder--line {
-  border-radius: var(--radius-md);
-}

@@ -1,248 +1,165 @@
 @import '../global/variables.css';
 
-/* ポイントアップセール.png (1500x5220 @4x) → 375x1305 CSS */
+/* -------------------------------------------------------------
+   ポイントアップセール.svg (viewBox 375x1305) 実測。
+
+   背景は #F8F5E8 のベタ塗りだが、下端が中央へ尖る:
+     M0 0 H375 V1236.32 L187.5 1305 L0 1236.32 Z  → 切っ先の深さ 68.68px
+   カード2枚は支給画像（335x257）。還元率・ブランド名・「詳しく見る」バーまで
+   焼き込まれているので、HTML では組まない。
+
+   縦位置（墨面 / 箱）:
+     リード 3行 72-166.9 / 短い罫線 190.5 / POINT UP 235.5-296.9
+     期間の罫線 317.5・364.5 / カード1 (20,381) 335x257
+     SALE 671.6-743.5 / 期間の罫線 768.5・815.5 / カード2 (20,834) 335x257
+     outro 1137-1212.9
+------------------------------------------------------------- */
+
+/* 下端の切っ先（深さ 68.68）は campaign01 側が三角形として描く。
+   ここで clip-path すると、切っ先の下に潜る緑（campaign01 の地色）と、
+   切っ先の上に出る茶筅（campaign01 の宝探し）を同時に成立させられない。
+   そのためこのセクションは切っ先を含まない 1236.32 までとする。 */
 .p-point-up {
   background-color: var(--bg-point);
   color: var(--color-text);
 }
 
-/* カンプ実測: 上72 / リード 3行の行ピッチ38 / POINT UP ink25 / 下(outro込み)149 */
+/* 列幅の固定は l-inner 側で行う（字送りで僅かに溢れるリードに引きずられないように） */
 .p-point-up__inner {
   position: relative;
   display: grid;
   justify-items: center;
-  padding-block: 72px 24px;
+  padding-block-start: 61.8px;
   text-align: center;
 }
 
+/* Figma 指定: Dancing Script 700 / 80px / line-height 35px / letter-spacing -7%
+   実測: 墨面 82.4-162.4（高さ 80）/ 色 #F1EDD9 */
 .p-point-up__watermark {
   position: absolute;
-  top: 24px;
+  top: 100px;
   left: 50%;
-  translate: -50% 0;
+  translate: -50% -50%;
   font-family: var(--font-en--decor);
-  font-size: 62px;
-  color: color-mix(in srgb, var(--color-sub) 10%, transparent);
+  font-size: 80px;
+  font-weight: var(--fw-bold);
+  line-height: 35px;
+  letter-spacing: -0.07em;
+  color: var(--bg-point-watermark);
   pointer-events: none;
   white-space: nowrap;
 }
 
+/* 実測: 墨面 72-166.9（3行・行送り 38・墨面高 19・字送り 0.12em） */
 .p-point-up__lead {
   position: relative;
   font-family: var(--font-jp--sanserif);
   font-size: var(--font-size-title-sm);
   font-weight: var(--fw-bold);
   line-height: 38px;
-  white-space: pre-line;
+  letter-spacing: 0.12em;
+  /* pre-line だと 3 行目が内寸 335 を 1px 超えて折り返す（CSS は末尾にも字送りを足すため）。
+     改行はデータの \n で決まっているので、折り返しは止める。 */
+  white-space: pre;
 }
 
+/* 実測: 中央の短い罫線 27px @ y=190.5 */
 .p-point-up__rule {
   width: 28px;
   height: 1px;
-  margin-block: 24px;
+  margin-block: 14.7px 34px;
   background-color: var(--color-text);
 }
 
+/* 実測: POINT UP 墨面 y235.5 高25 幅174.5 / キャンペーン 墨面 y271.5 高25.5 幅177.5
+   → 行の墨面ピッチ 36 */
 .p-point-up__title {
   display: grid;
-  gap: 4px;
+  gap: 0;
 }
 
 .p-point-up__title-en {
   font-family: var(--font-en);
   font-size: 34px;
   font-weight: var(--fw-bold);
-  letter-spacing: 0.04em;
-  line-height: 1.1;
+  letter-spacing: 0.11em;
+  line-height: 36px;
 }
 
 .p-point-up__title-ja {
   font-family: var(--font-jp--sanserif);
-  font-size: var(--font-size-title-sm);
+  font-size: 28px;
   font-weight: var(--fw-bold);
+  letter-spacing: 0.112em;
+  line-height: 36px;
 }
 
+/* 上下に罫線が付く（c-period）。実測: 罫線 317.5-364.5 / 768.5-815.5 = 高さ 47
+   墨面高 17.5・幅 299/324 → 15px では細く、16.5px + 字送り 0.09em */
 .p-point-up__period {
   width: 100%;
   margin-block-start: 20px;
+  padding-block: 9.15px;
+  font-size: 16.5px;
+  letter-spacing: 0.09em;
 }
 
-/* +6%還元 カード */
-.p-point-up__card {
-  width: 100%;
-  margin-block-start: 28px;
-  border-radius: var(--radius-sm);
-  background-color: var(--palette-green-vivid);
-  overflow: hidden;
+/* SALE 側は上のグリフ(51.5px の SALE)の箱が大きく、罫線までの間隔が余る。実測に合わせて詰める。 */
+.p-point-up__period--sale {
+  margin-block-start: 14.2px;
 }
 
-/* カンプ実測: カード全体 399..650 = 251px に収める */
-.p-point-up__rate {
-  position: relative;
-  margin: 12px;
-  padding: 12px 16px;
-  border-radius: var(--radius-sm);
-  background-color: var(--color-surface);
-}
-
-.p-point-up__rate-label {
-  display: inline-block;
-  padding-block-end: 2px;
-  border-block-end: 1px solid currentColor;
-  color: var(--palette-green-deep);
-  font-family: var(--font-jp--sanserif);
-  font-size: var(--font-size-body-sm);
-  font-weight: var(--fw-bold);
-}
-
-.p-point-up__rate-value {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  margin-block-start: 8px;
-  color: var(--palette-green-deep);
-}
-
-.p-point-up__rate-plus {
-  display: grid;
-  place-items: center;
-  width: 24px;
-  height: 24px;
-  border: 1.5px solid currentColor;
-  border-radius: var(--radius-xl);
-  font-size: 14px;
-  font-weight: var(--fw-bold);
-}
-
-.p-point-up__rate-num {
-  font-family: var(--font-en);
-  font-size: 64px;
-  font-weight: var(--fw-bold);
-  line-height: 1;
-}
-
-.p-point-up__rate-unit {
-  display: grid;
-  justify-items: start;
-  font-family: var(--font-jp--sanserif);
-  font-weight: var(--fw-bold);
-}
-
-.p-point-up__rate-all {
-  font-size: 12px;
-}
-
-.p-point-up__rate-pct {
-  font-size: var(--font-size-title-sm);
-}
-
-.p-point-up__brands {
-  padding: 0 16px 12px;
-  color: var(--color-text-on-dark);
-  font-family: var(--font-jp--sanserif);
-  font-size: var(--font-size-body-xs);
-  line-height: 1.6;
-  white-space: pre-line;
-}
-
-.p-point-up__brands-em {
+/* 支給画像 335x257。実測: カード1 y=381 / カード2 y=834。
+   画像に「詳しく見る」ボタンが焼き込まれているので、カード全体をリンクにする。 */
+.p-point-up__card,
+.p-point-up__card-image {
   display: block;
-  color: var(--palette-yellow);
-  font-weight: var(--fw-bold);
+  width: 100%;
+  height: auto;
 }
 
-.p-point-up__more {
-  --bar-bg: var(--palette-green-deep);
+.p-point-up__card {
+  margin-block-start: 16.5px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: opacity var(--duration-hover) var(--easing-standard);
 }
 
-/* 24時間限定 SALE */
+.p-point-up__card:hover {
+  opacity: 0.86;
+}
+
+/* カンプ側で罫線からの間隔が 16.5(カード1) と 18.5(カード2) で揃っていない。実測どおりにする。 */
+.p-point-up__card:nth-of-type(2) {
+  margin-block-start: 18.5px;
+}
+
+/* 24時間限定 SALE。実測: 24時間限定 墨面 y671.5 高22.5 幅127.5 / SALE 墨面 y705.5 高38 幅138.5
+   → 墨面ピッチ 34 */
 .p-point-up__sale-lead {
-  margin-block-start: 22px;
+  margin-block-start: 20.6px;
   font-family: var(--font-jp--sanserif);
-  font-size: var(--font-size-body);
+  font-size: 24px;
   font-weight: var(--fw-bold);
-  letter-spacing: 0.2em;
+  line-height: 34px;
+  letter-spacing: 0.05em;
 }
 
 .p-point-up__sale-title {
   font-family: var(--font-en);
-  font-size: 40px;
+  font-size: 51.5px;
   font-weight: var(--fw-bold);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.12em;
   line-height: 1.2;
 }
 
-/* スペシャルSALE バナー */
-.p-point-up__banner {
-  position: relative;
-  width: 100%;
-  margin-block-start: 24px;
-  padding-block-start: 24px;
-  border-radius: var(--radius-sm);
-  background-color: var(--palette-teal);
-  color: var(--color-text-on-dark);
-  overflow: hidden;
-}
-
-.p-point-up__banner-seal {
-  position: absolute;
-  top: 12px;
-  left: 16px;
-  display: grid;
-  place-items: center;
-  width: 54px;
-  height: 54px;
-  border-radius: var(--radius-xl);
-  background-color: var(--color-surface);
-  color: var(--palette-teal);
-  font-family: var(--font-jp--sanserif);
-  font-size: 12px;
-  font-weight: var(--fw-bold);
-  line-height: 1.3;
-}
-
-.p-point-up__banner-title {
-  display: grid;
-  gap: 2px;
-}
-
-.p-point-up__banner-ja {
-  font-family: var(--font-jp--sanserif);
-  font-size: var(--font-size-title);
-  font-weight: var(--fw-bold);
-}
-
-.p-point-up__banner-en {
-  font-family: var(--font-en);
-  font-size: 52px;
-  font-weight: var(--fw-bold);
-  line-height: 1;
-  color: var(--palette-yellow);
-}
-
-.p-point-up__banner-note {
-  display: inline-grid;
-  place-items: center;
-  margin-block: 12px 20px;
-  padding: 6px 18px;
-  background-color: var(--color-surface);
-  border-radius: var(--radius-pill);
-  color: var(--palette-teal);
-  font-family: var(--font-jp--sanserif);
-  font-size: var(--font-size-body-sm);
-  font-weight: var(--fw-bold);
-}
-
-/* 「周年期間のお得なキャンペーンはこちら」＋下向きの切り欠き */
+/* 実測: 墨面 1137-1212.9（3行）。切っ先はセクション側の clip-path で作る。 */
 .p-point-up__outro {
-  padding-block: 32px 48px;
+  padding-block: 36px 20.82px;
   font-family: var(--font-jp--sanserif);
-  font-size: var(--font-size-body);
+  font-size: 20px;
   font-weight: var(--fw-bold);
-  line-height: 1.9;
-  letter-spacing: 0.14em;
+  line-height: 29.5px;
+  letter-spacing: 0.2em;
   text-align: center;
-  background-color: var(--bg-point);
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 28px), 50% 100%, 0 calc(100% - 28px));
 }

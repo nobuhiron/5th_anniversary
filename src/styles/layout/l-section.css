@@ -11,4 +11,11 @@
   width: 100%;
   padding-inline: var(--layout-padding-sp);
   box-sizing: border-box;
+
+  /* l-inner を grid にしたとき、列幅を内寸(335)に固定する。
+     auto のままだと幅の広い子の max-content に列が引きずられて広がり、
+     兄弟の要素まで右へずれる。カルーセル・カレンダー・字送りで溢れた
+     テキストの 3 箇所で実際に踏んだので、器の側で塞ぐ。
+     grid でない要素ではこの宣言は無視される。 */
+  grid-template-columns: minmax(0, 1fr);
 }

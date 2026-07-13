@@ -1,5 +1,11 @@
 ---
+import { Image } from 'astro:assets';
 import { LIMITED_SALE, POINT_UP } from '../data/campaigns';
+import pointUpImage from '../assets/images/nav-image-pointup.jpg';
+import saleImage from '../assets/images/nav-image-sale.jpg';
+
+// 支給画像は還元率・ブランド名・「詳しく見る」バーまで焼き込まれた完成版（335x257）。
+// 文言は alt で読み上げる。
 ---
 
 <section id='point-up' class='l-section p-point-up' aria-labelledby='point-up-heading'>
@@ -16,67 +22,28 @@ import { LIMITED_SALE, POINT_UP } from '../data/campaigns';
 
     <p class='c-period p-point-up__period'>{POINT_UP.period}</p>
 
-    <div class='p-point-up__card'>
-      <div class='p-point-up__rate'>
-        <p class='p-point-up__rate-label'>対象5ブランド</p>
-        <p class='p-point-up__rate-value'>
-          <span class='p-point-up__rate-plus' aria-hidden='true'>＋</span>
-          <span class='p-point-up__rate-num'>6</span>
-          <span class='p-point-up__rate-unit'>
-            <span class='p-point-up__rate-all'>全品</span>
-            <span class='p-point-up__rate-pct'>％還元</span>
-          </span>
-        </p>
-        <span class='p-point-up__coins' aria-hidden='true'></span>
-      </div>
-
-      <p class='p-point-up__brands'>
-        {POINT_UP.brands}
-        <b class='p-point-up__brands-em'>{POINT_UP.brandsEm}</b>
-      </p>
-
-      <a href='#point-up' class='c-btn-bar p-point-up__more'>
-        詳しく見る
-        <span class='c-btn-bar__icon' aria-hidden='true'>
-          <svg viewBox='0 0 20 20' fill='none'>
-            <circle cx='10' cy='10' r='9' fill='currentColor'></circle>
-            <path
-              d='M8.5 6l4 4-4 4'
-              stroke='var(--bar-arrow)'
-              stroke-width='1.8'
-              stroke-linecap='round'
-              stroke-linejoin='round'></path>
-          </svg>
-        </span>
-      </a>
-    </div>
+    <a href={POINT_UP.href} class='p-point-up__card'>
+      <Image
+        class='p-point-up__card-image'
+        src={pointUpImage}
+        alt={`対象5ブランド 全品+6％還元。${POINT_UP.brands.replace(/\n/g, '')}${POINT_UP.brandsEm} 詳しく見る`}
+        format='webp'
+      />
+    </a>
 
     <p class='p-point-up__sale-lead'>{LIMITED_SALE.lead}</p>
     <p class='p-point-up__sale-title'>{LIMITED_SALE.title}</p>
-    <p class='c-period p-point-up__period'>{LIMITED_SALE.period}</p>
 
-    <div class='p-point-up__banner'>
-      <p class='p-point-up__banner-seal' aria-hidden='true'>毎月<br />恒例</p>
-      <p class='p-point-up__banner-title'>
-        <span class='p-point-up__banner-ja'>スペシャル</span>
-        <span class='p-point-up__banner-en'>SALE</span>
-      </p>
-      <p class='p-point-up__banner-note'>人気商品が驚きの価格に!</p>
-      <a href='#point-up' class='c-btn-bar c-btn-bar--dark p-point-up__banner-more'>
-        詳しく見る
-        <span class='c-btn-bar__icon' aria-hidden='true'>
-          <svg viewBox='0 0 20 20' fill='none'>
-            <circle cx='10' cy='10' r='9' fill='currentColor'></circle>
-            <path
-              d='M8.5 6l4 4-4 4'
-              stroke='var(--bar-arrow)'
-              stroke-width='1.8'
-              stroke-linecap='round'
-              stroke-linejoin='round'></path>
-          </svg>
-        </span>
-      </a>
-    </div>
+    <p class='c-period p-point-up__period p-point-up__period--sale'>{LIMITED_SALE.period}</p>
+
+    <a href={LIMITED_SALE.href} class='p-point-up__card'>
+      <Image
+        class='p-point-up__card-image'
+        src={saleImage}
+        alt='毎月恒例 スペシャルSALE 人気商品が驚きの価格に! 詳しく見る'
+        format='webp'
+      />
+    </a>
   </div>
 
   <p class='p-point-up__outro'>

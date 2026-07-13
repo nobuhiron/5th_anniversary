@@ -1,8 +1,34 @@
 ---
+import { Image } from 'astro:assets';
 import { PLUS1_TERMS } from '../data/campaigns';
+import bgImage from '../assets/images/campaign03-bg.jpg';
+import plusone01 from '../assets/images/plusone01.jpg';
+import plusone02 from '../assets/images/plusone02.jpg';
+import plusone03 from '../assets/images/plusone03.jpg';
+import plusone04 from '../assets/images/plusone04.jpg';
+import okImage from '../assets/images/OK.png';
+import ngImage from '../assets/images/NG.png';
+
+// 商品写真は白背景ごと焼き込まれた支給画像（244x220 = 122x110 の @2x）。
+const ITEM_IMAGES: Record<string, ImageMetadata> = {
+  greentea: plusone01,
+  mjb: plusone02,
+  koricha: plusone03,
+  minton: plusone04,
+};
+
+// カードごとの淡い色（SVG 実測。斜め 110.3deg で白へ）
+const CARD_TONES: Record<string, string> = {
+  greentea: 'green',
+  mjb: 'grey',
+  koricha: 'blue',
+  minton: 'orange',
+};
 ---
 
 <section id='campaign03' class='l-section p-campaign03' aria-labelledby='campaign03-heading'>
+  <Image class='p-campaign03__bg' src={bgImage} alt='' format='webp' />
+
   <div class='l-inner p-campaign03__inner'>
     <div class='c-heading p-campaign03__heading'>
       <p class='c-heading__en'>Campaign03</p>
@@ -21,11 +47,14 @@ import { PLUS1_TERMS } from '../data/campaigns';
           <p class='c-period p-campaign03__period'>{term.period}</p>
           <ul class='p-campaign03__items'>
             {term.items.map((item) => (
-              <li class='p-campaign03__item'>
+              <li class='p-campaign03__item' data-tone={CARD_TONES[item.id]}>
                 <a href={item.code ? `#${item.code}` : '#campaign03'} class='p-campaign03__item-link'>
-                  <span class='c-placeholder p-campaign03__item-photo' style='--ratio: 1 / 1'>
-                    <span class='c-placeholder__label'>商品</span>
-                  </span>
+                  <Image
+                    class='p-campaign03__item-photo'
+                    src={ITEM_IMAGES[item.id]}
+                    alt={item.name}
+                    format='webp'
+                  />
                   <span class='p-campaign03__item-body'>
                     <span class='p-campaign03__item-lead'>{item.lead}</span>
                     <span class='p-campaign03__item-name'>
@@ -35,10 +64,10 @@ import { PLUS1_TERMS } from '../data/campaigns';
                     </span>
                   </span>
                   <span class='p-campaign03__item-arrow' aria-hidden='true'>
-                    <svg viewBox='0 0 24 24' fill='none'>
-                      <circle cx='12' cy='12' r='11' fill='currentColor' />
+                    <svg viewBox='0 0 28 28' fill='none'>
+                      <circle cx='14' cy='14' r='14' fill='currentColor' />
                       <path
-                        d='M10 7l5 5-5 5'
+                        d='M12 8.6l5.4 5.4-5.4 5.4'
                         stroke='#fff'
                         stroke-width='2'
                         stroke-linecap='round'
@@ -66,24 +95,18 @@ import { PLUS1_TERMS } from '../data/campaigns';
       </p>
     </div>
 
-    <div class='p-campaign03__examples'>
-      <section class='p-campaign03__example' data-kind='ok'>
-        <h3 class='p-campaign03__example-heading'>OK例</h3>
-        <p class='p-campaign03__example-figure' aria-hidden='true'>
-          <span class='c-placeholder' style='--ratio: 300 / 92'>
-            <span class='c-placeholder__label'>商品A × 商品A ＋ 商品A（プレゼント）</span>
-          </span>
-        </p>
-      </section>
-
-      <section class='p-campaign03__example' data-kind='ng'>
-        <h3 class='p-campaign03__example-heading'>NG例</h3>
-        <p class='p-campaign03__example-figure' aria-hidden='true'>
-          <span class='c-placeholder' style='--ratio: 300 / 92'>
-            <span class='c-placeholder__label'>×異なる商品のみ ／ ×対象外商品</span>
-          </span>
-        </p>
-      </section>
-    </div>
+    {/* 枠・ラベル・図がすべて焼き込まれた支給画像 */}
+    <Image
+      class='p-campaign03__example'
+      src={okImage}
+      alt='OK例: 同一商品Aを2点ご購入で、商品Aを1つプレゼント'
+      format='webp'
+    />
+    <Image
+      class='p-campaign03__example'
+      src={ngImage}
+      alt='NG例: 異なる商品のみの組み合わせ、対象外商品との組み合わせは対象外'
+      format='webp'
+    />
   </div>
 </section>

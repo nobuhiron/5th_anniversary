@@ -1,34 +1,44 @@
 @import '../global/variables.css';
 
-/* Campagin02.png (1500x4936 @4x) → 375x1234 CSS */
+/* -------------------------------------------------------------
+   Campagin02.svg (viewBox 375x1234) 実測。地色 #F8F5E8 のベタ塗り。
+
+   紙吹雪 (0,0) 375x188 / バッジ 円 79.58 @(18.56,135.56) を -5.386deg 回転
+   英字 墨面 78-125.2 / 罫線 144.5 / リード 墨面 179.1-192.3
+   見出し 墨面 222.7-285.7
+   景品の円 160x160 @(20,319)(195,319)(20,600)(195,600) 列間 15 / 行ピッチ 281
+     リボン (51,489) 98x17 + 両脇の点線 19.5（合計 139.5）
+     金額 墨面 516-531.9 / 点線 537.75 / 品名 墨面 549.6-566.6
+   注意事項カード (20,915) 335x239
+------------------------------------------------------------- */
+
 .p-campaign02 {
   background-color: var(--bg-campaign02);
-  color: var(--color-sub);
+  color: var(--palette-brown-dark);
 }
 
-/* カンプ実測: 上78 / 景品グリッド上40 / 注意事項上71 /
-   注意事項カード下端 1079 → セクション下余白 155 */
-.p-campaign02__inner {
-  display: grid;
-  justify-items: center;
-  padding-block: 78px 155px;
-}
-
-.p-campaign02__heading {
-  --heading-fg: var(--color-sub);
-
-  position: relative;
+/* 実測: 375x188 をセクション上端に敷く */
+.p-campaign02__confetti {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
   width: 100%;
+  height: auto;
+  pointer-events: none;
 }
 
+/* 実測: 直径 79.58 の円。中心 (58.35,175.35) → 左上 (18.56,135.56) */
 .p-campaign02__badge {
   position: absolute;
-  top: 44px;
-  left: 0;
+  top: 135.56px;
+  left: 18.56px;
+  z-index: 2;
   display: grid;
   place-items: center;
-  width: 70px;
-  height: 70px;
+  width: 79.58px;
+  height: 79.58px;
+  rotate: -5.386deg;
   border-radius: var(--radius-xl);
   background-color: var(--palette-gold);
   color: var(--color-text-on-dark);
@@ -39,105 +49,204 @@
 }
 
 .p-campaign02__badge-sm {
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .p-campaign02__badge-lg {
-  font-size: var(--font-size-body);
+  font-size: 20px;
 }
 
-.p-campaign02__goods {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 34px 16px;
-  width: 100%;
-  margin-block-start: 40px;
-}
-
-.p-campaign02__item {
+.p-campaign02__inner {
+  position: relative;
+  z-index: 1;
   display: grid;
   justify-items: center;
-  gap: 8px;
+  padding-block: 71.6px 80px;
+}
+
+.p-campaign02__heading {
+  --heading-fg: var(--palette-brown-dark);
+
+  gap: 0;
+  width: 100%;
+}
+
+/* 実測: 英字の箱下端 123.8 → 罫線 144.5 */
+.p-campaign02__heading .c-heading__rule {
+  margin-block-start: 20.7px;
+}
+
+.p-campaign02__heading .c-heading__lead {
+  margin-block-start: 30.2px;
+}
+
+/* 実測: 墨面 223 / 260 → 行の墨面ピッチ 37（Campaign01 の 40 とは異なる） */
+.p-campaign02__heading .c-heading__ja {
+  margin-block-start: 19.3px;
+  line-height: 37px;
+  letter-spacing: 0.116em;
+}
+
+/* 実測: 円 160x160 / 列間 15 / 行ピッチ 281 */
+.p-campaign02__goods {
+  display: grid;
+  grid-template-columns: repeat(2, 160px);
+  justify-content: space-between;
+  row-gap: 34.35px;
+  width: 100%;
+  margin-block-start: 27.9px;
+}
+
+/* align-content を start にする。既定の stretch だと、行の高さが余ったアイテムで
+   行間が引き伸ばされ、リボンの位置が隣とずれる。 */
+.p-campaign02__item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  justify-items: center;
+  width: 160px;
 }
 
 .p-campaign02__photo {
-  width: 128px;
+  display: block;
+  width: 160px;
+  height: auto;
+  border-radius: var(--radius-xl);
 }
 
-/* リボン型のラベル（両端が V 字カット） */
+/* リボン。両脇は点 0.5px・ピッチ 2.5px の点線（SVG の stroke-dasharray="0.5 2"）。 */
 .p-campaign02__ribbon {
-  padding: 3px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25px;
+  width: 139.5px;
+  margin-block-start: 10px;
+}
+
+.p-campaign02__ribbon::before,
+.p-campaign02__ribbon::after {
+  content: '';
+  flex: 1;
+  height: 0.5px;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--palette-brown-dark) 0 0.5px,
+    transparent 0.5px 2.5px
+  );
+}
+
+/* 実測: 98x17。両端は V 字カット */
+.p-campaign02__ribbon-label {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 98px;
+  height: 17px;
   color: var(--color-text-on-dark);
   font-family: var(--font-jp--sanserif);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: var(--fw-bold);
   clip-path: polygon(0 0, 100% 0, calc(100% - 6px) 50%, 100% 100%, 0 100%, 6px 50%);
 }
 
-.p-campaign02__ribbon[data-tone='green'] {
-  background-color: var(--palette-green-vivid);
+.p-campaign02__ribbon-label[data-tone='green'] {
+  background-color: var(--bg-campaign01);
 }
 
-.p-campaign02__ribbon[data-tone='olive'] {
+.p-campaign02__ribbon-label[data-tone='olive'] {
   background-color: var(--palette-green-olive);
 }
 
+/* 実測: 墨面 516-531.9（高さ 15.9） */
 .p-campaign02__range {
+  margin-block-start: 4.45px;
   font-family: var(--font-jp--sanserif);
-  font-size: var(--font-size-body-sm);
+  font-size: 16px;
   font-weight: var(--fw-bold);
+  line-height: 22px;
 }
 
 .p-campaign02__range[data-tone='green'] {
-  color: var(--palette-green-vivid);
+  color: var(--bg-campaign01);
 }
 
 .p-campaign02__range[data-tone='olive'] {
   color: var(--palette-green-olive);
 }
 
+/* 金額の下の点線（リボン脇と同じ dasharray）。品名の上に置く。 */
+/* 点線(537.75)を品名の箱の上端に置く。実測: 品名の墨面 549.6-566.6（高さ 17）。
+   品名は 1 行。「くま半ぬいぐるみ」は墨面 144.6 あり、点線の幅(139.5)には収まらない
+   ので、箱はアイテム幅いっぱいにして点線だけを 139.5 にする。 */
 .p-campaign02__name {
+  position: relative;
+  width: 100%;
+  white-space: nowrap;
+  margin-block-start: 4.3px;
+  padding-block-start: 11.9px;
   font-family: var(--font-jp--sanserif);
-  font-size: var(--font-size-body);
+  font-size: 18px;
   font-weight: var(--fw-bold);
+  line-height: 17px;
+  letter-spacing: 0.08em;
+  text-align: center;
 }
 
+.p-campaign02__name::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  translate: -50% 0;
+  width: 139.5px;
+  height: 0.5px;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--palette-brown-dark) 0 0.5px,
+    transparent 0.5px 2.5px
+  );
+}
+
+/* 実測: カード 335x239 @(20,915) */
 .p-campaign02__notes {
   width: 100%;
-  margin-block-start: 71px;
-  padding: 20px 16px;
+  height: 239px;
+  margin-block-start: 68.4px;
+  padding: 21.4px 13px;
   box-sizing: border-box;
   background-color: var(--color-surface);
   border-radius: var(--radius-xs);
 }
 
+/* 実測: 墨面 936.4-951.5 / 罫線 959.5（x 33-341） */
 .p-campaign02__notes-heading {
   padding-block-end: 8px;
+  line-height: 15.1px;
   border-block-end: 1px solid var(--palette-alert);
   color: var(--palette-alert);
   font-family: var(--font-jp--sanserif);
-  font-size: var(--font-size-body);
+  font-size: 17px;
   font-weight: var(--fw-bold);
   text-align: center;
 }
 
+/* 実測: 墨面 975.8-1131.0 */
 .p-campaign02__notes-list {
-  display: grid;
-  gap: 6px;
   margin-block-start: 12px;
 }
 
+/* 実測: 墨面高 11 / 行ピッチ 18 / 1 行目の墨面 302.5。
+   カンプは折り返し行を字下げしない（2 行目も左端から始まる）ので、
+   ※ は絶対配置のぶら下げにせず、行内に置く。 */
 .p-campaign02__note {
-  position: relative;
-  padding-inline-start: 1.2em;
-  color: var(--color-text);
+  color: var(--palette-brown-dark);
   font-family: var(--font-jp--sanserif);
-  font-size: 11px;
-  line-height: 1.7;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.056em;
 }
 
 .p-campaign02__note::before {
   content: '※';
-  position: absolute;
-  left: 0;
 }
