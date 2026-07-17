@@ -3,123 +3,167 @@
 /* -------------------------------------------------------------
    PC 左右カラム（chrome）。SP では l-shell 側で非表示。
    背景は l-page__bg（固定）に載るため、chrome 自身は透過。
+
+   寸法はすべて MV_PC.svg（1440 幅カンプ）の実測値。
+   左ブロック 360px / 右ブロック 286px。
 ------------------------------------------------------------- */
 
 .p-chrome-left {
+  position: relative;
+  isolation: isolate;
   display: grid;
   justify-items: center;
-  gap: 20px;
-  width: 100%;
-  max-width: 300px;
-  padding-inline: var(--spacing-lg);
+  width: 360px;
   color: var(--color-text-on-dark);
   text-align: center;
 }
 
-/* カンプ実測: ロゴ 125x67.5（全体カンプ @2x の 250x135） */
+/* 下地のあしらい。カンプ実測: 1440 の (38, 52) に 349x328 = ブロック基準で (-90, 5)。
+   CSS の url() は CDN 配信で壊れるため p-about と同じく <img> で敷く。 */
+.p-chrome-left__ashirai {
+  position: absolute;
+  z-index: -1;
+  inset-block-start: 5px;
+  inset-inline-start: -90px;
+  width: 349px;
+  height: 328px;
+  max-width: none;
+  pointer-events: none;
+}
+
+/* カンプ実測: ロゴ 125x68 */
 .p-chrome-left__logo {
   width: 125px;
 }
 
+/* 5th Anniversary。カンプ実測: 「5」195px と「th」30px は同一ベースライン */
 .p-chrome-left__title {
   display: grid;
   justify-items: center;
+  margin-block-start: 3px;
   font-family: var(--font-jp--serif);
+}
+
+.p-chrome-left__title-main {
+  display: block;
   line-height: 1;
 }
 
 .p-chrome-left__title-num {
-  font-size: 82px;
+  font-size: 195px;
   font-weight: var(--fw-regular);
 }
 
 .p-chrome-left__title-th {
-  font-size: 32px;
-  margin-inline-start: 4px;
+  font-size: 30px;
+  font-weight: var(--fw-regular);
+  letter-spacing: 0.02em;
+  margin-inline-start: 2px;
 }
 
 .p-chrome-left__title-en {
-  margin-block-start: 12px;
-  font-size: var(--font-size-body);
-  letter-spacing: 0.34em;
-  text-indent: 0.34em;
+  margin-block-start: 8px;
+  font-size: 24px;
+  font-weight: var(--fw-regular);
+  line-height: 1;
+  letter-spacing: 0.31em;
+  text-indent: 0.31em;
 }
 
+/* -------------------------------------------------------------
+   うちわバナー。カンプ実測: 360x130 のチケット型（左右中央に切り欠き）。
+   写真は 520x246 で描画し、チケット窓が (128, 49) の位置を見せる。
+------------------------------------------------------------- */
 .p-chrome-left__banner {
-  display: block;
-  width: 100%;
-}
-
-/* 宝探しカード */
-.p-treasure {
   position: relative;
-  width: 100%;
-  padding: 20px 16px 16px;
-  box-sizing: border-box;
-  background-color: var(--palette-green-deep);
-  border: 1px solid var(--palette-gold);
-  border-radius: var(--radius-xs);
-  overflow: hidden;
-}
-
-.p-treasure__ribbon {
-  position: absolute;
-  top: 12px;
-  left: -30px;
-  width: 110px;
-  padding-block: 3px;
-  rotate: -45deg;
-  background-color: var(--palette-gold);
-  color: var(--palette-green-deep);
-  font-family: var(--font-en--decor);
-  font-size: 10px;
-  font-weight: var(--fw-semibold);
-  text-align: center;
-}
-
-.p-treasure__text {
-  font-family: var(--font-jp--sanserif);
-  font-size: 11px;
-  font-weight: var(--fw-medium);
-  line-height: 1.8;
-}
-
-.p-treasure__count {
-  color: var(--palette-yellow);
-}
-
-.p-treasure__strong {
-  color: var(--palette-yellow);
-}
-
-.p-treasure__stamps {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-block-start: 14px;
-}
-
-.p-treasure__stamp {
-  width: 42px;
-  height: 42px;
-  border-radius: var(--radius-xl);
-  background-color: color-mix(in srgb, var(--palette-mint-pale) 88%, transparent);
-  opacity: 0.35;
+  display: block;
+  width: 360px;
+  height: 130px;
+  margin-block-start: 54px;
+  clip-path: var(--ticket-clip);
+  background-color: var(--bg-banner-uchiwa);
   transition: opacity var(--duration-hover) var(--easing-standard);
 }
 
-.p-treasure__stamp.is-found {
-  opacity: 1;
-  background-color: var(--palette-mint-pale);
-  box-shadow: inset 0 0 0 2px var(--palette-green-vivid);
+.p-chrome-left__banner:hover {
+  opacity: 0.86;
 }
 
-/* 右カラム */
-/* カンプ実測: ナビも LINE バナーも幅 286・左端が揃う（全体カンプ @2x の 572px） */
+.p-chrome-left__banner-image {
+  position: absolute;
+  inset-block-start: -49px;
+  inset-inline-start: -128px;
+  /* reset の img { max-width: 100% } に負けると 360px に丸められる */
+  max-width: none;
+  width: 520px;
+  height: 246px;
+}
+
+/* テキストはチケット左側（カンプ実測: 中心 x = 98.5）に置く */
+.p-chrome-left__banner-body {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  width: 197px;
+  padding-block-start: 10px;
+  color: var(--color-heading);
+  font-family: var(--font-jp--sanserif);
+  line-height: 1;
+}
+
+.p-chrome-left__banner-pill {
+  display: grid;
+  place-items: center;
+  width: 102.5px;
+  height: 21.5px;
+  border: 0.5px solid var(--color-heading);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface);
+  font-size: 12px;
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.04em;
+  text-indent: 0.04em;
+}
+
+.p-chrome-left__banner-lead {
+  margin-block-start: 4px;
+  font-size: 15px;
+  font-weight: var(--fw-medium);
+  line-height: 1.4;
+}
+
+.p-chrome-left__banner-title {
+  margin-block-start: 2px;
+  font-size: 19px;
+  font-weight: var(--fw-bold);
+  line-height: 1.15;
+  /* カンプは約物を詰めている（Figma の既定）。palt を当てないと「！」の前が空く */
+  font-feature-settings: 'palt' 1;
+}
+
+.p-chrome-left__banner-note {
+  margin-block-start: 5px;
+  font-size: 11px;
+  font-weight: var(--fw-regular);
+  line-height: 1.4;
+}
+
+/* 宝探しカード本体は p-treasure.css。ここでは chrome 内での置き位置だけ。
+   カンプ実測: うちわバナーの下 16px */
+.p-chrome-left__treasure {
+  margin-block-start: 16px;
+}
+
+/* -------------------------------------------------------------
+   右カラム。カンプ実測: 幅 286・ナビと LINE バナーの間隔 36
+------------------------------------------------------------- */
 .p-chrome-right {
   display: grid;
   justify-items: center;
-  gap: 28px;
+  gap: 36px;
   width: 286px;
 }
 

@@ -4,7 +4,7 @@ import '../styles/style.css';
 import { FONT_LINKS, SITE } from '../config/site';
 import PageChromeLeft from '../components/PageChromeLeft.astro';
 import PageChromeRight from '../components/PageChromeRight.astro';
-import PageTop from '../components/PageTop.astro';
+import StampButton from '../components/StampButton.astro';
 import TreasurePopups from '../components/TreasurePopups.astro';
 import { publicAssetPath } from '../utils/assets';
 import pageBgSrc from '../assets/images/page_bg.jpg';
@@ -97,8 +97,10 @@ const twitterCard = ogImageUrl ? 'summary_large_image' : 'summary';
       </aside>
     </div>
 
+    {/* 左 chrome が消える幅（--lg 未満）でだけ出るスタンプ帳のショートカット */}
+    <StampButton />
+
     <TreasurePopups />
-    <PageTop />
 
     <script>
       import '../scripts/main.js';

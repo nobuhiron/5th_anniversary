@@ -29,6 +29,7 @@
   --palette-yellow-vivid: #ffed22;
   --palette-green-line: #02872a; /* Campaign01 の地色 / LINE 緑 */
   --palette-green-olive: #879c51;
+  --palette-hover: #879c51; /* ボタン・ナビのホバー色（指定） */
   --palette-orange-deep: #fd8b2d;
   --palette-gold: #daac2b;
   --palette-mint-pale: #f0f9f6;
@@ -51,11 +52,36 @@
   --bg-campaign01: #02872a;
   --bg-campaign02: #f8f5e8;
   --bg-campaign03-base: #1d6b45; /* Plus1 の緑。背景画像 campaign03-bg.jpg の読込前フォールバック */
-  --bg-campaign04: #fecc82;
+  --bg-campaign04: #fecc82; /* はちみつ色。背景画像 campaign04-bg.jpg の読込前フォールバック */
+  --palette-sale: #c90808; /* セール価格の赤（Campaign04。SVG 実測） */
   --bg-nav-base: #f8f5e8; /* nav のクリーム地。背景画像 nav-bg.jpg の読込前フォールバック */
   --bg-point: #f8f5e8; /* ポイントアップの地色（ベタ塗り） */
   --bg-point-watermark: #f1edd9; /* 地色に沈む Point-up sale の飾り文字 */
   --bg-footer: #354e0f;
+
+  /* PC 左 chrome の宝探しカード（MV_PC.svg 実測）。
+     地はカンプの 7px タイル（斜め 45 度・2 色）を repeating-linear-gradient で再現する。 */
+  --palette-stripe-dark: #054d21;
+  --palette-stripe-light: #095e2a;
+  --palette-cream-pale: #feffea; /* スタンプ枠の地 */
+  --bg-treasure-stripe: repeating-linear-gradient(
+    135deg,
+    var(--palette-stripe-dark) 0 2.475px,
+    var(--palette-stripe-light) 2.475px 4.95px
+  );
+  /* カード内側の金枠。SVG のグラデ stop から参照する（両端が濃く中央が淡い） */
+  --palette-gold-frame: #af9f3f;
+  --palette-gold-frame-light: #afac72;
+  /* 左上のコーナーリボン。SVG のグラデ軸は帯の長手方向（画面上で 234deg）。
+     帯自体を -45deg 回転させて使うので、要素ローカルでは +45 した 279deg になる。 */
+  --gradient-gold-ribbon: linear-gradient(
+    279deg,
+    #ebcd68 0%,
+    #f2d377 25%,
+    #caaa46 50%,
+    #f2d98a 75%,
+    #b8a14c 100%
+  );
 
   /* パーツ地色（本画像が入るまでのプレースホルダ地。実測値） */
   --bg-banner-uchiwa: #f2efe9;

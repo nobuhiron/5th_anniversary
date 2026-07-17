@@ -1,135 +1,247 @@
 @import '../global/variables.css';
 
-/* Campagin04.png (1500x6628 @4x) → 375x1657 CSS */
+/* -------------------------------------------------------------
+   Campagin04.svg (viewBox 375x1657) 実測。背景は支給画像。
+
+   英字 墨面 78-125.2 / 罫線 144.5 / リード 墨面 189.1-203.8
+   見出し 墨面 225.9-250.3（1行）/ 期間の罫線 278.5-325.5
+   カード (20,350)(20,764)(20,1178) 335x394・間隔 20
+
+   カード内（カード上端からの相対）:
+     写真 335x200 / SALE バッジ 六角形 57.2x66 @(12.4,10)
+     商品名 墨面 218.6-258.8（2行）/ 点線 271.75（幅 279.5）
+     旧価格 墨面 287.5-301.4（取り消し線 293.5）/ ▶ 154.3-161
+     新価格 墨面 282.4-306.8（赤 #C90808）
+     ボタン (27.5,320) 280x54 rx27（#805A24）
+
+   宝探し（茶碗）は前セクションにまたがるので、全体カンプから実測して置く。
+------------------------------------------------------------- */
+
 .p-campaign04 {
+  position: relative;
+  isolation: isolate;
+  /* 茶碗が上端からはみ出すので l-section の overflow:clip を解除する */
+  overflow: visible;
   background-color: var(--bg-campaign04);
-  color: var(--color-sub);
+  color: var(--palette-brown-dark);
+}
+
+.p-campaign04__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  pointer-events: none;
+}
+
+/* 全体カンプ実測: 陶器部が (267.5,-42) 91.5x62.5 に載る */
+.p-campaign04__treasure {
+  position: absolute;
+  top: -49.5px;
+  left: 265.5px;
+  z-index: 3;
+  width: 94.5px;
+}
+
+.p-campaign04__treasure .p-treasure-trigger__image {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .p-campaign04__inner {
   position: relative;
+  z-index: 1;
   display: grid;
   justify-items: center;
-  padding-block: 56px 48px;
+  padding-block: 71.6px 85px;
+  text-align: center;
 }
 
 .p-campaign04__heading {
-  --heading-fg: var(--color-sub);
+  --heading-fg: var(--palette-brown-dark);
+
+  gap: 0;
+  width: 100%;
 }
 
+.p-campaign04__heading .c-heading__rule {
+  margin-block-start: 20.7px;
+}
+
+.p-campaign04__heading .c-heading__lead {
+  margin-block-start: 30.2px;
+}
+
+/* 実測: 墨面 225.9-250.3（1行・高さ 24.5・幅 242）→ 28px では大きい。26px。 */
+.p-campaign04__heading .c-heading__ja {
+  margin-block-start: 20.1px;
+  font-size: 26px;
+  line-height: 37px;
+  letter-spacing: 0.116em;
+}
+
+/* 実測: 罫線 278.5-325.5 = 高さ 47 */
 .p-campaign04__period {
   width: 100%;
-  margin-block-start: 20px;
+  margin-block-start: 22.7px;
+  padding-block: 9.15px;
+  font-size: 16.5px;
+  letter-spacing: 0.09em;
 }
 
+/* 実測: カード (20,350) 335x394・間隔 20 */
 .p-campaign04__items {
   display: grid;
-  gap: 20px;
+  row-gap: 20px;
   width: 100%;
-  margin-block-start: 28px;
+  margin-block-start: 24.5px;
 }
 
 .p-campaign04__item {
+  height: 394px;
+  box-sizing: border-box;
   border-radius: var(--radius-sm);
   background-color: var(--color-surface);
   overflow: hidden;
 }
 
+/* 実測: 写真 335x200（カード上辺いっぱい） */
 .p-campaign04__figure {
   position: relative;
-  background-color: var(--bg-photo-area);
-}
-
-.p-campaign04__badge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  background-color: var(--palette-orange);
-  color: var(--color-text-on-dark);
-  font-family: var(--font-en);
-  font-size: var(--font-size-body-xs);
-  font-weight: var(--fw-bold);
-  clip-path: polygon(50% 0, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
 }
 
 .p-campaign04__photo {
-  border-radius: 0;
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* 実測: 六角形 57.2x66 @(12.4,10)。文字は白。 */
+.p-campaign04__badge {
+  position: absolute;
+  top: 10px;
+  left: 12.4px;
+  display: grid;
+  place-items: center;
+  width: 57.2px;
+  height: 66px;
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  color: var(--color-text-on-dark);
+  font-family: var(--font-en);
+  font-size: 15px;
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.02em;
+}
+
+.p-campaign04__badge[data-tone='amber'] {
+  background-color: #fdae2d;
+}
+
+.p-campaign04__badge[data-tone='orange'] {
+  background-color: #fd8b2d;
 }
 
 .p-campaign04__body {
   display: grid;
   justify-items: center;
-  padding: 16px;
-  text-align: center;
+  padding-inline: 27.5px;
 }
 
+/* 実測: 商品名の墨面 218.6-258.8（2行・行送り 22.5） */
 .p-campaign04__lead {
+  margin-block-start: 12px;
   font-family: var(--font-jp--sanserif);
-  font-size: var(--font-size-body-xs);
+  font-size: 15px;
+  line-height: 22.5px;
 }
 
 .p-campaign04__name {
-  margin-block-start: 4px;
-  padding-block-end: 12px;
-  border-block-end: 1px dotted color-mix(in srgb, var(--color-sub) 40%, transparent);
-  width: 100%;
   font-family: var(--font-jp--sanserif);
-  font-size: var(--font-size-body);
+  font-size: 17px;
   font-weight: var(--fw-bold);
+  line-height: 22.5px;
 }
 
+/* 実測: 点線 271.75（幅 279.5）。価格行の上に置く。 */
 .p-campaign04__price {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin-block-start: 12px;
+  width: 279.5px;
+  margin-block-start: 14.75px;
+  padding-block-start: 5.75px;
 }
 
+.p-campaign04__price::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0.5px;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--palette-brown-dark) 0 0.5px,
+    transparent 0.5px 2.5px
+  );
+}
+
+/* 実測: 旧価格 墨面 287.5-301.4（取り消し線あり） */
 .p-campaign04__price-before {
   font-family: var(--font-jp--sanserif);
-  font-size: var(--font-size-body-xs);
-  color: var(--color-sub);
+  font-size: 14px;
+  line-height: 1;
 }
 
 .p-campaign04__price-arrow {
   font-size: 10px;
+  line-height: 1;
 }
 
+/* 実測: 新価格 墨面 282.4-306.8（赤） */
 .p-campaign04__price-after {
   display: flex;
   align-items: baseline;
-  gap: 2px;
-  color: var(--palette-price);
+  color: var(--palette-sale);
+  font-family: var(--font-jp--sanserif);
+  font-weight: var(--fw-bold);
 }
 
+/* 実測: 数字の墨面高 24.4 → 34px */
 .p-campaign04__price-num {
   font-family: var(--font-en);
   font-size: 34px;
-  font-weight: var(--fw-bold);
   line-height: 1;
 }
 
 .p-campaign04__price-unit {
-  font-family: var(--font-jp--sanserif);
-  font-size: var(--font-size-body-xs);
-  font-weight: var(--fw-bold);
+  font-size: 14px;
 }
 
+/* 実測: ボタン (27.5,320) 280x54 rx27 */
 .p-campaign04__cta {
-  margin-block-start: 14px;
-  border-radius: var(--radius-xs);
+  display: grid;
+  place-items: center;
+  width: 280px;
+  height: 54px;
+  margin-block-start: 8.5px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-cta);
+  color: var(--color-text-on-dark);
+  font-family: var(--font-jp--sanserif);
+  font-size: 16px;
+  font-weight: var(--fw-bold);
+  text-decoration: none;
+  transition: opacity var(--duration-hover) var(--easing-standard);
 }
 
-/* 宝探し（茶碗） */
-.p-campaign04__treasure {
-  position: absolute;
-  right: 4px;
-  bottom: 8px;
-  width: 72px;
+.p-campaign04__cta:hover {
+  opacity: 0.86;
 }

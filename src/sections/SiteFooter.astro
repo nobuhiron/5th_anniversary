@@ -4,6 +4,18 @@ import { FOOTER_NAV_ITEMS } from '../data/campaign-nav';
 ---
 
 <footer class='p-footer'>
+  {/* カンプ実測: フッター右上、前セクションとの境界にまたがる白い四角 */}
+  <button type='button' class='p-footer__pagetop' data-pagetop aria-label='ページの先頭へ戻る'>
+    <svg viewBox='0 0 8 17' fill='none' aria-hidden='true'>
+      <path
+        d='M4 16.5V1M1 4.5L4 1L7 4.5'
+        stroke='currentColor'
+        stroke-width='1.2'
+        stroke-linecap='round'
+        stroke-linejoin='round'></path>
+    </svg>
+  </button>
+
   <div class='l-inner p-footer__inner'>
     <p class='p-footer__logo'>
       <BrandLogo alt='森半 tea&amp;coffee' />

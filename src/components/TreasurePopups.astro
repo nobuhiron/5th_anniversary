@@ -1,8 +1,10 @@
 ---
 /**
- * 宝探しのポップアップ。3種のお道具ごとに 1 枚。
+ * 宝探しのポップアップ。3種のお道具ごとに 1 枚 + スタンプ帳（スタンプボタン用）。
  * 3つ揃うと「茶碗」のポップアップが完了版（特別セットを見る）になる。
  */
+import TreasureCard from './TreasureCard.astro';
+
 const POPUPS = [
   {
     item: 'matcha',
@@ -75,3 +77,21 @@ const POPUPS = [
     </div>
   ))
 }
+
+{/* スタンプ帳（左 chrome が消える幅で、スタンプボタンから開く） */}
+<div
+  class='p-treasure-popup'
+  data-treasure-popup='stamps'
+  role='dialog'
+  aria-modal='true'
+  aria-labelledby='treasure-popup-stamps'
+  hidden
+>
+  <div class='p-treasure-popup__panel p-treasure-popup__panel--card'>
+    <button type='button' class='p-treasure-popup__close' data-treasure-close aria-label='閉じる'>
+      ×
+    </button>
+
+    <TreasureCard headingId='treasure-popup-stamps' />
+  </div>
+</div>

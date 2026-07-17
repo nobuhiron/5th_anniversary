@@ -1,8 +1,20 @@
 @import '../global/variables.css';
 
-/* fotter.png (1500x2120 @4x) → 375x530 CSS
-   実測: マーク上105・高さ50 / 森半 ink24 / ナビ ink12・行ピッチ39.8 / 下78 */
+/* -------------------------------------------------------------
+   fotter.svg (viewBox 375x530) 実測。
+
+   緑の地色はフレームの y=25 から始まる。つまりフレーム上端の 25px は
+   前セクション（Campaign04 のはちみつ色）で、ページトップボタンが
+   その境界にまたがって載る（全体カンプで確認）。
+   → footer 要素そのものは 505px。以下はフレーム値から 25 を引いた実測値。
+
+   ロゴ 163x89 @(106,80) / ナビ 5 項目の墨面 253.2・293.2・333.1・373.9・413.2
+   （行の墨面ピッチ 40）/ 下 77.3
+   ページトップ 50x50 @(305,-25)
+------------------------------------------------------------- */
+
 .p-footer {
+  position: relative;
   background-color: var(--bg-footer);
   color: var(--color-text-on-dark);
 }
@@ -10,31 +22,61 @@
 .p-footer__inner {
   display: grid;
   justify-items: center;
-  padding-block: 105px 68px;
+  padding-block: 80px 65.1px;
   text-align: center;
 }
 
-/* カンプ実測: ロゴ 163x88.8（fotter.png @4x の 652x355） */
+/* 実測: ロゴ 163x89 @(106,80) */
 .p-footer__logo {
   width: 163px;
 }
 
-/* カンプ実測: ナビの行ピッチ 39.8px（項目の行ボックス 26.2 + gap 14） */
+/* 実測: 1 項目目の墨面 253.2 / 行の墨面ピッチ 40 */
 .p-footer__list {
   display: grid;
-  gap: 14px;
-  margin-block-start: 63px;
+  gap: 0;
+  margin-block-start: 70.9px;
 }
 
 .p-footer__link {
+  display: block;
   color: var(--color-text-on-dark);
   font-family: var(--font-jp--sanserif);
   font-size: var(--font-size-body-sm);
-  line-height: 1.4;
+  line-height: 40px;
   text-decoration: none;
   transition: color var(--duration-hover) var(--easing-standard);
 }
 
 .p-footer__link:hover {
-  color: var(--palette-gold);
+  color: var(--palette-hover);
+}
+
+/* 実測: 50x50 @(305,-25)。前セクションにまたがるので上へはみ出す。 */
+.p-footer__pagetop {
+  position: absolute;
+  top: -25px;
+  left: 305px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  border: none;
+  background-color: var(--color-surface);
+  color: var(--bg-footer);
+  cursor: pointer;
+  transition: color var(--duration-hover) var(--easing-standard);
+}
+
+.p-footer__pagetop:hover {
+  color: var(--palette-hover);
+}
+
+/* 実測: 矢印の墨面 x 326.5-333.5 / y 16.6-33.0 → 7x16.4 */
+.p-footer__pagetop svg {
+  display: block;
+  width: 8px;
+  height: 17px;
 }

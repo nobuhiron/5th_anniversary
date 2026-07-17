@@ -1,0 +1,75 @@
+---
+/**
+ * 宝探しのスタンプカード。カンプ実測 360x180。
+ * PC 左 chrome と、スタンプボタンのポップアップ（左 chrome が消える幅）の 2 か所で使う。
+ * 幅は --treasure-w で外から変えられる（高さは中身で決まる 180px 固定）。
+ *
+ * 見出しの id は置き先ごとに変える（同じ id を 2 つ出さない）。
+ */
+import { Image } from 'astro:assets';
+import matchaBowl from '../assets/images/matcha-bowl.png';
+import mascot from '../assets/images/kumahan.png';
+import logoMark from '../assets/images/logo-mark-green.png';
+
+interface Props {
+  headingId: string;
+  class?: string;
+}
+const { headingId, class: className } = Astro.props;
+
+const TREASURE_SLOTS = ['matcha', 'chasen', 'chawan'] as const;
+---
+
+<section class:list={['p-treasure', className]} aria-labelledby={headingId}>
+  <span class='p-treasure__surface' aria-hidden='true'>
+    <span class='p-treasure__ribbon'>5th<br />Anniversary</span>
+  </span>
+
+  <svg
+    class='p-treasure__frame'
+    viewBox='0 0 360 180'
+    preserveAspectRatio='none'
+    aria-hidden='true'
+    focusable='false'
+  >
+    <linearGradient id={`${headingId}-frame`} x1='354' y1='154' x2='6' y2='6' gradientUnits='userSpaceOnUse'>
+      <stop offset='0' stop-color='var(--palette-gold-frame)'></stop>
+      <stop offset='0.5' stop-color='var(--palette-gold-frame-light)'></stop>
+      <stop offset='1' stop-color='var(--palette-gold-frame)'></stop>
+    </linearGradient>
+    <path
+      d='M345 6C345 10.971 349.029 15 354 15V165C349.029 165 345 169.029 345 174H15C15 169.029 10.971 165 6 165V15C10.971 15 15 10.971 15 6H345Z'
+      fill='none'
+      stroke={`url(#${headingId}-frame)`}
+      stroke-width='1.5'
+      vector-effect='non-scaling-stroke'
+    ></path>
+  </svg>
+
+  <h2 id={headingId} class='p-treasure__text'>
+    茶の湯にまつわる道具が、<br />
+    このページのどこかに隠れています。<br />
+    <b class='p-treasure__count'>3つすべて</b>を見つけた方へ、<br />
+    <b class='p-treasure__strong'>特別なお品をご用意</b>しております。
+  </h2>
+
+  <ul class='p-treasure__stamps' data-treasure-stamps>
+    {
+      TREASURE_SLOTS.map((slot) => (
+        <li class='p-treasure__stamp' data-treasure-slot={slot}>
+          <Image
+            class='p-treasure__stamp-mark'
+            src={logoMark}
+            alt=''
+            widths={[26, 52]}
+            sizes='26px'
+            format='webp'
+          />
+        </li>
+      ))
+    }
+  </ul>
+
+  <Image class='p-treasure__matcha' src={matchaBowl} alt='' widths={[83, 166]} sizes='83px' format='webp' />
+  <Image class='p-treasure__mascot' src={mascot} alt='' widths={[76, 132]} sizes='76px' format='webp' />
+</section>

@@ -30,7 +30,9 @@ function saveFound(found) {
 
 export function initTreasureHunt() {
   const triggers = Array.from(document.querySelectorAll('[data-treasure-trigger]'));
-  if (triggers.length === 0) return;
+  const stampsOpeners = Array.from(document.querySelectorAll('[data-treasure-stamps-open]'));
+  const popups = Array.from(document.querySelectorAll('[data-treasure-popup]'));
+  if (triggers.length === 0 && stampsOpeners.length === 0) return;
 
   const found = loadFound();
   let lastFocused = null;
@@ -60,17 +62,22 @@ export function initTreasureHunt() {
     popup.hidden = false;
     document.body.classList.add('is-treasure-open');
     popup.querySelector('[data-treasure-close]')?.focus();
-
-    popup.addEventListener(
-      'click',
-      (event) => {
-        const target = event.target;
-        if (!(target instanceof Element)) return;
-        if (target.closest('[data-treasure-close]') || target === popup) closePopup(popup);
-      },
-      { once: false }
-    );
   };
+
+  // 閉じる操作は開くたびではなく最初に 1 回だけ結び付ける
+  // （開くたびに addEventListener すると同じハンドラが積み上がる）
+  popups.forEach((popup) => {
+    popup.addEventListener('click', (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      if (target.closest('[data-treasure-close]') || target === popup) closePopup(popup);
+    });
+  });
+
+  // スタンプボタン: 見つけた状態は変えず、スタンプ帳だけを開く
+  stampsOpeners.forEach((opener) => {
+    opener.addEventListener('click', () => openPopup('stamps', opener));
+  });
 
   triggers.forEach((trigger) => {
     trigger.addEventListener('click', () => {

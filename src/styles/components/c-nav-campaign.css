@@ -10,20 +10,23 @@
   max-width: 286px;
 }
 
+/* カンプ実測: 字面高 22px・区切りは白の点線（SVG は dasharray 0.5 2） */
 .c-nav-campaign__title {
   font-family: var(--font-en--decor);
-  font-size: 24px;
+  font-size: 22px;
   font-weight: var(--fw-semibold);
   color: var(--color-text-on-dark);
-  line-height: 1.1;
-  padding-block-end: var(--spacing-sm);
-  border-block-end: 1px solid var(--palette-border-on-dark);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  padding-block-end: 23px;
+  border-block-end: 1px dotted var(--palette-border-on-dark);
 }
 
+/* カンプ実測: 1 行 40px ピッチ・区切り線から 9px */
 .c-nav-campaign__list {
   display: grid;
-  gap: 2px;
-  margin-block-start: var(--spacing-md);
+  gap: 0;
+  margin-block-start: 9px;
 }
 
 .c-nav-campaign__link {
@@ -35,13 +38,13 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--spacing-sm);
-  min-height: 40px;
-  padding-block: 6px;
+  height: 40px;
   color: var(--nav-fg);
   font-family: var(--font-jp--sanserif);
-  font-size: var(--font-size-body-sm);
-  font-weight: var(--fw-medium);
-  line-height: 1.45;
+  font-size: var(--font-size-body);
+  font-weight: var(--fw-regular);
+  line-height: 1;
+  letter-spacing: 0.02em;
   text-decoration: none;
   transition:
     color var(--duration-hover) var(--easing-standard),

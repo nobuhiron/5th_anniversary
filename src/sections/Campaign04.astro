@@ -1,9 +1,33 @@
 ---
+import { Image } from 'astro:assets';
 import TreasureTrigger from '../components/TreasureTrigger.astro';
 import { HONEY_SALE_ITEMS, HONEY_SALE_PERIOD } from '../data/campaigns';
+import bgImage from '../assets/images/campaign04-bg.jpg';
+import clickChawan from '../assets/images/click-chawan.png';
+import shiawase from '../assets/images/hatimitukoutya_img.jpg';
+import hotto from '../assets/images/hottoyasuragu_img.jpg';
+import coffee from '../assets/images/hatimitucoffee_img.jpg';
+
+// 支給の商品写真（670x400 = 335x200 の @2x）
+const ITEM_IMAGES: Record<string, ImageMetadata> = {
+  'shiawase-tea': shiawase,
+  'hotto-instant': hotto,
+  'kfk-coffee': coffee,
+};
+
+// SALE バッジ（六角形）の色。カンプ実測: 1・3 枚目 #FDAE2D / 2 枚目 #FD8B2D
+const BADGE_TONES: Record<string, string> = {
+  'shiawase-tea': 'amber',
+  'hotto-instant': 'orange',
+  'kfk-coffee': 'amber',
+};
 ---
 
 <section id='campaign04' class='l-section p-campaign04' aria-labelledby='campaign04-heading'>
+  <Image class='p-campaign04__bg' src={bgImage} alt='' format='webp' />
+
+  <TreasureTrigger item='chawan' label='茶碗' image={clickChawan} class='p-campaign04__treasure' />
+
   <div class='l-inner p-campaign04__inner'>
     <div class='c-heading p-campaign04__heading'>
       <p class='c-heading__en'>Campaign04</p>
@@ -19,11 +43,14 @@ import { HONEY_SALE_ITEMS, HONEY_SALE_PERIOD } from '../data/campaigns';
         HONEY_SALE_ITEMS.map((item) => (
           <li class='p-campaign04__item'>
             <div class='p-campaign04__figure'>
-              <span class='p-campaign04__badge' aria-hidden='true'>
+              <Image
+                class='p-campaign04__photo'
+                src={ITEM_IMAGES[item.id]}
+                alt={item.name}
+                format='webp'
+              />
+              <span class='p-campaign04__badge' data-tone={BADGE_TONES[item.id]} aria-hidden='true'>
                 SALE
-              </span>
-              <span class='c-placeholder p-campaign04__photo' style='--ratio: 295 / 190'>
-                <span class='c-placeholder__label'>{item.name}</span>
               </span>
             </div>
 
@@ -50,7 +77,5 @@ import { HONEY_SALE_ITEMS, HONEY_SALE_PERIOD } from '../data/campaigns';
         ))
       }
     </ul>
-
-    <TreasureTrigger item='chawan' label='茶碗' class='p-campaign04__treasure' />
   </div>
 </section>

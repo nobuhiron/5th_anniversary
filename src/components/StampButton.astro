@@ -1,0 +1,26 @@
+---
+/**
+ * スタンプボタン。PC 左 chrome（スタンプカード）が消える幅（--lg 未満）でだけ出す。
+ * 画面上端から 648px の位置に固定し、本体カラムの右端に寄せる。
+ * 押すとスタンプカードのポップアップが開く（treasure.js が拾う）。
+ */
+import { Image } from 'astro:assets';
+import stampButton from '../assets/images/stamp-button.png';
+---
+
+<button
+  type='button'
+  class='p-stamp-button'
+  data-treasure-stamps-open
+  aria-haspopup='dialog'
+  aria-label='スタンプ帳を確認する'
+>
+  <Image
+    class='p-stamp-button__image'
+    src={stampButton}
+    alt=''
+    widths={[168, 336]}
+    sizes='168px'
+    format='webp'
+  />
+</button>

@@ -13,6 +13,9 @@
   min-height: 100vh;
   min-height: 100dvh;
   isolation: isolate;
+  /* 狭い PC で chrome のレイアウトボックスがはみ出しても横スクロールを出さない。
+     clip はスクロールコンテナを作らないので aside の position:sticky は生きる（hidden は壊す）。 */
+  overflow-x: clip;
 }
 
 .l-page__bg {
@@ -64,14 +67,29 @@
     gap: 0;
   }
 
+  /* カンプ実測(1440): 左ブロックは本体の 44px 外、右ブロックは本体の 76px 外。
+     どちらも本体カラム側の端を基準に置く（= 画面が広がっても本体から離れない）。 */
   .l-shell__aside {
     display: flex;
     align-items: center;
-    justify-content: center;
     min-width: 0;
     position: sticky;
     top: 0;
     height: 100vh;
+  }
+
+  .l-shell__aside > * {
+    flex: 0 0 auto;
+  }
+
+  .l-shell__aside--left {
+    justify-content: flex-end;
+    padding-inline-end: 44px;
+  }
+
+  .l-shell__aside--right {
+    justify-content: flex-start;
+    padding-inline-start: 76px;
   }
 
   .l-shell__main {
@@ -84,5 +102,29 @@
     margin-inline: 0;
     /* カンプ実測: 本体カラムの外側に淡いドロップシャドウ */
     box-shadow: 0 0 24px rgb(0 0 0 / 18%);
+  }
+}
+
+/* カンプ実寸の左 chrome は 360 + 44 = 404px を要求するので、
+   左右カラムが 404px に満たない幅（= 1184px 未満）では本体側を軸に縮小して収める。 */
+@media (min-width: 1024px) and (max-width: 1119.98px) {
+  .l-shell__aside > * {
+    scale: 0.77;
+  }
+}
+
+@media (min-width: 1120px) and (max-width: 1183.98px) {
+  .l-shell__aside > * {
+    scale: 0.88;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1183.98px) {
+  .l-shell__aside--left > * {
+    transform-origin: right center;
+  }
+
+  .l-shell__aside--right > * {
+    transform-origin: left center;
   }
 }

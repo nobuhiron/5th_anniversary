@@ -1,41 +1,60 @@
 ---
 /**
  * PC 左カラム。森半ロゴ + 5th Anniversary + うちわバナー + 宝探しカード。
- * 画像素材は支給待ちのためプレースホルダ。
+ * 寸法はすべて MV_PC.svg（1440 幅カンプ）の実測値。ブロック幅 360px。
  */
+import { Image } from 'astro:assets';
 import BrandLogo from './BrandLogo.astro';
+import TreasureCard from './TreasureCard.astro';
+import { publicAssetPath } from '../utils/assets';
+import uchiwaBanner from '../assets/images/uchiwa-banner.jpg';
+
+/* うちわバナー = 角丸 + 左右中央に切り欠きのあるチケット型（SVG の mask パスを 360x130 に平行移動） */
+const TICKET_CLIP =
+  'M14.217 129.99C6.379 129.99 0 125.56 0 120.116V86.035C11.634 82.162 19.078 74.012 19.078 64.99C19.078 55.968 11.634 47.817 0 43.945V9.874C0 4.43 6.379 0 14.217 0H345.783C353.621 0 360 4.43 360 9.874V44.949C349.855 49.155 343.593 56.748 343.593 65C343.593 73.252 349.841 80.845 360 85.051V120.126C360 125.57 353.621 130 345.783 130H14.217V129.99Z';
 ---
 
 <div class='p-chrome-left'>
+  {/* カンプの下地あしらい（森半マークを opacity 0.04 で敷く。SVG 側に不透明度を持たせている） */}
+  <img
+    class='p-chrome-left__ashirai'
+    src={publicAssetPath('/ashirai_logo.svg')}
+    alt=''
+    aria-hidden='true'
+    width='349'
+    height='328'
+  />
+
   <BrandLogo class='p-chrome-left__logo' />
 
   <p class='p-chrome-left__title'>
-    <span class='p-chrome-left__title-num'>5</span><span class='p-chrome-left__title-th'>th</span>
+    <span class='p-chrome-left__title-main'>
+      <span class='p-chrome-left__title-num'>5</span><span class='p-chrome-left__title-th'>th</span>
+    </span>
     <span class='p-chrome-left__title-en'>Anniversary</span>
   </p>
 
   <a
     href='#campaign-uchiwa'
     class='p-chrome-left__banner'
+    style={`--ticket-clip: path('${TICKET_CLIP}')`}
     aria-label='購入者全員に クーポン付きミニうちわプレゼント'
   >
-    <span class='c-placeholder' style='--ratio: 300 / 118'>
-      <span class='c-placeholder__label'>うちわバナー</span>
+    <Image
+      class='p-chrome-left__banner-image'
+      src={uchiwaBanner}
+      alt=''
+      widths={[520, 1040]}
+      sizes='520px'
+      format='webp'
+    />
+    <span class='p-chrome-left__banner-body'>
+      <span class='p-chrome-left__banner-pill'>購入者全員に</span>
+      <span class='p-chrome-left__banner-lead'>＼クーポン付き／</span>
+      <span class='p-chrome-left__banner-title'>ミニうちわ<br />プレゼント！</span>
+      <span class='p-chrome-left__banner-note'>※なくなり次第終了</span>
     </span>
   </a>
 
-  <section class='p-treasure' aria-labelledby='treasure-heading'>
-    <span class='p-treasure__ribbon' aria-hidden='true'>5th Anniversary</span>
-    <h2 id='treasure-heading' class='p-treasure__text'>
-      茶の湯にまつわる道具が、<br />
-      このページのどこかに隠れています。<br />
-      <b class='p-treasure__count'>3つすべて</b>を見つけた方へ、<br />
-      <b class='p-treasure__strong'>特別なお品をご用意</b>しております。
-    </h2>
-    <ul class='p-treasure__stamps' data-treasure-stamps>
-      <li class='p-treasure__stamp' data-treasure-slot='matcha'></li>
-      <li class='p-treasure__stamp' data-treasure-slot='chasen'></li>
-      <li class='p-treasure__stamp' data-treasure-slot='chawan'></li>
-    </ul>
-  </section>
+  <TreasureCard headingId='treasure-heading' class='p-chrome-left__treasure' />
 </div>
