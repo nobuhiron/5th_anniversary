@@ -3,12 +3,16 @@ import { Image } from 'astro:assets';
 import { LIMITED_SALE, POINT_UP } from '../data/campaigns';
 import pointUpImage from '../assets/images/nav-image-pointup.jpg';
 import saleImage from '../assets/images/nav-image-sale.jpg';
+import matchaLatte from '../assets/images/matcha-latte.png';
 
 // 支給画像は還元率・ブランド名・「詳しく見る」バーまで焼き込まれた完成版（335x257）。
 // 文言は alt で読み上げる。
 ---
 
 <section id='point-up' class='l-section p-point-up' aria-labelledby='point-up-heading'>
+  {/* 前セクション(CampaignNav)との境界の左端にまたがる抹茶ラテ（装飾） */}
+  <Image class='p-point-up__matcha-latte' src={matchaLatte} alt='' format='webp' />
+
   <div class='l-inner p-point-up__inner'>
     <p class='p-point-up__watermark' aria-hidden='true'>Point-up sale</p>
 

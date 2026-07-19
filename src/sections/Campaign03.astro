@@ -2,12 +2,13 @@
 import { Image } from 'astro:assets';
 import { PLUS1_TERMS } from '../data/campaigns';
 import bgImage from '../assets/images/campaign03-bg.jpg';
-import plusone01 from '../assets/images/plusone01.jpg';
-import plusone02 from '../assets/images/plusone02.jpg';
-import plusone03 from '../assets/images/plusone03.jpg';
-import plusone04 from '../assets/images/plusone04.jpg';
+import plusone01 from '../assets/images/plusone01.png';
+import plusone02 from '../assets/images/plusone02.png';
+import plusone03 from '../assets/images/plusone03.png';
+import plusone04 from '../assets/images/plusone04.png';
 import okImage from '../assets/images/OK.png';
 import ngImage from '../assets/images/NG.png';
+import iceGreentea from '../assets/images/ice-greentea.png';
 
 // 商品写真は白背景ごと焼き込まれた支給画像（244x220 = 122x110 の @2x）。
 const ITEM_IMAGES: Record<string, ImageMetadata> = {
@@ -28,6 +29,9 @@ const CARD_TONES: Record<string, string> = {
 
 <section id='campaign03' class='l-section p-campaign03' aria-labelledby='campaign03-heading'>
   <Image class='p-campaign03__bg' src={bgImage} alt='' format='webp' />
+
+  {/* 前セクション(Campaign02)との境界の左端にまたがるアイスグリーンティー（装飾） */}
+  <Image class='p-campaign03__ice-greentea' src={iceGreentea} alt='' format='webp' />
 
   <div class='l-inner p-campaign03__inner'>
     <div class='c-heading p-campaign03__heading'>
@@ -56,11 +60,11 @@ const CARD_TONES: Record<string, string> = {
                     format='webp'
                   />
                   <span class='p-campaign03__item-body'>
-                    <span class='p-campaign03__item-lead'>{item.lead}</span>
+                    <span class='p-campaign03__item-lead'>
+                      <span class='p-campaign03__mark'>{item.lead}</span>
+                    </span>
                     <span class='p-campaign03__item-name'>
-                      {item.name}
-                      <br />
-                      {item.spec}
+                      <span class='p-campaign03__mark'>{item.name}<br />{item.spec}</span>
                     </span>
                   </span>
                   <span class='p-campaign03__item-arrow' aria-hidden='true'>

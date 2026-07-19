@@ -17,8 +17,22 @@
 .p-campaign03 {
   position: relative;
   isolation: isolate;
+  /* アイスグリーンティーが上端から前セクションへはみ出すので overflow:clip を解除する */
+  overflow: visible;
   background-color: var(--bg-campaign03-base);
   color: var(--color-text-on-dark);
+}
+
+/* 前セクション(Campaign02)との境界の左端にまたがるアイスグリーンティー（装飾）。
+   PointUp の抹茶ラテと同じ要領で negative top で上へはみ出させる。 */
+.p-campaign03__ice-greentea {
+  position: absolute;
+  top: -52px;
+  left: 0;
+  z-index: 2;
+  width: 100px;
+  height: auto;
+  pointer-events: none;
 }
 
 .p-campaign03__bg {
@@ -145,7 +159,9 @@
   opacity: 0.86;
 }
 
-/* 実測: 写真枠は x=26（カード左から 6）115x110。支給画像は 122x110 なので cover で収める。 */
+/* 実測: 写真枠は x=26（カード左から 6）115x110。
+   支給が透過PNG（商品切り抜き）になり、4枚目だけ縦横比が違う（176x220 / 他は 230x220）。
+   cover だと 4枚目が上下トリミングされるため、切り抜きを丸ごと見せる contain で収める。 */
 .p-campaign03__item-photo {
   position: absolute;
   top: 0;
@@ -154,7 +170,7 @@
   width: 115px;
   height: 110px;
   max-width: none;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 /* 実測: 本文 x=145（カード左から 125）。3 行・行送り 23.5 / 墨面 461.2-522.4 */
@@ -179,11 +195,21 @@
   font-weight: var(--fw-bold);
 }
 
-/* 実測: 円 28x28 @(316, カード上から 42) */
+/* lead・商品名は行ごとに白背景を敷く（カンプ指定）。inline + box-decoration-break:clone で
+   各行に白帯を付け、左右に 3px の余白をとる。 */
+.p-campaign03__mark {
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding-inline: 3px;
+  background-color: #fff;
+}
+
+/* 円 28x28。カード右端から 11px・縦は 50% で中央配置（カード高が変わっても中央を保つ）。 */
 .p-campaign03__item-arrow {
   position: absolute;
-  top: 42px;
-  left: 296px;
+  top: 50%;
+  right: 11px;
+  translate: 0 -50%;
   display: block;
   width: 28px;
   height: 28px;

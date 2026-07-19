@@ -20,8 +20,23 @@
    切っ先の上に出る茶筅（campaign01 の宝探し）を同時に成立させられない。
    そのためこのセクションは切っ先を含まない 1236.32 までとする。 */
 .p-point-up {
+  position: relative;
+  /* 抹茶ラテが上端から前セクションへはみ出すので l-section の overflow:clip を解除する */
+  overflow: visible;
   background-color: var(--bg-point);
   color: var(--color-text);
+}
+
+/* 前セクション(CampaignNav)との境界の左端にまたがる抹茶ラテ（装飾）。
+   negative top で上へはみ出させ、下セクション側の子として前面に重ねる。 */
+.p-point-up__matcha-latte {
+  position: absolute;
+  top: -52px;
+  left: 0;
+  z-index: 2;
+  width: 103px;
+  height: auto;
+  pointer-events: none;
 }
 
 /* 列幅の固定は l-inner 側で行う（字送りで僅かに溢れるリードに引きずられないように） */

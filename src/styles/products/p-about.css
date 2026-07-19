@@ -25,7 +25,8 @@
 .p-about__inner {
   display: grid;
   justify-items: center;
-  padding-block: 76px 33px;
+  /* 上は指定で 21px（SVG 実測 76 を上書き） / 下は実測 33 */
+  padding-block: 21px 33px;
   text-align: center;
 }
 

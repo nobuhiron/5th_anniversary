@@ -52,8 +52,8 @@
 }
 
 .c-nav-campaign__link:hover {
-  --nav-fg: var(--palette-gold);
-  --nav-icon-bg: var(--palette-gold);
+  --nav-fg: var(--palette-hover);
+  --nav-icon-bg: var(--palette-hover);
   --nav-chevron-stroke: var(--palette-green-deep);
 }
 

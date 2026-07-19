@@ -60,10 +60,11 @@
   letter-spacing: -0.01em;
 }
 
-/* 実測: 160x28 @(107,216) */
+/* 実測: 160x28 @(107,216)。年/月 = Noto Sans JP 14px/700、数字は下の num で上書き。
+   指定: line-height 37px・letter-spacing 11%(=0.11em)・下揃え。 */
 .p-schedule__month {
   display: inline-flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
   gap: 1px;
   width: 160px;
@@ -75,12 +76,18 @@
   font-family: var(--font-jp--sanserif);
   font-size: var(--font-size-body-sm);
   font-weight: var(--fw-bold);
+  line-height: 28px;
+  letter-spacing: 0.11em;
   white-space: nowrap;
 }
 
+/* 数字（2026 / 8）= Roboto 20px/700 */
 .p-schedule__month-num {
-  font-size: var(--font-size-title);
-  line-height: 1;
+  font-family: var(--font-en);
+  font-size: var(--font-size-title-sm);
+  font-weight: var(--fw-bold);
+  line-height: 28px;
+  letter-spacing: 0.11em;
 }
 
 /* 実測: カード 160x157 / 行間 12。
