@@ -184,15 +184,39 @@
   display: none;
 }
 
+/* お道具カード。地色・アクセント（枠/タイトル/ピル/CTA）はテーマ変数で切替。
+   茶: 抹茶・茶筅 / 緑: 茶碗（実測色）。 */
 .p-treasure-popup__panel {
+  --tc-bg: var(--palette-mint-pale);
+  --tc-accent: var(--palette-green-deep);
+
   position: relative;
   width: min(100%, 320px);
-  padding: 28px 20px 24px;
+  padding: 24px 22px 22px;
   box-sizing: border-box;
   border-radius: var(--radius-md);
-  background-color: var(--palette-mint-pale);
-  border: 1px solid var(--palette-green-vivid);
+  background-color: var(--tc-bg);
   text-align: center;
+}
+
+/* 内側の細い飾り罫（カンプの枠線） */
+.p-treasure-popup__panel::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid color-mix(in srgb, var(--tc-accent) 55%, transparent);
+  border-radius: calc(var(--radius-md) - 4px);
+  pointer-events: none;
+}
+
+.p-treasure-popup__panel--brown {
+  --tc-bg: #e6ddd9;
+  --tc-accent: #7c625b;
+}
+
+.p-treasure-popup__panel--green {
+  --tc-bg: #f3f9e6;
+  --tc-accent: var(--palette-green-olive); /* #879c51 */
 }
 
 /* スタンプ帳のポップアップはカードがそのままパネル。地色や枠は要らない。
@@ -207,6 +231,10 @@
   transform-origin: center;
 }
 
+.p-treasure-popup__panel--card::before {
+  display: none;
+}
+
 @media (max-width: 430.98px) {
   .p-treasure-popup__panel--card {
     scale: 0.9;
@@ -219,57 +247,100 @@
   }
 }
 
+/* × はカード内右上・テーマ色の丸 */
 .p-treasure-popup__close {
   position: absolute;
-  top: -14px;
-  right: -14px;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
   display: grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
+  width: 26px;
+  height: 26px;
   border: none;
   border-radius: var(--radius-xl);
+  background-color: var(--tc-accent);
+  color: #fff;
+  font-size: 15px;
+  line-height: 1;
+}
+
+/* スタンプ帳カードの × は従来どおりカード外・白丸 */
+.p-treasure-popup__panel--card .p-treasure-popup__close {
+  top: -14px;
+  right: -14px;
+  width: 36px;
+  height: 36px;
   background-color: var(--color-surface);
   color: var(--base-text);
   font-size: 18px;
-  line-height: 1;
   box-shadow: 0 2px 8px rgb(0 0 0 / 20%);
 }
 
 .p-treasure-popup__title {
+  position: relative;
+  padding-block-start: 4px;
   font-family: var(--font-jp--sanserif);
   font-size: var(--font-size-title-sm);
   font-weight: var(--fw-bold);
-  line-height: 1.45;
-  color: var(--palette-green-deep);
+  line-height: 1.4;
+  color: var(--tc-accent);
   white-space: pre-line;
 }
 
 .p-treasure-popup__figure {
-  width: 60%;
-  margin: 16px auto 0;
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 118px;
+  margin-block-start: 12px;
+}
+
+.p-treasure-popup__illust {
+  width: auto;
+  max-width: 68%;
+  max-height: 126px;
+  height: auto;
+}
+
+.p-treasure-popup__leaf {
+  position: absolute;
+  left: 2px;
+  bottom: -2px;
+  width: 34px;
+  height: auto;
+  pointer-events: none;
 }
 
 .p-treasure-popup__body {
-  margin-block-start: 16px;
-  padding: 12px;
+  margin-block-start: 14px;
+  padding: 12px 14px;
   border-radius: var(--radius-xs);
-  background-color: var(--color-surface);
+  background-color: #fff;
   color: var(--color-text);
   font-family: var(--font-jp--sanserif);
   font-size: var(--font-size-body-xs);
-  line-height: 1.8;
+  line-height: 1.75;
   white-space: pre-line;
-  text-align: left;
+  text-align: center;
 }
 
+.p-treasure-popup__body[hidden] {
+  display: none;
+}
+
+/* ○/3個獲得。テーマ色のピル・白文字 */
 .p-treasure-popup__count {
-  margin-block-start: 12px;
-  padding-block: 6px;
-  background-color: color-mix(in srgb, var(--palette-green-light) 30%, transparent);
-  border-radius: var(--radius-xs);
+  width: fit-content;
+  min-width: 128px;
+  margin: 12px auto 0;
+  padding: 5px 20px;
+  border-radius: var(--radius-pill);
+  background-color: var(--tc-accent);
+  color: #fff;
   font-family: var(--font-jp--sanserif);
   font-size: var(--font-size-body-xs);
+  font-weight: var(--fw-bold);
 }
 
 .p-treasure-popup__count b {
@@ -278,13 +349,17 @@
 }
 
 .p-treasure-popup__cta {
-  margin-block-start: 16px;
-  --btn-bg: var(--palette-green-deep);
-  --btn-border: var(--palette-green-deep);
+  margin-block-start: 14px;
+  --btn-bg: var(--tc-accent);
+  --btn-border: var(--tc-accent);
 }
 
 .p-treasure-popup__cta:hover {
-  --btn-fg: var(--palette-green-deep);
+  --btn-fg: var(--tc-accent);
+}
+
+.p-treasure-popup__cta[hidden] {
+  display: none;
 }
 
 body.is-treasure-open {

@@ -9,7 +9,7 @@
 import { Image } from 'astro:assets';
 import matchaBowl from '../assets/images/matcha-bowl.png';
 import mascot from '../assets/images/kumahan.png';
-import logoMark from '../assets/images/logo-mark-green.png';
+import logoStamp from '../assets/images/logo-stamp.png';
 
 interface Props {
   headingId: string;
@@ -17,7 +17,8 @@ interface Props {
 }
 const { headingId, class: className } = Astro.props;
 
-const TREASURE_SLOTS = ['matcha', 'chasen', 'chawan'] as const;
+// スタンプは発見順に左から埋めるので、道具固定ではなく枠数だけ用意する。
+const STAMP_COUNT = 3;
 ---
 
 <section class:list={['p-treasure', className]} aria-labelledby={headingId}>
@@ -55,11 +56,11 @@ const TREASURE_SLOTS = ['matcha', 'chasen', 'chawan'] as const;
 
   <ul class='p-treasure__stamps' data-treasure-stamps>
     {
-      TREASURE_SLOTS.map((slot) => (
-        <li class='p-treasure__stamp' data-treasure-slot={slot}>
+      Array.from({ length: STAMP_COUNT }).map((_, i) => (
+        <li class='p-treasure__stamp' data-treasure-stamp={i}>
           <Image
             class='p-treasure__stamp-mark'
-            src={logoMark}
+            src={logoStamp}
             alt=''
             widths={[26, 52]}
             sizes='26px'

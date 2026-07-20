@@ -147,6 +147,7 @@
   font-family: var(--font-jp--sanserif);
   font-size: 12px;
   font-weight: var(--fw-bold);
+  line-height: 1;
   clip-path: polygon(0 0, 100% 0, calc(100% - 6px) 50%, 100% 100%, 0 100%, 6px 50%);
 }
 
