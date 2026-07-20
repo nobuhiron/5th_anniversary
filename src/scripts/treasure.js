@@ -71,7 +71,9 @@ export function initTreasureHunt() {
     });
     triggers.forEach((trigger) => {
       const item = trigger.getAttribute('data-treasure-trigger');
-      trigger.classList.toggle('is-found', found.has(item));
+      const isFound = found.has(item);
+      trigger.classList.toggle('is-found', isFound);
+      if (isFound) trigger.classList.remove('is-wiggling');
     });
   };
 
@@ -150,6 +152,20 @@ export function initTreasureHunt() {
       if (!popup.hidden) closePopup(popup);
     });
   });
+
+  // 見えたら少し揺れて存在を知らせる。見つけたものは揺らさない。
+  if ('IntersectionObserver' in window) {
+    const wiggleIO = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const item = entry.target.getAttribute('data-treasure-trigger');
+          entry.target.classList.toggle('is-wiggling', entry.isIntersecting && !found.has(item));
+        });
+      },
+      { threshold: 0.6 },
+    );
+    triggers.forEach((trigger) => wiggleIO.observe(trigger));
+  }
 
   syncStamps();
 }

@@ -150,8 +150,41 @@
   scale: 1.05;
 }
 
+/* 見えたら少し揺れて存在を知らせる（JS が交差時に is-wiggling を付ける）。
+   一定間隔で“ちょい揺れ→静止”を繰り返す。回転は個別プロパティなので hover の
+   scale と共存する。 */
+@keyframes treasure-wiggle {
+  0%,
+  16%,
+  100% {
+    rotate: 0deg;
+  }
+  4% {
+    rotate: -8deg;
+  }
+  8% {
+    rotate: 7deg;
+  }
+  12% {
+    rotate: -4deg;
+  }
+}
+
+.p-treasure-trigger.is-wiggling {
+  transform-origin: center bottom;
+  animation: treasure-wiggle 2.6s var(--easing-standard) infinite;
+}
+
 .p-treasure-trigger.is-found {
   opacity: 0.5;
+  /* 見つけたら揺れは止める */
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .p-treasure-trigger.is-wiggling {
+    animation: none;
+  }
 }
 
 .p-treasure-trigger__badge {
