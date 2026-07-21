@@ -38,39 +38,43 @@ const CARD_IMAGES: Record<string, ImageMetadata> = {
       <span class='p-schedule__month-num'>2026</span>年<span class='p-schedule__month-num'>8</span>月
     </p>
 
-    <ul class='p-schedule__cards'>
-      {
-        SCHEDULE_CARDS.map((card) => (
-          <li class='p-schedule__card'>
-            <Image
-              class='p-schedule__card-image'
-              src={CARD_IMAGES[card.id]}
-              alt={`${card.en} ${card.title.replace(/\n/g, '')}`}
-              format='webp'
-            />
-          </li>
-        ))
-      }
-    </ul>
+    {/* 閉じているときは上段カードの中ほどから下をグラデーションでフェードして隠す。
+        カード群・注記・カレンダーをまとめて 1 つの開閉領域にする。 */}
+    <div class='p-schedule__collapse' id='schedule-detail'>
+      <ul class='p-schedule__cards'>
+        {
+          SCHEDULE_CARDS.map((card) => (
+            <li class='p-schedule__card'>
+              <Image
+                class='p-schedule__card-image'
+                src={CARD_IMAGES[card.id]}
+                alt={`${card.en} ${card.title.replace(/\n/g, '')}`}
+                format='webp'
+              />
+            </li>
+          ))
+        }
+      </ul>
 
-    <p class='p-schedule__notes'>
-      ※期間:2026/8/1~31<br />
-      ※詳細は、本頁の中部をご確認ください。
-    </p>
+      <p class='p-schedule__notes'>
+        ※期間:2026/8/1~31<br />
+        ※詳細は、本頁の中部をご確認ください。
+      </p>
 
-    <div class='p-schedule__detail' id='schedule-detail' hidden>
-      <TreasureTrigger
-        item='matcha'
-        label='抹茶'
-        image={clickMatcha}
-        class='p-schedule__treasure'
-      />
-      <Image
-        class='p-schedule__calendar'
-        src={calendarImage}
-        alt='2026年8月のキャンペーンスケジュール。8/1〜8/17 Plus1キャンペーン第1弾、8/3 はちみつ紅茶セール、8/7〜8/8 ポイントUP DAY、8/20 毎月恒例SALE、8/21〜8/31 Plus1キャンペーン第2弾。'
-        format='webp'
-      />
+      <div class='p-schedule__detail'>
+        <TreasureTrigger
+          item='matcha'
+          label='抹茶'
+          image={clickMatcha}
+          class='p-schedule__treasure'
+        />
+        <Image
+          class='p-schedule__calendar'
+          src={calendarImage}
+          alt='2026年8月のキャンペーンスケジュール。8/1〜8/17 Plus1キャンペーン第1弾、8/3 はちみつ紅茶セール、8/7〜8/8 ポイントUP DAY、8/20 毎月恒例SALE、8/21〜8/31 Plus1キャンペーン第2弾。'
+          format='webp'
+        />
+      </div>
     </div>
 
     <button

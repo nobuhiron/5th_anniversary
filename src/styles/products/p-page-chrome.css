@@ -144,11 +144,40 @@
   font-feature-settings: 'palt' 1;
 }
 
-.p-chrome-left__banner-note {
-  margin-block-start: 5px;
-  font-size: 11px;
-  font-weight: var(--fw-regular);
-  line-height: 1.4;
+/* なくなり次第終了の丸スタンプ。素材 SVG（金 #daac2b・約5°傾き・白抜き）を
+   画像ではなくテキストで再現し、バナー右下（うちわ写真の上）へ重ねる。
+   チケットの切り欠き・角丸に掛からない内側に置くのでクリップされない。 */
+.p-chrome-left__banner-badge {
+  position: absolute;
+  inset-block-end: 8px;
+  inset-inline-end: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  background-color: #daac2b;
+  color: var(--color-surface);
+  font-family: var(--font-jp--sanserif);
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  text-align: center;
+  transform: rotate(-5deg);
+}
+
+.p-chrome-left__banner-badge-top {
+  font-size: 10px;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+.p-chrome-left__banner-badge-main {
+  font-size: 21px;
+  letter-spacing: 0.04em;
+  text-indent: 0.04em;
 }
 
 /* 宝探しカード本体は p-treasure.css。ここでは chrome 内での置き位置だけ。

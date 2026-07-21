@@ -99,7 +99,7 @@
   justify-content: space-between;
   row-gap: 12px;
   width: 100%;
-  margin-block-start: 40px;
+  /* 上余白は親 .p-schedule__collapse へ移した（クリップ内に余白を残さないため） */
 }
 
 /* カードはリンクにしない（遷移は nav セクションのバナーが担う） */
@@ -119,14 +119,48 @@
   text-align: left;
 }
 
+/* カード群〜カレンダーをまとめて開閉する領域。
+   閉じているときは上段カードの中ほどから下を schedule 背景色へフェードして隠す
+   （gra.svg = 上 透明 → 下 #2b5014 のグラデーションを CSS で再現）。
+   折りたたみは JS が付ける is-collapsible があるときだけ効かせる
+   （JS 無しではクリップされず全体がそのまま読める）。 */
+.p-schedule__collapse {
+  /* 閉じているときに上段カードをどこまで覗かせるか（カード高 157 の半分あたり + フェード分） */
+  --peek-height: 132px;
+  position: relative;
+  width: 100%;
+  margin-block-start: 40px; /* 旧 .p-schedule__cards の上余白をここへ移動 */
+}
+
+.p-schedule__collapse.is-collapsible:not(.is-open) {
+  max-height: var(--peek-height);
+  overflow: hidden;
+}
+
+.p-schedule__collapse.is-collapsible:not(.is-open)::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgb(43 80 20 / 0) 0%,
+    rgb(43 80 20 / 0) 55%,
+    var(--bg-schedule-base) 100%
+  );
+  pointer-events: none;
+}
+
+/* 閉じている間は宝探しの抹茶を隠す（開いたときだけ見つかる） */
+.p-schedule__collapse.is-collapsible:not(.is-open) .p-schedule__treasure {
+  display: none;
+}
+
 .p-schedule__detail {
   position: relative;
   width: 100%;
   margin-block-start: 52px;
-}
-
-.p-schedule__detail[hidden] {
-  display: none;
 }
 
 /* 実測: 白カード 335 幅 + バッジのはみ出し 12 = 347x510 @(20,709)。

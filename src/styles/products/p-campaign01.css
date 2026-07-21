@@ -195,10 +195,22 @@
   line-height: 16.53px;
 }
 
-/* 実測: バー 334x12 @(20.5,1136.5) / つまみ 105x7 */
+/* 実測: バー 334x12 @(20.5,1136.5) / つまみ 105x7。
+   デザイン(scroll.svg): 白トラック + #E5E5E5 の枠 / #D8D8D8 のつまみ。
+   角丸は c-swiper 側の --radius-pill 任せ（12→6 / 7→3.5 で svg と一致）。 */
 .p-campaign01__scrollbar {
+  --scrollbar-track: #fff;
+  --scrollbar-thumb: #d8d8d8;
   width: 100%;
   height: 12px;
   margin-block-start: 20.5px;
   margin-block-end: 75.5px;
+  box-shadow: inset 0 0 0 1px #e5e5e5;
+}
+
+/* つまみはトラック(12)より薄い 7px。横移動は Swiper が transform で当てるので、
+   縦中央寄せは top だけで行う（transform には触らない）。 */
+.p-campaign01__scrollbar .swiper-scrollbar-drag {
+  height: 7px;
+  top: 2.5px;
 }
