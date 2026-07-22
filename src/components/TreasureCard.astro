@@ -22,9 +22,7 @@ const STAMP_COUNT = 3;
 ---
 
 <section class:list={['p-treasure', className]} aria-labelledby={headingId}>
-  <span class='p-treasure__surface' aria-hidden='true'>
-    <span class='p-treasure__ribbon'>5th<br />Anniversary</span>
-  </span>
+  <span class='p-treasure__surface' aria-hidden='true'></span>
 
   <svg
     class='p-treasure__frame'
@@ -46,6 +44,11 @@ const STAMP_COUNT = 3;
       vector-effect='non-scaling-stroke'
     ></path>
   </svg>
+
+  {/* リボンは枠(frame)より上のレイヤーに置き、帯の両端はカード角で切り落とす */}
+  <span class='p-treasure__ribbon-clip' aria-hidden='true'>
+    <span class='p-treasure__ribbon'>5th<br />Anniversary</span>
+  </span>
 
   <h2 id={headingId} class='p-treasure__text'>
     茶の湯にまつわる道具が、<br />

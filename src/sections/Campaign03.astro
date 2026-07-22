@@ -52,7 +52,12 @@ const CARD_TONES: Record<string, string> = {
           <ul class='p-campaign03__items'>
             {term.items.map((item) => (
               <li class='p-campaign03__item' data-tone={CARD_TONES[item.id]}>
-                <a href={item.code ? `#${item.code}` : '#campaign03'} class='p-campaign03__item-link'>
+                <a
+                  href={item.code ? `https://www.tea-and-coffee.shop/view/item/${item.code}` : '#campaign03'}
+                  class='p-campaign03__item-link'
+                  target={item.code ? '_blank' : undefined}
+                  rel={item.code ? 'noopener' : undefined}
+                >
                   <Image
                     class='p-campaign03__item-photo'
                     src={ITEM_IMAGES[item.id]}

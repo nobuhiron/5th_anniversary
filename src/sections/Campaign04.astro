@@ -69,7 +69,12 @@ const BADGE_TONES: Record<string, string> = {
                 </span>
               </p>
 
-              <a href={item.code ? `#${item.code}` : '#campaign04'} class='c-btn p-campaign04__cta'>
+              <a
+                href={item.code ? `https://www.tea-and-coffee.shop/view/item/${item.code}` : '#campaign04'}
+                class='c-btn p-campaign04__cta'
+                target={item.code ? '_blank' : undefined}
+                rel={item.code ? 'noopener' : undefined}
+              >
                 ご購入はこちらから
               </a>
             </div>

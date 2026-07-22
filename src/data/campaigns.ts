@@ -20,16 +20,16 @@ export const PLUS1_TERMS = [
     id: 'term1',
     period: '2026年8/1(土)10:00 - 8/17(月)9:59',
     items: [
-      { id: 'greentea', lead: '国産素材100%使用', name: '宇治抹茶グリーンティー', spec: '[500g]', code: '' },
-      { id: 'mjb', lead: 'MJB(エムジェービー)', name: '水出しアイスコーヒー', spec: '[18g×6袋]', code: '' },
+      { id: 'greentea', lead: '国産素材100%使用', name: '宇治抹茶グリーンティー', spec: '[500g]', code: '000000000608' },
+      { id: 'mjb', lead: 'MJB(エムジェービー)', name: '水出しアイスコーヒー', spec: '[18g×6袋]', code: '000000000783' },
     ],
   },
   {
     id: 'term2',
     period: '2026年8/21(金)10:00 - 8/31(月)9:59',
     items: [
-      { id: 'koricha', lead: '＜ティーバッグ＞', name: '氷茶 水出し煎茶', spec: 'プレミアム [10P入り]', code: '' },
-      { id: 'minton', lead: 'MINTON(ミントン)', name: '和紅茶バラエティーパック', spec: '(2杯分×5種類) [10P]', code: '' },
+      { id: 'koricha', lead: '＜ティーバッグ＞', name: '氷茶 水出し煎茶', spec: 'プレミアム [10P入り]', code: '000000000111' },
+      { id: 'minton', lead: 'MINTON(ミントン)', name: '和紅茶バラエティーパック', spec: '(2杯分×5種類) [10P]', code: '000000000659' },
     ],
   },
 ] as const;
@@ -53,7 +53,7 @@ export const HONEY_SALE_ITEMS = [
     name: 'しあわせのはちみつ紅茶 [20P]',
     priceBefore: '1000円(税込)',
     priceAfter: '888',
-    code: '',
+    code: '000000000281',
   },
   {
     id: 'hotto-instant',
@@ -61,7 +61,7 @@ export const HONEY_SALE_ITEMS = [
     name: 'ほっと安らぐはちみつ紅茶 [200g]',
     priceBefore: '540円(税込)',
     priceAfter: '380',
-    code: '',
+    code: '000000000634',
   },
   {
     id: 'kfk-coffee',
@@ -69,7 +69,7 @@ export const HONEY_SALE_ITEMS = [
     name: 'はちみつ珈琲 [8袋]',
     priceBefore: '756円(税込)',
     priceAfter: '696',
-    code: '',
+    code: '000000000568',
   },
 ] as const;
 

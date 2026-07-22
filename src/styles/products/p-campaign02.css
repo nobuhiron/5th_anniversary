@@ -36,6 +36,7 @@
   z-index: 2;
   display: grid;
   place-items: center;
+  align-content: center;
   width: 79.58px;
   height: 79.58px;
   rotate: -5.386deg;

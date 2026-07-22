@@ -2,10 +2,14 @@
 /**
  * 宝探しのポップアップ。3種のお道具ごとに 1 枚 + スタンプ帳（スタンプボタン用）。
  *
- * 発見順は不定なので、カウント（○/3個獲得）は treasure.js が found.size を差し込む。
- * 「特別セットを見る」CTA は 3 つ目を見つけた瞬間の“最後のカード”だけに出す
- * （どの道具でも良い）。ボタン色はそのカードのテーマ色に合わせる。
- * イラスト・地色は道具ごと（抹茶/茶筅=茶、茶碗=緑）。
+ * アイテムはタイトル（○○を見つけた！）とイラストで示し、本文は「そのカードを
+ * 何番目に見つけたか（進捗）」だけで決まる（道具に依らず共通）。発見順は treasure.js
+ * が found の並びから求め、data-treasure-show（order1 / order2 / done）で出し分ける。
+ *   - 1 番目に見つけた: STAGE_BODIES[0]
+ *   - 2 番目に見つけた: STAGE_BODIES[1]
+ *   - 3 番目に見つけた（＝完了。どの道具でも良い＝最後にクリックしたカード）:
+ *     タイトル・本文を差し替え、「特別セットを見る」CTA を出す。
+ * 地色・アクセント（枠/×/タイトル/CTA/バッジ）は道具ごと（実測色）。
  */
 import { Image } from 'astro:assets';
 import TreasureCard from './TreasureCard.astro';
@@ -14,33 +18,23 @@ import treasureChasen from '../assets/images/treasure-chasen.png';
 import treasureWan from '../assets/images/treasure-wan.png';
 import treasureLeaf from '../assets/images/treasure-leaf01.png';
 
+// 本文は「そのカードを何番目に見つけたか（進捗）」だけで決まる。どの道具でも共通。
+// アイテムの区別はタイトル（○○を見つけた！）とイラストで示す。
+// [0]=1 番目 / [1]=2 番目。3 番目は完了メッセージ（DONE_BODY）。
+const STAGE_BODIES = [
+  'さあ、おいしいお茶を点てる準備を始めましょう。\n残りの道具も探してみてください。',
+  'お茶を点てる準備が整ってきました。\n秘密のお茶会まであと一息です！',
+] as const;
+
 const POPUPS = [
-  {
-    item: 'matcha',
-    tone: 'brown',
-    title: '抹茶を見つけた！',
-    img: treasureMatcha,
-    body: '大切な主役、抹茶を見つけた\nようです。さあ、おいしい抹茶\nを立てる準備を始めましょう。',
-  },
-  {
-    item: 'chasen',
-    tone: 'brown',
-    title: '茶筅を見つけた！',
-    img: treasureChasen,
-    body: 'お茶を点てる準備が整ってき\nました。秘密のお茶会まであ\nと一息です！',
-  },
-  {
-    item: 'chawan',
-    tone: 'green',
-    title: '茶碗を見つけた！',
-    img: treasureWan,
-    body: 'これでお道具が勢ぞろい。心を\n込めて、一服のお茶をお楽しみ\nください。',
-  },
+  { item: 'matcha', name: '抹茶', img: treasureMatcha },
+  { item: 'chasen', name: '茶筅', img: treasureChasen },
+  { item: 'chawan', name: '茶碗', img: treasureWan },
 ] as const;
 
 // 3 つ揃った“最後のカード”に出す完了メッセージ（本文と差し替え）。
 const DONE_BODY =
-  'おめでとうございます！\nすべての道具が揃いました。\n数量限定の特別セットをご用意しました。\n通常ページにはない限定商品を\nぜひご覧ください。';
+  'おめでとうございます！\nすべての道具を見つけた方だけに、\n数量限定の特別セットをご用意しました。\n通常ページにはない限定商品を\nぜひご覧ください。';
 ---
 
 {
@@ -53,7 +47,7 @@ const DONE_BODY =
       aria-labelledby={`treasure-popup-${popup.item}`}
       hidden
     >
-      <div class={`p-treasure-popup__panel p-treasure-popup__panel--${popup.tone}`}>
+      <div class={`p-treasure-popup__panel p-treasure-popup__panel--${popup.item}`}>
         <button
           type='button'
           class='p-treasure-popup__close'
@@ -64,27 +58,56 @@ const DONE_BODY =
         </button>
 
         <h2 id={`treasure-popup-${popup.item}`} class='p-treasure-popup__title'>
-          {popup.title}
+          <span data-treasure-show='order1 order2'>{popup.name}を見つけた！</span>
+          <span class='p-treasure-popup__title-done' data-treasure-show='done' hidden>
+            道具が揃った！<br />お茶会へようこそ
+          </span>
         </h2>
 
-        <p class='p-treasure-popup__figure'>
+        <span class='p-treasure-popup__figure'>
           <Image class='p-treasure-popup__illust' src={popup.img} alt='' format='webp' />
+        </span>
+
+        <div class='p-treasure-popup__box'>
+          <p class='p-treasure-popup__body' data-treasure-show='order1'>
+            {STAGE_BODIES[0]}
+          </p>
+          <p class='p-treasure-popup__body' data-treasure-show='order2' hidden>
+            {STAGE_BODIES[1]}
+          </p>
+          <p class='p-treasure-popup__body' data-treasure-show='done' hidden>
+            {DONE_BODY}
+          </p>
+
+          <p class='p-treasure-popup__count'>
+            <span class='p-treasure-popup__count-figure'>
+              <b data-treasure-count>1</b>/3
+            </span>
+            <span class='p-treasure-popup__count-unit'>個獲得</span>
+          </p>
+
           <Image class='p-treasure-popup__leaf' src={treasureLeaf} alt='' format='webp' />
-        </p>
+        </div>
 
-        <p class='p-treasure-popup__body' data-treasure-body='normal'>
-          {popup.body}
-        </p>
-        <p class='p-treasure-popup__body' data-treasure-body='done' hidden>
-          {DONE_BODY}
-        </p>
-
-        <p class='p-treasure-popup__count'>
-          <b data-treasure-count>1</b>/3個獲得
-        </p>
-
-        <a href='#campaign-special' class='c-btn p-treasure-popup__cta' data-treasure-cta hidden>
+        <a
+          href='#campaign-special'
+          class='p-treasure-popup__cta'
+          data-treasure-show='done'
+          hidden
+        >
           特別セットを見る
+          <span class='p-treasure-popup__cta-arrow' aria-hidden='true'>
+            <svg viewBox='0 0 30 30' fill='none'>
+              <circle cx='15' cy='15' r='15' fill='#fff' />
+              <path
+                d='M13 9.5l5.5 5.5-5.5 5.5'
+                stroke='currentColor'
+                stroke-width='2.2'
+                stroke-linecap='round'
+                stroke-linejoin='round'
+              />
+            </svg>
+          </span>
         </a>
       </div>
     </div>

@@ -28,6 +28,17 @@
   background-image: var(--bg-treasure-stripe);
 }
 
+/* リボンだけは枠(frame, z-index:1)より上に出す。ただし帯の両端はカード角で
+   切り落とすので、ストライプ地(surface)とは別に、枠より上のクリップ層に載せる。 */
+.p-treasure__ribbon-clip {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  pointer-events: none;
+}
+
 /* 左上のコーナーリボン。カンプ実測: 帯幅 31px、対角 50px の位置 */
 .p-treasure__ribbon {
   position: absolute;
@@ -217,39 +228,45 @@
   display: none;
 }
 
-/* お道具カード。地色・アクセント（枠/タイトル/ピル/CTA）はテーマ変数で切替。
-   茶: 抹茶・茶筅 / 緑: 茶碗（実測色）。 */
+/* お道具カード。実測(SVG): 334×416・枠 5px・角丸 20px・白地＋斜めストライプ。
+   アクセント（枠/×/タイトル/CTA/本文）とバッジ地は道具ごとに変数で切替。
+   高さは内容依存（完了状態は本文が伸び CTA が付くので縦に伸びる）。 */
 .p-treasure-popup__panel {
-  --tc-bg: var(--palette-mint-pale);
-  --tc-accent: var(--palette-green-deep);
+  --tc-accent: #7c625b;
+  --tc-badge: #eae0dd;
+  --tc-stripe: 12%;
 
   position: relative;
-  width: min(100%, 320px);
-  padding: 24px 22px 22px;
   box-sizing: border-box;
-  border-radius: var(--radius-md);
-  background-color: var(--tc-bg);
+  width: min(100%, 334px);
+  padding: 35px 18px 23px;
+  border: 5px solid var(--tc-accent);
+  border-radius: 20px;
+  background-color: #fff;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    color-mix(in srgb, var(--tc-accent) var(--tc-stripe), transparent) 0 1px,
+    transparent 1px 9px
+  );
   text-align: center;
 }
 
-/* 内側の細い飾り罫（カンプの枠線） */
-.p-treasure-popup__panel::before {
-  content: '';
-  position: absolute;
-  inset: 6px;
-  border: 1px solid color-mix(in srgb, var(--tc-accent) 55%, transparent);
-  border-radius: calc(var(--radius-md) - 4px);
-  pointer-events: none;
-}
-
-.p-treasure-popup__panel--brown {
-  --tc-bg: #e6ddd9;
+.p-treasure-popup__panel--matcha {
   --tc-accent: #7c625b;
+  --tc-badge: #eae0dd;
+  --tc-stripe: 12%;
 }
 
-.p-treasure-popup__panel--green {
-  --tc-bg: #f3f9e6;
-  --tc-accent: var(--palette-green-olive); /* #879c51 */
+.p-treasure-popup__panel--chasen {
+  --tc-accent: #af8a3d;
+  --tc-badge: #fbeccb;
+  --tc-stripe: 12%;
+}
+
+.p-treasure-popup__panel--chawan {
+  --tc-accent: #879c51;
+  --tc-badge: #e6f0d6;
+  --tc-stripe: 8%;
 }
 
 /* スタンプ帳のポップアップはカードがそのままパネル。地色や枠は要らない。
@@ -260,12 +277,10 @@
   width: auto;
   padding: 0;
   border: none;
+  border-radius: 0;
   background-color: transparent;
+  background-image: none;
   transform-origin: center;
-}
-
-.p-treasure-popup__panel--card::before {
-  display: none;
 }
 
 @media (max-width: 430.98px) {
@@ -280,26 +295,30 @@
   }
 }
 
-/* × はカード内右上・テーマ色の丸 */
+/* × はカード右上角にまたがるアクセント色の丸（実測: Ø58）。 */
 .p-treasure-popup__close {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 1;
+  top: -18px;
+  right: -15px;
+  z-index: 2;
   display: grid;
   place-items: center;
-  width: 26px;
-  height: 26px;
+  width: 58px;
+  height: 58px;
   border: none;
-  border-radius: var(--radius-xl);
+  border-radius: 50%;
   background-color: var(--tc-accent);
   color: #fff;
-  font-size: 15px;
+  font-size: 26px;
   line-height: 1;
+  cursor: pointer;
 }
 
-/* スタンプ帳カードの × は従来どおりカード外・白丸 */
+/* スタンプ帳カードの × は従来どおりカード外・白丸。
+   カード内の文字・スタンプ・マスコット（z-index:2）と角で重なるので、
+   クリックを奪われないよう × を必ず上に載せる。 */
 .p-treasure-popup__panel--card .p-treasure-popup__close {
+  z-index: 3;
   top: -14px;
   right: -14px;
   width: 36px;
@@ -310,89 +329,165 @@
   box-shadow: 0 2px 8px rgb(0 0 0 / 20%);
 }
 
+/* タイトル。実測: Noto Sans JP 900 / 28px / line-height 100% / +4% / 中央。
+   完了時は2行になる（お茶会へようこそ）。 */
 .p-treasure-popup__title {
-  position: relative;
-  padding-block-start: 4px;
   font-family: var(--font-jp--sanserif);
-  font-size: var(--font-size-title-sm);
-  font-weight: var(--fw-bold);
-  line-height: 1.4;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.04em;
   color: var(--tc-accent);
-  white-space: pre-line;
+  text-align: center;
 }
 
+.p-treasure-popup__title-done {
+  display: inline-block;
+  line-height: 1.3;
+}
+
+/* class の display:inline-block が [hidden] の display:none を上書きしてしまうので、
+   ガードを入れて完了用タイトルは既定で隠す（本文・CTA と同じ対処）。 */
+.p-treasure-popup__title-done[hidden] {
+  display: none;
+}
+
+/* 道具イラスト（中央）。支給素材に白フチが無いので drop-shadow でステッカー風に縁取る。 */
 .p-treasure-popup__figure {
-  position: relative;
   display: grid;
   place-items: center;
-  min-height: 118px;
+  min-height: 150px;
   margin-block-start: 12px;
 }
 
 .p-treasure-popup__illust {
   width: auto;
-  max-width: 68%;
-  max-height: 126px;
   height: auto;
+  max-width: 72%;
+  max-height: 160px;
+  filter: drop-shadow(0 0 3px #fff) drop-shadow(0 0 3px #fff) drop-shadow(0 0 2px #fff);
 }
 
-.p-treasure-popup__leaf {
-  position: absolute;
-  left: 2px;
-  bottom: -2px;
-  width: 34px;
-  height: auto;
-  pointer-events: none;
-}
-
-.p-treasure-popup__body {
-  margin-block-start: 14px;
-  padding: 12px 14px;
-  border-radius: var(--radius-xs);
+/* 本文＋バッジを包む白ボックス。実測: 角丸12・上下padding10・左右約16。 */
+.p-treasure-popup__box {
+  position: relative;
+  margin-block-start: 20px;
+  padding: 10px 16px;
+  border-radius: 12px;
   background-color: #fff;
-  color: var(--color-text);
+}
+
+/* 本文。実測: Noto Sans JP 900 / 16px / line-height 23 / +4% / アクセント色・左寄せ。 */
+.p-treasure-popup__body {
   font-family: var(--font-jp--sanserif);
-  font-size: var(--font-size-body-xs);
-  line-height: 1.75;
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 23px;
+  letter-spacing: 0.04em;
+  color: var(--tc-accent);
   white-space: pre-line;
-  text-align: center;
+  text-align: left;
 }
 
 .p-treasure-popup__body[hidden] {
   display: none;
 }
 
-/* ○/3個獲得。テーマ色のピル・白文字 */
+/* 獲得バッジ。実測: 高32・角丸6・地 --tc-badge。
+   数字 Roboto 900 / 24px、個獲得 Noto Sans JP 900 / 16px、共に +7%・アクセント色。 */
 .p-treasure-popup__count {
-  width: fit-content;
-  min-width: 128px;
-  margin: 12px auto 0;
-  padding: 5px 20px;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px;
+  margin-block-start: 10px;
+  padding: 3px 20px;
+  border-radius: 6px;
+  background-color: var(--tc-badge);
+  color: var(--tc-accent);
+  font-family: var(--font-jp--sanserif);
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 26px;
+  letter-spacing: 0.07em;
+}
+
+.p-treasure-popup__count-figure {
+  font-family: var(--font-en); /* Roboto 系の欧文 */
+  font-size: 24px;
+  letter-spacing: 0.07em;
+}
+
+/* 葉の装飾。白ボックスの角に重ねる。位置・向き・大きさは道具ごとに実測で変える
+   （抹茶=左上・反転 / 茶筅=右上）。既定は茶筅（右上）。 */
+.p-treasure-popup__leaf {
+  position: absolute;
+  top: -11px;
+  right: -4px;
+  width: 35px;
+  height: auto;
+  pointer-events: none;
+}
+
+/* 抹茶: 左上・左右反転・やや大きめ（実測 約47px） */
+.p-treasure-popup__panel--matcha .p-treasure-popup__leaf {
+  right: auto;
+  left: -15px;
+  top: -20px;
+  width: 47px;
+  transform: scaleX(-1);
+}
+
+/* 茶碗: 通常状態のカンプ未支給のため暫定（左上）。要指定なら調整。 */
+.p-treasure-popup__panel--chawan .p-treasure-popup__leaf {
+  right: auto;
+  left: -8px;
+  top: -14px;
+  width: 40px;
+}
+
+/* CTA（完了時のみ）。実測: 幅280・高54・角丸ピル・アクセント地・白文字＋右端に白丸の矢印。 */
+.p-treasure-popup__cta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
+  margin-block-start: 16px;
+  padding: 6px 46px;
   border-radius: var(--radius-pill);
   background-color: var(--tc-accent);
   color: #fff;
   font-family: var(--font-jp--sanserif);
-  font-size: var(--font-size-body-xs);
-  font-weight: var(--fw-bold);
-}
-
-.p-treasure-popup__count b {
-  font-family: var(--font-en);
-  font-size: var(--font-size-body);
-}
-
-.p-treasure-popup__cta {
-  margin-block-start: 14px;
-  --btn-bg: var(--tc-accent);
-  --btn-border: var(--tc-accent);
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-align: center;
+  transition: opacity var(--duration-hover) var(--easing-standard);
 }
 
 .p-treasure-popup__cta:hover {
-  --btn-fg: var(--tc-accent);
+  opacity: 0.88;
 }
 
 .p-treasure-popup__cta[hidden] {
   display: none;
+}
+
+.p-treasure-popup__cta-arrow {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  translate: 0 -50%;
+  width: 30px;
+  height: 30px;
+  color: var(--tc-accent);
+}
+
+.p-treasure-popup__cta-arrow svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 body.is-treasure-open {

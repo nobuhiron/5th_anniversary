@@ -77,20 +77,20 @@ export function initTreasureHunt() {
     });
   };
 
-  // カードごとに、その時点の獲得数・完了状態を反映する。
+  // カードごとに、獲得数・発見順を反映する。
+  // 本文の 2 文目・タイトル・CTA は「そのカードを何番目に見つけたか」で決まる。
+  // found は発見順を保持する Set なので、その並びから順位(1..3)を得る。
+  // 3 番目 = 完了(done)。表示要素は data-treasure-show（order1 / order2 / done）で出し分け。
   const applyState = (popup, item) => {
-    const isCompleter = found.size === TOTAL && item === completedBy;
+    const order = [...found].indexOf(item) + 1; // 1..3（未発見なら 0）
+    const state = order >= TOTAL ? 'done' : `order${order}`;
 
     const countEl = popup.querySelector('[data-treasure-count]');
     if (countEl) countEl.textContent = String(found.size);
 
-    const normalBody = popup.querySelector('[data-treasure-body="normal"]');
-    const doneBody = popup.querySelector('[data-treasure-body="done"]');
-    if (normalBody) normalBody.hidden = isCompleter;
-    if (doneBody) doneBody.hidden = !isCompleter;
-
-    const cta = popup.querySelector('[data-treasure-cta]');
-    if (cta) cta.hidden = !isCompleter;
+    popup.querySelectorAll('[data-treasure-show]').forEach((el) => {
+      el.hidden = !el.getAttribute('data-treasure-show').split(/\s+/).includes(state);
+    });
   };
 
   const closePopup = (popup) => {
