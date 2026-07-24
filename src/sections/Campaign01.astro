@@ -9,11 +9,22 @@ import sweets from '../assets/images/sweets.png';
 import clickChasen from '../assets/images/click-chasen.png';
 import staffAvatarKM from '../assets/images/icn_m.png';
 import staffAvatarNN from '../assets/images/icn_n.png';
+import staffAvatarSY from '../assets/images/icn_sy.png';
+import staffAvatarNM from '../assets/images/nm.png';
+import staffAvatarTE from '../assets/images/icn_t.png';
+import staffAvatarOT from '../assets/images/icn_o.png';
+import staffAvatarHR from '../assets/images/icn_h.png';
 import pickPhotoHyocha from '../assets/images/staff-recommend-koricha-sencha.jpg';
 import pickPhotoWakocha from '../assets/images/staff-recommend-wakocha-peach.jpg';
 import pickPhotoKoicha from '../assets/images/staff-recommend-koicha-powder.jpg';
 import pickPhotoGreentea from '../assets/images/staff-recommend-premium-greentea.jpg';
 import pickPhotoKuromame from '../assets/images/staff-recommend-kuromame-rooibos.jpg';
+import pickPhotoWaffel from '../assets/images/staff-recommend-houji-waffel.JPG';
+import pickPhotoDaifuku from '../assets/images/staff-recommend-daifuku.jpg';
+import pickPhotoIceCoffee from '../assets/images/staff-recommend-kfk-icecoffee.jpg';
+import pickPhotoChasta from '../assets/images/staff-recommend-chasta.jpg';
+import pickPhotoCookie from '../assets/images/staff-recommend-matcha-cookie.jpg';
+import pickPhotoAsatsuyu from '../assets/images/staff-recommend-asatsuyu.jpg';
 
 // LINE カードは吹き出し・クーポン・スマホ・友だち追加ボタンまで焼き込まれた完成版（335x408）。
 // 文言は alt で読み上げ、カード全体を LINE への導線にする。
@@ -25,10 +36,21 @@ const PICK_PHOTOS: Record<string, typeof pickPhotoHyocha> = {
   koicha: pickPhotoKoicha,
   greentea: pickPhotoGreentea,
   kuromame: pickPhotoKuromame,
+  waffel: pickPhotoWaffel,
+  daifuku: pickPhotoDaifuku,
+  icecoffee: pickPhotoIceCoffee,
+  chasta: pickPhotoChasta,
+  cookie: pickPhotoCookie,
+  asatsuyu: pickPhotoAsatsuyu,
 };
 const STAFF_AVATARS: Record<string, typeof staffAvatarKM> = {
   KM: staffAvatarKM,
   NN: staffAvatarNN,
+  SY: staffAvatarSY,
+  NM: staffAvatarNM,
+  TE: staffAvatarTE,
+  OT: staffAvatarOT,
+  HR: staffAvatarHR,
 };
 ---
 
