@@ -149,10 +149,19 @@
   overflow: hidden;
 }
 
+/* 文章量に関わらずカード高を揃える: wrapper を stretch にし、スライド高さは
+   一番高いカードに合わせる（Swiper の .swiper-slide{height:100%} を height:auto で打ち消す）。 */
+.p-campaign01__carousel .swiper-wrapper {
+  align-items: stretch;
+}
+
 /* swiper/css の .swiper-slide{width:100%} はランタイム注入で後勝ちになるため、
    セレクタを 2 段にして詳細度で上回る（!important を使わない） */
 .p-campaign01__carousel .p-campaign01__pick {
+  display: flex;
+  flex-direction: column;
   width: 154px;
+  height: auto; /* Swiper の height:100% を打ち消し、stretch に委ねる */
   box-sizing: border-box;
   padding-block-end: 14px;
   border-radius: var(--radius-sm);
@@ -162,10 +171,34 @@
   text-align: left;
 }
 
-/* 実測: 写真 154x100（カード上辺いっぱい） */
+/* 商品ページへのリンク枠。下線を消し、ホバーで軽く沈める。 */
+.p-campaign01__carousel .p-campaign01__pick--link {
+  text-decoration: none;
+  transition: opacity var(--duration-hover) var(--easing-standard);
+}
+
+.p-campaign01__carousel .p-campaign01__pick--link:hover {
+  opacity: 0.92;
+}
+
+/* 実測: 写真 154x100（カード上辺いっぱい）。3:2 の支給画像を cover で流し込む。 */
 .p-campaign01__pick-photo {
   display: block;
   width: 100%;
+  aspect-ratio: 154 / 100;
+  object-fit: cover;
+}
+
+/* おすすめ商品名。写真の直下。本文(400)より一段だけ強い semibold。
+   商品名の行数で下のスタッフ行がズレないよう、常に2行分(2×1.4em)の高さを確保する。 */
+.p-campaign01__pick-product {
+  padding-inline: 10px;
+  margin-block-start: 8px;
+  min-height: 2.8em; /* line-height 1.4 × 2 行 */
+  font-family: var(--font-jp--sanserif);
+  font-size: 13px;
+  font-weight: var(--fw-semibold);
+  line-height: 1.4;
 }
 
 /* 実測: アバター 46x46 @ カード左から 10・上から 106 */
@@ -178,8 +211,13 @@
 }
 
 .p-campaign01__pick-avatar {
+  display: block;
   flex-shrink: 0;
   width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: var(--palette-image-placeholder);
 }
 
 .p-campaign01__pick-name {
@@ -188,14 +226,22 @@
   font-weight: var(--fw-bold);
 }
 
-/* 実測: 墨面 1038.9-1099.1（4行・行送り 16.53）。
-   カード高 238 = 写真100 + 6 + アバター46 + 5.9 + 本文66.1 + 下14 */
+/* 実測(カンプはダミー4行): 12px・行送り 16.53。実コメントは長いのでカード高は
+   内容依存で伸びる（商品名も上に入る）。本文は main の 500 だと重いので 400 に落とす。 */
 .p-campaign01__pick-comment {
   padding-inline: 10px;
   margin-block-start: 5.9px;
   font-family: var(--font-jp--sanserif);
   font-size: 12px;
+  font-weight: var(--fw-regular);
   line-height: 16.53px;
+}
+
+/* 支給待ちの枠。淡色で「準備中」だけ置く。 */
+.p-campaign01__pick-comment--empty {
+  margin-block-start: 12px;
+  color: var(--palette-muted);
+  text-align: center;
 }
 
 /* 実測: バー 334x12 @(20.5,1136.5) / つまみ 105x7。

@@ -7,9 +7,29 @@ import bgImage from '../assets/images/campaign01-bg.jpg';
 import lineCard from '../assets/images/campaign01-line.jpg';
 import sweets from '../assets/images/sweets.png';
 import clickChasen from '../assets/images/click-chasen.png';
+import staffAvatarKM from '../assets/images/icn_m.png';
+import staffAvatarNN from '../assets/images/icn_n.png';
+import pickPhotoHyocha from '../assets/images/staff-recommend-koricha-sencha.jpg';
+import pickPhotoWakocha from '../assets/images/staff-recommend-wakocha-peach.jpg';
+import pickPhotoKoicha from '../assets/images/staff-recommend-koicha-powder.jpg';
+import pickPhotoGreentea from '../assets/images/staff-recommend-premium-greentea.jpg';
+import pickPhotoKuromame from '../assets/images/staff-recommend-kuromame-rooibos.jpg';
 
 // LINE カードは吹き出し・クーポン・スマホ・友だち追加ボタンまで焼き込まれた完成版（335x408）。
 // 文言は alt で読み上げ、カード全体を LINE への導線にする。
+
+// 推し商品カードの画像マップ。データ(STAFF_PICKS)の photo キー / staff 略号で引く。
+const PICK_PHOTOS: Record<string, typeof pickPhotoHyocha> = {
+  hyocha: pickPhotoHyocha,
+  wakocha: pickPhotoWakocha,
+  koicha: pickPhotoKoicha,
+  greentea: pickPhotoGreentea,
+  kuromame: pickPhotoKuromame,
+};
+const STAFF_AVATARS: Record<string, typeof staffAvatarKM> = {
+  KM: staffAvatarKM,
+  NN: staffAvatarNN,
+};
 ---
 
 <section id='campaign01' class='l-section p-campaign01' aria-labelledby='campaign01-heading'>
@@ -48,21 +68,67 @@ import clickChasen from '../assets/images/click-chasen.png';
       >
         <div class='swiper-wrapper'>
           {
-            STAFF_PICKS.map((pick) => (
-              <div class='swiper-slide p-campaign01__pick'>
-                <span class='c-placeholder p-campaign01__pick-photo' style='--ratio: 154 / 100'>
-                  <span class='c-placeholder__label'>商品写真</span>
-                </span>
-                <p class='p-campaign01__pick-staff'>
-                  <span
-                    class='c-placeholder c-placeholder--circle p-campaign01__pick-avatar'
-                    style='--ratio: 1 / 1'
-                  />
-                  <span class='p-campaign01__pick-name'>{pick.staff}</span>
-                </p>
-                <p class='p-campaign01__pick-comment'>{pick.comment}</p>
-              </div>
-            ))
+            STAFF_PICKS.map((pick) => {
+              // staff / product / comment が揃った枠だけ本表示。無ければ「準備中」。
+              const filled = 'product' in pick;
+              const photo = 'photo' in pick ? PICK_PHOTOS[pick.photo] : undefined;
+              const avatar = 'staff' in pick ? STAFF_AVATARS[pick.staff] : undefined;
+              const href = 'href' in pick ? pick.href : undefined;
+              // 商品リンクがある枠は a、無ければ div（Swiper はドラッグ後のクリックを自動で抑制する）。
+              const Tag = href ? 'a' : 'div';
+              return (
+                <Tag
+                  class:list={['swiper-slide', 'p-campaign01__pick', href && 'p-campaign01__pick--link']}
+                  href={href}
+                  target={href ? '_blank' : undefined}
+                  rel={href ? 'noopener noreferrer' : undefined}
+                >
+                  {photo ? (
+                    <Image
+                      class='p-campaign01__pick-photo'
+                      src={photo}
+                      alt=''
+                      width={308}
+                      height={200}
+                      format='webp'
+                    />
+                  ) : (
+                    <span class='c-placeholder p-campaign01__pick-photo' style='--ratio: 154 / 100'>
+                      <span class='c-placeholder__label'>商品写真</span>
+                    </span>
+                  )}
+
+                  {filled ? (
+                    <Fragment>
+                      <p class='p-campaign01__pick-product'>{pick.product}</p>
+                      <p class='p-campaign01__pick-staff'>
+                        {avatar ? (
+                          <Image
+                            class='p-campaign01__pick-avatar'
+                            src={avatar}
+                            alt=''
+                            width={92}
+                            height={92}
+                            format='webp'
+                          />
+                        ) : (
+                          <span
+                            class='c-placeholder c-placeholder--circle p-campaign01__pick-avatar'
+                            style='--ratio: 1 / 1'
+                          />
+                        )}
+                        <span class='p-campaign01__pick-name'>{pick.staff}</span>
+                      </p>
+                      {'comment' in pick && (
+                        <p class='p-campaign01__pick-comment'>{pick.comment}</p>
+                      )}
+                    </Fragment>
+                  ) : (
+                    <p class='p-campaign01__pick-comment p-campaign01__pick-comment--empty'>準備中</p>
+                  )}
+                </Tag>
+              );
+            })
           }
         </div>
       </div>

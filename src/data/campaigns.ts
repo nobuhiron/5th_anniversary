@@ -73,11 +73,28 @@ export const HONEY_SALE_ITEMS = [
   },
 ] as const;
 
-/** Campaign01 — スタッフの推し商品紹介（コメントは支給待ちのダミー） */
+/** Campaign01 — スタッフの推し商品紹介。1件ずつ支給され次第、上から埋める。
+   staff/product/comment が揃った枠は本表示、無い枠は「準備中」プレースホルダ。
+   photo は Campaign01.astro 側の画像マップ(PICK_PHOTOS)のキー。 */
+const KM_HYOCHA_COMMENT =
+  'お湯で淹れて苦みや渋みを楽しむ煎茶とは違い、お茶の甘み・旨味を楽しめる水出し茶。そんな水出し茶を、当社の氷茶なら簡単に作れます。ティーバッグ形式なので簡単に作れて後片付けが簡単なのも嬉しい所。どれも美味しいですが、プレミアム煎茶は後味がすっきりしており、飲みやすいところが特におすすめです。';
+const KM_WAKOCHA_COMMENT =
+  '国産紅茶「和紅茶」は品質が高く、世界的な評価が高まっています。MINTONの和紅茶はその中でも早くから販売を始めてきました。和紅茶ならではのすっきりとした味わい、そして白桃の「芳醇な甘い香り」は暑い季節にぴったりな一品。ぜひ、一度アイスティで楽しんでいて欲しいです。';
+const KM_KOICHA_COMMENT =
+  'カフェでも使われている本格的な商品。フロストシュガーが入っているので、水でも簡単に溶けて使いやすくなっています。おすすめはミルクに溶かして飲む抹茶ラテ。お家で簡単に日本茶カフェ気分が味わえる優れものです。';
+const NN_UJI_COMMENT =
+  'ひと口目から抹茶の旨みがしっかり広がり、後味にはほどよい甘みが残ります。特に牛乳で溶くと、抹茶の濃さとミルクのまろやかさが合わさり、濃厚でリッチな味わいが楽しめます！';
+const NN_KUROMAME_COMMENT =
+  '口に含んだときの黒豆の自然な甘みがすっきりと感じられ、後味はルイボスらしく軽やか。焙煎香と黒豆の甘みにはしっかり存在感があり、口さみしいときにおやつ代わりに飲むのもおすすめです！';
+
+const SHOP_ITEM = 'https://www.tea-and-coffee.shop/view/item/';
+
 export const STAFF_PICKS = [
-  { id: 'pick1', staff: 'A.A', comment: 'ここにコメントが入ります。ここにコメントが入ります。ここにコメントが入ります。' },
-  { id: 'pick2', staff: 'A.A', comment: 'ここにコメントが入ります。ここにコメントが入ります。ここにコメントが入ります。' },
-  { id: 'pick3', staff: 'A.A', comment: 'ここにコメントが入ります。ここにコメントが入ります。ここにコメントが入ります。' },
+  { id: 'pick1', staff: 'KM', product: '氷茶プレミアム煎茶', comment: KM_HYOCHA_COMMENT, photo: 'hyocha', href: `${SHOP_ITEM}000000000111` },
+  { id: 'pick2', staff: 'KM', product: 'MINTON和紅茶「白桃」', comment: KM_WAKOCHA_COMMENT, photo: 'wakocha', href: `${SHOP_ITEM}000000000662` },
+  { id: 'pick3', staff: 'KM', product: '濃い抹茶パウダー', comment: KM_KOICHA_COMMENT, photo: 'koicha', href: `${SHOP_ITEM}000000000012` },
+  { id: 'pick4', staff: 'NN', product: '宇治抹茶グリーンティープレミアム', comment: NN_UJI_COMMENT, photo: 'greentea', href: `${SHOP_ITEM}000000000666` },
+  { id: 'pick5', staff: 'NN', product: '黒豆ルイボスティー', comment: NN_KUROMAME_COMMENT, photo: 'kuromame', href: `${SHOP_ITEM}000000000857` },
 ] as const;
 
 /** ポイントアップセール */

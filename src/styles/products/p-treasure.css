@@ -230,11 +230,17 @@
 
 /* お道具カード。実測(SVG): 334×416・枠 5px・角丸 20px・白地＋斜めストライプ。
    アクセント（枠/×/タイトル/CTA/本文）とバッジ地は道具ごとに変数で切替。
-   高さは内容依存（完了状態は本文が伸び CTA が付くので縦に伸びる）。 */
+   高さは内容依存（完了状態は本文が伸び CTA が付くので縦に伸びる）。
+
+   地紋: カンプ(SVG)は 45° の二色斜め帯（濃色→明色の 50/50）を白地に重ねたもの。
+   周期はカンプ実測で 334px 幅なら 6.3px（帯 3.15px ずつ）。パターン形状は全カード共通で、
+   色（--tc-pat-dark / --tc-pat-light）と不透明度（--tc-pat-opacity）だけ道具ごとに変える。 */
 .p-treasure-popup__panel {
   --tc-accent: #7c625b;
   --tc-badge: #eae0dd;
-  --tc-stripe: 12%;
+  --tc-pat-dark: #835343;
+  --tc-pat-light: #9d6858;
+  --tc-pat-opacity: 20%;
 
   position: relative;
   box-sizing: border-box;
@@ -245,8 +251,8 @@
   background-color: #fff;
   background-image: repeating-linear-gradient(
     -45deg,
-    color-mix(in srgb, var(--tc-accent) var(--tc-stripe), transparent) 0 1px,
-    transparent 1px 9px
+    color-mix(in srgb, var(--tc-pat-dark) var(--tc-pat-opacity), #fff) 0 3.15px,
+    color-mix(in srgb, var(--tc-pat-light) var(--tc-pat-opacity), #fff) 3.15px 6.3px
   );
   text-align: center;
 }
@@ -254,19 +260,28 @@
 .p-treasure-popup__panel--matcha {
   --tc-accent: #7c625b;
   --tc-badge: #eae0dd;
-  --tc-stripe: 12%;
+  /* カンプ(SVG)実測: 二色 #835343 / #9d6858・不透明度 20% */
+  --tc-pat-dark: #835343;
+  --tc-pat-light: #9d6858;
+  --tc-pat-opacity: 20%;
 }
 
 .p-treasure-popup__panel--chasen {
   --tc-accent: #af8a3d;
   --tc-badge: #fbeccb;
-  --tc-stripe: 12%;
+  /* カンプ(SVG)実測: 二色 #7c5823 / #966d36・不透明度 20% */
+  --tc-pat-dark: #7c5823;
+  --tc-pat-light: #966d36;
+  --tc-pat-opacity: 20%;
 }
 
 .p-treasure-popup__panel--chawan {
   --tc-accent: #879c51;
   --tc-badge: #e6f0d6;
-  --tc-stripe: 8%;
+  /* カンプ(SVG)実測: 二色 #365800 / #89bf01・不透明度 10% */
+  --tc-pat-dark: #365800;
+  --tc-pat-light: #89bf01;
+  --tc-pat-opacity: 10%;
 }
 
 /* スタンプ帳のポップアップはカードがそのままパネル。地色や枠は要らない。
