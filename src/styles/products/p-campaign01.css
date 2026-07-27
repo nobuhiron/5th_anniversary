@@ -29,7 +29,12 @@
    このセクションの上に重ねて描く。両脇からこの緑が覗く。
    継ぎ目が小数ピクセル(例 298.219px)に来ると、そこに campaign01 の緑地が
    1px の線として覗く。上端を 1px 前セクションへ食い込ませて継ぎ目を覆う
-   （上は同じ --bg-point なので重なりは見えない）。切っ先の深さは維持する。 */
+   （上は同じ --bg-point なので重なりは見えない）。切っ先の深さは維持する。
+
+   斜辺の始点は「食い込ませた上辺(y=0)」ではなく「セクション上端(y=1px)」に置く。
+   上辺から引くと、角の手前 2.7px が上辺で水平に切られて折れ線に見えてしまう
+   （斜辺が y=0..1px を横切る間に x が 0→2.69px 進むため）。y=1px から引けば
+   左右の角まで直線のまま届く。y=0..1px は全幅を塗って継ぎ目だけ覆う。 */
 .p-campaign01::before {
   content: '';
   position: absolute;
@@ -39,20 +44,27 @@
   width: 100%;
   height: calc(68.68px + 1px);
   background-color: var(--bg-point);
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 1px, 50% 100%, 0 1px);
   pointer-events: none;
 }
 
-/* 支給画像は上 35px・下 5px が枠外の白帯（緑は設計の 0..1224 と一致）。
-   object-position で上を 35px ぶん送り、緑の部分だけを見せる。 */
+/* 支給画像(375換算 375x1264)は上 35px・下 5px が枠外の白帯。中身は金の紙吹雪が
+   y=126..365 にあるだけで、それより下は #02872a のベタ＝--bg-campaign01 と同値。
+
+   inset:0 + object-fit:cover だと、セクションが設計高 1224px を超えた時点で
+   上下の白帯が露出する（cover は必ず縦を埋めきるため、はみ出しが 40px を
+   下回ると白帯を隠しきれない）。推し商品が増えて高さが伸びると境目が白くなった。
+
+   よって画像は上端に原寸で置き、紙吹雪の下(400px)で切り落とす。そこから下は
+   同色の背景色がそのまま続くので継ぎ目は出ず、高さが変わっても破綻しない。 */
 .p-campaign01__bg {
   position: absolute;
-  inset: 0;
+  top: -35px;
+  left: 0;
   z-index: 0;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 87.5%;
+  height: auto;
+  clip-path: inset(35px 0 864px);
   pointer-events: none;
 }
 

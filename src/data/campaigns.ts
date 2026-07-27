@@ -76,11 +76,11 @@ export const HONEY_SALE_ITEMS = [
 /** Campaign01 — スタッフの推し商品紹介。1件ずつ支給され次第、上から埋める。
    staff/product/comment が揃った枠は本表示、無い枠は「準備中」プレースホルダ。
    photo は Campaign01.astro 側の画像マップ(PICK_PHOTOS)のキー。 */
-const KM_HYOCHA_COMMENT =
+const MK_HYOCHA_COMMENT =
   'ティーバッグ形式なので手軽に作れて後片付けが簡単なのも嬉しい所。どれも美味しいですが、プレミアム煎茶は後味がすっきりしており、飲みやすいところが特におすすめです。';
 const SY_WAKOCHA_COMMENT =
   '和紅茶ならではのすっきりとした味わい、そして白桃の「芳醇な甘い香り」は暑い夏にぴったりな一品。ぜひ、一度アイスティで楽しんでいて欲しいです！';
-const KM_KOICHA_COMMENT =
+const MK_KOICHA_COMMENT =
   'フロストシュガーが入っているので、水でも簡単に溶けて使いやすくなっています。おすすめはミルクに溶かして飲む抹茶ラテ。お家で簡単に日本茶カフェ気分が味わえる優れものです。';
 const NN_UJI_COMMENT =
   'ひと口目から抹茶の旨みがしっかり広がり、後味にはほどよい甘みが残ります。特に牛乳で溶くと、抹茶の濃さとミルクのまろやかさが合わさり、濃厚でリッチな味わいが楽しめます！';
@@ -102,13 +102,13 @@ const TE_DAIFUKU_COMMENT =
 const SHOP_ITEM = 'https://www.tea-and-coffee.shop/view/item/';
 
 export const STAFF_PICKS = [
-  { id: 'pick1', staff: 'KM', product: '氷茶プレミアム煎茶', comment: KM_HYOCHA_COMMENT, photo: 'hyocha', href: `${SHOP_ITEM}000000000111` },
+  { id: 'pick1', staff: 'MK', product: '氷茶プレミアム煎茶', comment: MK_HYOCHA_COMMENT, photo: 'hyocha', href: `${SHOP_ITEM}000000000111` },
   { id: 'pick2', staff: 'OT', product: 'CHASTA（チャスタ）', comment: OT_CHASTA_COMMENT, photo: 'chasta', href: `${SHOP_ITEM}000000000316` },
   { id: 'pick3', staff: 'NN', product: '宇治抹茶グリーンティープレミアム', comment: NN_UJI_COMMENT, photo: 'greentea', href: `${SHOP_ITEM}000000000666` },
   { id: 'pick4', staff: 'TE', product: '抹茶大福', comment: TE_DAIFUKU_COMMENT, photo: 'daifuku', href: `${SHOP_ITEM}000000000200` },
   { id: 'pick5', staff: 'SY', product: 'MINTON和紅茶「白桃」', comment: SY_WAKOCHA_COMMENT, photo: 'wakocha', href: `${SHOP_ITEM}000000000662` },
   { id: 'pick6', staff: 'OT', product: '抹茶クッキー', comment: OT_COOKIE_COMMENT, photo: 'cookie', href: `${SHOP_ITEM}000000000163` },
-  { id: 'pick7', staff: 'KM', product: '濃い抹茶パウダー', comment: KM_KOICHA_COMMENT, photo: 'koicha', href: `${SHOP_ITEM}000000000012` },
+  { id: 'pick7', staff: 'MK', product: '濃い抹茶パウダー', comment: MK_KOICHA_COMMENT, photo: 'koicha', href: `${SHOP_ITEM}000000000012` },
   { id: 'pick8', staff: 'NM', product: 'ほうじ茶ヴァッフェル', comment: NM_HOJICHA_COMMENT, photo: 'waffel', href: `${SHOP_ITEM}000000000174` },
   { id: 'pick9', staff: 'OT', product: '品種抹茶「朝露（あさつゆ）」', comment: OT_ASATSUYU_COMMENT, photo: 'asatsuyu', href: `${SHOP_ITEM}000000000802` },
   { id: 'pick10', staff: 'HR', product: 'KFK 水出しアイスコーヒー', comment: HR_KFK_COMMENT, photo: 'icecoffee', href: `${SHOP_ITEM}000000000774` },

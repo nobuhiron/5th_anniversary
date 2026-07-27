@@ -13,6 +13,7 @@
  */
 import { Image } from 'astro:assets';
 import TreasureCard from './TreasureCard.astro';
+import { TREASURE_SPECIAL_URL } from '../data/links';
 import treasureMatcha from '../assets/images/treasure-matcha.png';
 import treasureChasen from '../assets/images/treasure-chasen.png';
 import treasureWan from '../assets/images/treasure-wan.png';
@@ -90,7 +91,7 @@ const DONE_BODY =
         </div>
 
         <a
-          href='#campaign-special'
+          href={TREASURE_SPECIAL_URL}
           class='p-treasure-popup__cta'
           data-treasure-show='done'
           hidden

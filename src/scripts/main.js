@@ -9,12 +9,29 @@ export function initSiteScripts() {
 
 /**
  * ページトップへ戻る。
- * カンプではフッター右上（前セクションとの境界にまたがる位置）に常時置かれるので、
- * スクロール量による表示切替は行わない。
+ * 追従表示。1 画面ぶんスクロールしたら is-visible を付けて出す（CSS でフェード）。
+ * scroll は passive + rAF で 1 フレーム 1 回に間引く。
  */
 function initPageTop() {
   const button = document.querySelector('[data-pagetop]');
   if (!(button instanceof HTMLElement)) return;
+
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    button.classList.toggle('is-visible', window.scrollY > window.innerHeight);
+  };
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    },
+    { passive: true },
+  );
+  update();
 
   button.addEventListener('click', () => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

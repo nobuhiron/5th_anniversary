@@ -104,6 +104,10 @@
   --layout-main-max-sp: 390px;
   --layout-padding-sp: 20px;
   --layout-padding-pc: 50px;
+  /* スタンプボタン(fixed)の上端と高さ。ページトップボタンをこの上に積むので共有する。
+     648px は指定値。縦の短い端末で画面外へ落ちないよう下端で止める。 */
+  --stamp-button-top: min(648px, calc(100dvh - 130px));
+  --stamp-button-height: 106px;
 
   /* Spacing */
   --spacing-xs: 4px;

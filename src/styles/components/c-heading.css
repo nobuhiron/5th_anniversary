@@ -54,12 +54,12 @@
 
 /* ＼ は上が左に倒れる = 反時計回り。／ は時計回り。 */
 .c-heading__lead::before {
-  left: 0.2em;
+  left: 0.45em;
   rotate: -20deg;
 }
 
 .c-heading__lead::after {
-  right: 0.2em;
+  right: 0.45em;
   rotate: 20deg;
 }
 

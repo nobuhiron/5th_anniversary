@@ -5,3 +5,6 @@ export const LINE_URL = import.meta.env.PUBLIC_LINE_URL || process.env.PUBLIC_LI
 
 /** MakeShop の商品詳細 URL を組み立てる */
 export const itemUrl = (code: string) => `${LINK_BASE}${code}`;
+
+/** 宝探しを 3 つ揃えた人だけに出す「特別セットを見る」CTA の遷移先 */
+export const TREASURE_SPECIAL_URL = 'https://www.tea-and-coffee.shop/view/item/000000000892';

@@ -518,8 +518,7 @@ body.is-treasure-open {
 .p-stamp-button {
   position: fixed;
   z-index: 20;
-  /* 648px は指定値。ただし縦の短い端末で画面外へ落ちないよう下端で止める */
-  inset-block-start: min(648px, calc(100dvh - 130px));
+  inset-block-start: var(--stamp-button-top);
   /* 本体カラム（中央・最大 --layout-main-max-sp）の右端に右端を合わせる */
   inset-inline-end: max(0px, calc((100% - var(--layout-main-max-sp)) / 2));
   display: block;
