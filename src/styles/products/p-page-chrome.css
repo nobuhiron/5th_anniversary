@@ -82,11 +82,6 @@
   margin-block-start: 54px;
   clip-path: var(--ticket-clip);
   background-color: var(--bg-banner-uchiwa);
-  transition: opacity var(--duration-hover) var(--easing-standard);
-}
-
-.p-chrome-left__banner:hover {
-  opacity: 0.86;
 }
 
 .p-chrome-left__banner-image {

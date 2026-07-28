@@ -34,12 +34,8 @@ const TICKET_CLIP =
     <span class='p-chrome-left__title-en'>Anniversary</span>
   </p>
 
-  <a
-    href='#campaign-uchiwa'
-    class='p-chrome-left__banner'
-    style={`--ticket-clip: path('${TICKET_CLIP}')`}
-    aria-label='購入者全員に クーポン付きミニうちわプレゼント なくなり次第終了'
-  >
+  {/* うちわには対応するセクションがないので、リンクではなく単なるバナーとして置く */}
+  <div class='p-chrome-left__banner' style={`--ticket-clip: path('${TICKET_CLIP}')`}>
     <Image
       class='p-chrome-left__banner-image'
       src={uchiwaBanner}
@@ -54,12 +50,14 @@ const TICKET_CLIP =
       <span class='p-chrome-left__banner-title'>ミニうちわ<br />プレゼント！</span>
     </span>
 
-    {/* なくなり次第終了の丸スタンプ。画像ではなくテキストで組む（上「なくなり次第」小 / 下「終了」大） */}
-    <span class='p-chrome-left__banner-badge' aria-hidden='true'>
+    {/* なくなり次第終了の丸スタンプ。画像ではなくテキストで組む（上「なくなり次第」小 / 下「終了」大）。
+        リンクだった頃は aria-label が文言を持っていたので aria-hidden にしていたが、
+        今は本文テキストが唯一の読み上げ元なので隠さない。 */}
+    <span class='p-chrome-left__banner-badge'>
       <span class='p-chrome-left__banner-badge-top'>なくなり次第</span>
       <span class='p-chrome-left__banner-badge-main'>終了</span>
     </span>
-  </a>
+  </div>
 
   <TreasureCard headingId='treasure-heading' class='p-chrome-left__treasure' />
 </div>

@@ -8,7 +8,8 @@ import campaign02 from '../assets/images/nav-image--campaign02.jpg';
 import campaign03 from '../assets/images/nav-image--campaign03.jpg';
 import campaign04 from '../assets/images/nav-image--campaign04.jpg';
 
-// バナー画像は見出し・ピル・シェブロンまで焼き込まれた完成版。文言は alt で読み上げる。
+// campaign01〜04 のバナー画像は見出し・ピル・シェブロンまで焼き込まれた完成版。文言は alt で読み上げる。
+// うちわだけは写真（文字なし）＋ HTML テキストで組むので alt は空にし、文言は本文が持つ。
 const BANNER_IMAGES: Record<string, ImageMetadata> = {
   uchiwa,
   campaign01,
@@ -16,6 +17,8 @@ const BANNER_IMAGES: Record<string, ImageMetadata> = {
   campaign03,
   campaign04,
 };
+
+const UCHIWA_ID = 'uchiwa';
 ---
 
 <section id='campaign-nav' class='l-section p-campaign-nav' aria-labelledby='campaign-nav-heading'>
@@ -26,18 +29,44 @@ const BANNER_IMAGES: Record<string, ImageMetadata> = {
   <div class='l-inner p-campaign-nav__inner'>
     <ul class='p-campaign-nav__list'>
       {
-        CAMPAIGN_BANNERS.map((banner) => (
-          <li class='p-campaign-nav__item'>
-            <a href={banner.href} class='p-campaign-nav__banner'>
-              <Image
-                class='p-campaign-nav__image'
-                src={BANNER_IMAGES[banner.id]}
-                alt={banner.alt}
-                format='webp'
-              />
-            </a>
-          </li>
-        ))
+        CAMPAIGN_BANNERS.map((banner) => {
+          const isUchiwa = banner.id === UCHIWA_ID;
+          // 飛び先のないバナーは <a> にしない。href なしの <a> はフォーカスも
+          // クリックもできないのに見た目だけリンクとして残ってしまう。
+          const Tag = banner.href ? 'a' : 'div';
+
+          return (
+            <li class='p-campaign-nav__item'>
+              <Tag
+                href={banner.href ?? undefined}
+                class:list={[
+                  'p-campaign-nav__banner',
+                  isUchiwa && 'p-campaign-nav__banner--uchiwa',
+                ]}
+              >
+                <Image
+                  class='p-campaign-nav__image'
+                  src={BANNER_IMAGES[banner.id]}
+                  alt={isUchiwa ? '' : banner.alt}
+                  format='webp'
+                />
+
+                {isUchiwa && (
+                  <span class='p-campaign-nav__body'>
+                    <span class='p-campaign-nav__pill'>購入者全員に</span>
+                    <span class='p-campaign-nav__lead'>＼クーポン付き／</span>
+                    <span class='p-campaign-nav__title'>
+                      ミニうちわ
+                      <br />
+                      プレゼント!
+                    </span>
+                    <span class='p-campaign-nav__note'>※なくなり次第終了</span>
+                  </span>
+                )}
+              </Tag>
+            </li>
+          );
+        })
       }
     </ul>
   </div>

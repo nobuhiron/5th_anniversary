@@ -48,6 +48,79 @@
   transition: opacity var(--duration-hover) var(--easing-standard);
 }
 
-.p-campaign-nav__banner:hover {
+/* うちわバナーは飛び先がなく <div> で出るので、ホバーの反応も付けない */
+.p-campaign-nav__banner[href]:hover {
   opacity: 0.86;
+}
+
+/* -------------------------------------------------------------
+   うちわバナーだけは文字なしの写真を敷き、文言は HTML で載せる
+   （campaign01〜04 は見出しまで焼き込まれた支給画像のまま）。
+   本体カラムは 375〜390px 可変＝バナーは 335〜350px なので、px 固定だと
+   文字だけ取り残されて写真とズレる。カンプ 335px の 1px を --u に置いて
+   全寸法をぶら下げ、写真と一緒に伸縮させる。
+   寸法は現行の焼き込み画像（670x314 = 表示 335x157）の実測値。
+------------------------------------------------------------- */
+.p-campaign-nav__banner--uchiwa {
+  position: relative;
+  container-type: inline-size;
+}
+
+.p-campaign-nav__body {
+  /* cqw は「自分自身」ではなく祖先コンテナ基準で解決される。
+     コンテナ本体で宣言すると外側（≒ビューポート）を見てしまうので、子のここで持つ。 */
+  --u: 0.29851cqw; /* = 100cqw / 335 */
+
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  width: calc(190 * var(--u));
+  padding-block-start: calc(15 * var(--u));
+  color: var(--color-heading);
+  font-family: var(--font-jp--sanserif);
+  line-height: 1;
+}
+
+.p-campaign-nav__pill {
+  display: grid;
+  place-items: center;
+  width: calc(122 * var(--u));
+  height: calc(23 * var(--u));
+  border: 1px solid currentColor;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface);
+  font-size: calc(13 * var(--u));
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.04em;
+  text-indent: 0.04em;
+}
+
+.p-campaign-nav__lead {
+  margin-block-start: calc(6 * var(--u));
+  font-size: calc(15 * var(--u));
+  font-weight: var(--fw-medium);
+  line-height: 1.4;
+}
+
+.p-campaign-nav__title {
+  margin-block-start: calc(6 * var(--u));
+  font-size: calc(20 * var(--u));
+  font-weight: var(--fw-bold);
+  line-height: 1.15;
+  text-align: center;
+  /* カンプは約物を詰めている（Figma の既定）。palt を当てないと「！」の前が空く */
+  font-feature-settings: 'palt' 1;
+}
+
+.p-campaign-nav__note {
+  margin-block-start: calc(14 * var(--u));
+  /* 11px はタイポスケール外だが、焼き込み画像の実測（9文字で 101.7px）がこの値。
+     画像だった頃と違って拡大に追従するので、小さくても読めなくなることはない。 */
+  font-size: calc(11 * var(--u));
+  font-weight: var(--fw-regular);
+  letter-spacing: 0.02em;
+  text-indent: 0.02em;
 }
