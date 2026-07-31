@@ -84,20 +84,6 @@
   line-height: 1;
 }
 
-.p-campaign-nav__pill {
-  display: grid;
-  place-items: center;
-  width: calc(122 * var(--u));
-  height: calc(23 * var(--u));
-  border: 1px solid currentColor;
-  border-radius: var(--radius-pill);
-  background-color: var(--color-surface);
-  font-size: calc(13 * var(--u));
-  font-weight: var(--fw-medium);
-  letter-spacing: 0.04em;
-  text-indent: 0.04em;
-}
-
 .p-campaign-nav__lead {
   margin-block-start: calc(6 * var(--u));
   font-size: calc(15 * var(--u));
@@ -123,4 +109,12 @@
   font-weight: var(--fw-regular);
   letter-spacing: 0.02em;
   text-indent: 0.02em;
+}
+
+/* ケース配送品・冷凍品の対象外注釈。17文字は本文幅 190u に 1 行で収まらないので、
+   文字は小さくせず「※ケース配送品、/ 冷凍品は対象外です」の 2 行で折る（改行位置は <br> で固定） */
+.p-campaign-nav__note--exclusion {
+  margin-block-start: calc(4 * var(--u));
+  line-height: 1.3;
+  text-align: center;
 }

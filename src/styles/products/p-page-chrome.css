@@ -109,20 +109,6 @@
   line-height: 1;
 }
 
-.p-chrome-left__banner-pill {
-  display: grid;
-  place-items: center;
-  width: 102.5px;
-  height: 21.5px;
-  border: 0.5px solid var(--color-heading);
-  border-radius: var(--radius-pill);
-  background-color: var(--color-surface);
-  font-size: 12px;
-  font-weight: var(--fw-medium);
-  letter-spacing: 0.04em;
-  text-indent: 0.04em;
-}
-
 .p-chrome-left__banner-lead {
   margin-block-start: 4px;
   font-size: 15px;
@@ -137,6 +123,17 @@
   line-height: 1.15;
   /* カンプは約物を詰めている（Figma の既定）。palt を当てないと「！」の前が空く */
   font-feature-settings: 'palt' 1;
+}
+
+/* ケース配送品・冷凍品の対象外注釈。1 行だと 17文字 × 11px ≒ 191px で
+   文字ゾーン 197px をほぼ使い切るので、nav 側と同じ 2 行折りにする */
+.p-chrome-left__banner-note {
+  margin-block-start: 8px;
+  font-size: 11px;
+  font-weight: var(--fw-regular);
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+  text-align: center;
 }
 
 /* なくなり次第終了の丸スタンプ。素材 SVG（金 #daac2b・約5°傾き・白抜き）を
