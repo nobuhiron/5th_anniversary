@@ -59,7 +59,7 @@ export const HONEY_SALE_ITEMS = [
     id: 'hotto-instant',
     lead: '＜インスタント＞',
     name: 'ほっと安らぐはちみつ紅茶 [200g]',
-    priceBefore: '540円(税込)',
+    priceBefore: '648円(税込)',
     priceAfter: '380',
     code: '000000000634',
   },
